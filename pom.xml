@@ -68,6 +68,14 @@
                 <artifactId>mifish-kernel</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
+
+            <!--test start -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
