@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mifish</groupId>
+    <groupId>com.ruanyi.mifish</groupId>
     <artifactId>mifish-boot</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -10,7 +10,15 @@
     <modules>
         <module>mifish-common</module>
         <module>mifish-kernel</module>
+        <module>mifish-web</module>
     </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <properties>
         <mifish.boot.version>1.0.0-SNAPSHOT</mifish.boot.version>
@@ -24,7 +32,7 @@
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <groovy.version>2.4.13</groovy.version>
+        <groovy.version>2.5.13</groovy.version>
         <guava.version>23.0</guava.version>
         <yaml.version>1.20</yaml.version>
         <commons.lang3.version>3.8</commons.lang3.version>
@@ -32,6 +40,7 @@
         <slf4j.version>1.7.21</slf4j.version>
         <mifish.log4j2.version>2.10.0</mifish.log4j2.version>
         <jackson.version>2.11.1</jackson.version>
+        <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
     </properties>
 
     <dependencyManagement>
@@ -66,15 +75,28 @@
 
             <!--mifish dependency -->
             <dependency>
-                <groupId>com.mifish</groupId>
+                <groupId>com.ruanyi.mifish</groupId>
                 <artifactId>mifish-common</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.mifish</groupId>
+                <groupId>com.ruanyi.mifish</groupId>
                 <artifactId>mifish-kernel</artifactId>
                 <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruanyi.mifish</groupId>
+                <artifactId>mifish-web</artifactId>
+                <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <!--spring boot dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
             </dependency>
 
             <!--test start -->
