@@ -4,7 +4,7 @@ package com.ruanyi.mifish.common.event;
  * Description:
  *
  * @author: rls
- * Date: 2018-04-15 10:07
+ * @Date: 2018-04-15 10:07
  */
 public class MifishEventListener {
 

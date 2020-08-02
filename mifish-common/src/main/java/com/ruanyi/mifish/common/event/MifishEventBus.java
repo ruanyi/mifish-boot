@@ -6,11 +6,11 @@ import com.google.common.eventbus.EventBus;
  * Description:
  *
  * @author: rls
- * Date: 2018-04-15 10:06
+ * @Date: 2018-04-15 10:06
  */
 public class MifishEventBus {
 
-    /***EVENT_BUS*/
+    /*** EVENT_BUS */
     private static final EventBus EVENT_BUS = new EventBus("mifish");
 
     /**
@@ -40,7 +40,7 @@ public class MifishEventBus {
         EVENT_BUS.unregister(handler);
     }
 
-
+    /** forbit instance */
     private MifishEventBus() {
 
     }
