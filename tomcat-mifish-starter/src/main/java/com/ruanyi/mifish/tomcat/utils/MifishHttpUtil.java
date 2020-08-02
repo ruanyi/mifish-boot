@@ -216,7 +216,7 @@ public final class MifishHttpUtil {
      * @return
      */
     public static Cookie newCookie(String name, String value, int maxAge, String path) {
-        return newCookie(name, value, "www.meitu.com", maxAge, path, false);
+        return newCookie(name, value, "www.ruanyi.com", maxAge, path, false);
     }
 
     /**
