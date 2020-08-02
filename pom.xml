@@ -11,6 +11,8 @@
         <module>mifish-common</module>
         <module>mifish-kernel</module>
         <module>mifish-web</module>
+        <module>tomcat-mifish-starter</module>
+        <module>mifish-boot-dependencies</module>
     </modules>
 
     <parent>
@@ -83,6 +85,12 @@
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
                 <artifactId>mifish-kernel</artifactId>
+                <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruanyi.mifish</groupId>
+                <artifactId>tomcat-mifish-starter</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
