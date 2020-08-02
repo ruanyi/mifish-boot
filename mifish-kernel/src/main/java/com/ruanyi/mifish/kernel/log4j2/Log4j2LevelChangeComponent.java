@@ -10,8 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.appender.ConsoleAppender;
-import org.apache.logging.log4j.core.appender.RollingFileAppender;
-import org.apache.logging.log4j.core.appender.rolling.TimeBasedTriggeringPolicy;
 import org.apache.logging.log4j.core.config.AppenderRef;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
@@ -22,7 +20,6 @@ import org.springframework.beans.factory.InitializingBean;
 import com.google.common.collect.Maps;
 import com.ruanyi.mifish.common.logs.MifishLoggerContainer;
 import com.ruanyi.mifish.common.logs.MifishLogs;
-import com.ruanyi.mifish.common.utils.UUIDUtil;
 
 /**
  * Description: com.meitu.xiuxiu.framework.log4j2
@@ -69,12 +66,7 @@ public class Log4j2LevelChangeComponent implements InitializingBean {
             Logger logger = entry.getValue();
             // 假如log4j2没有配置，则使用默认配置
             if (!loggerConfigMap.containsKey(category)) {
-                // 本地没有必要初始化大数据日志
-                if (isInitActivityLogger(logger)) {
-                    initActivityLoggerConfig(ctx, logger);
-                } else {
-                    initDefaultLoggerConfig(ctx, category);
-                }
+                initDefaultLoggerConfig(ctx, category);
             }
         }
     }
@@ -87,41 +79,6 @@ public class Log4j2LevelChangeComponent implements InitializingBean {
      */
     static boolean isInitActivityLogger(Logger logger) {
         return logger != null && StringUtils.equals(logger.getName(), "activity");
-    }
-
-    /**
-     * initActivityLoggerConfig
-     * <p>
-     * 初始化大数据日志的配置，固定写死，约定大于配置
-     *
-     * @param ctx
-     * @param logger
-     */
-    private void initActivityLoggerConfig(LoggerContext ctx, Logger logger) {
-        try {
-            Configuration config = ctx.getConfiguration();
-            final Layout layout = PatternLayout.newBuilder().withPattern(PatternLayout.DEFAULT_CONVERSION_PATTERN)
-                .withConfiguration(config).withCharset(Charset.forName("utf-8")).build();
-            TimeBasedTriggeringPolicy timeBasedTriggeringPolicy =
-                TimeBasedTriggeringPolicy.newBuilder().withInterval(1).withModulate(true).build();
-            RollingFileAppender appender = RollingFileAppender.newBuilder().withName(UUIDUtil.obtainUUID())
-                .withFileName("/www/arachnia_log/processor-server-meitu/bigdata.log")
-                .withFilePattern("/www/arachnia_log/processor-server-meitu/bigdata.log2-%d{yyyyMMdd-HH}")
-                .setConfiguration(config).withLayout(layout).withPolicy(timeBasedTriggeringPolicy).build();
-            appender.start();
-            config.addAppender(appender);
-            AppenderRef ref = AppenderRef.createAppenderRef(appender.getName(), null, null);
-            AppenderRef[] refs = new AppenderRef[] {ref};
-            LoggerConfig loggerConfig =
-                LoggerConfig.createLogger(false, Level.INFO, logger.getName(), null, refs, null, config, null);
-            loggerConfig.addAppender(appender, null, null);
-            config.addLogger(logger.getName(), loggerConfig);
-            ctx.updateLoggers();
-        } catch (Exception ex) {
-            LOGGER.warn(ex, Pair.of("method", "initActivityLoggerConfig"), Pair.of("status", "exceptions"),
-                Pair.of("clazz", "Log4j2StartupInitRunner"),
-                Pair.of("loggerName", logger != null ? logger.getName() : ""));
-        }
     }
 
     /**
