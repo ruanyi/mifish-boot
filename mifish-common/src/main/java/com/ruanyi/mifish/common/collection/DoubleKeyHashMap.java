@@ -1,12 +1,12 @@
 package com.ruanyi.mifish.common.collection;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * Description:
@@ -29,7 +29,7 @@ public class DoubleKeyHashMap<M, N, V> implements DoubleKeyMap<M, N, V> {
     /**
      * lock
      */
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
     /**
      * size
@@ -76,7 +76,8 @@ public class DoubleKeyHashMap<M, N, V> implements DoubleKeyMap<M, N, V> {
     /**
      * containsValue
      *
-     * @param value value whose presence in this map is to be tested
+     * @param value
+     *            value whose presence in this map is to be tested
      * @return
      */
     @Override
@@ -207,8 +208,8 @@ public class DoubleKeyHashMap<M, N, V> implements DoubleKeyMap<M, N, V> {
         try {
             for (DoubleKeyEntry<? extends M, ? extends N, ? extends V> entry : doubleKeyMap.entrySet()) {
                 if (entry != null) {
-                    DoubleKeyNode<M, N, V> node = new DoubleKeyNode(entry.getFirstKey(), entry.getSecondKey(), entry
-                            .getValue());
+                    DoubleKeyNode<M, N, V> node =
+                        new DoubleKeyNode(entry.getFirstKey(), entry.getSecondKey(), entry.getValue());
                     this.firstTable.put(entry.getFirstKey(), node);
                     this.secondTable.put(entry.getSecondKey(), node);
                 }
@@ -296,7 +297,7 @@ public class DoubleKeyHashMap<M, N, V> implements DoubleKeyMap<M, N, V> {
      * Description:
      *
      * @author: rls
-     * Date: 2018-01-22 11:17
+     * @Date: 2018-01-22 11:17
      */
     private static class DoubleKeyNode<M, N, V> implements DoubleKeyEntry<M, N, V> {
 
@@ -370,10 +371,9 @@ public class DoubleKeyHashMap<M, N, V> implements DoubleKeyMap<M, N, V> {
                 return true;
             }
             if (o instanceof DoubleKeyMap.DoubleKeyEntry) {
-                DoubleKeyNode<?, ?, ?> that = (DoubleKeyNode<?, ?, ?>) o;
-                if (Objects.equals(firstKey, that.firstKey)
-                        && Objects.equals(secondKey, that.secondKey)
-                        && Objects.equals(value, that.value)) {
+                DoubleKeyNode<?, ?, ?> that = (DoubleKeyNode<?, ?, ?>)o;
+                if (Objects.equals(firstKey, that.firstKey) && Objects.equals(secondKey, that.secondKey)
+                    && Objects.equals(value, that.value)) {
                     return true;
                 }
             }
