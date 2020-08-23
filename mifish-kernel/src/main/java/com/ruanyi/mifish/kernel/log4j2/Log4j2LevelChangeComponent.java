@@ -72,16 +72,6 @@ public class Log4j2LevelChangeComponent implements InitializingBean {
     }
 
     /**
-     * 判断是否需要初始化数据日志
-     *
-     * @param logger
-     * @return
-     */
-    static boolean isInitActivityLogger(Logger logger) {
-        return logger != null && StringUtils.equals(logger.getName(), "activity");
-    }
-
-    /**
      * initDefaultLoggerConfig
      *
      * @param ctx
