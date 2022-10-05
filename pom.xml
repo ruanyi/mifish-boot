@@ -41,7 +41,7 @@
         <junit.version>4.12</junit.version>
         <slf4j.version>1.7.21</slf4j.version>
         <mifish.log4j2.version>2.10.0</mifish.log4j2.version>
-        <jackson.version>2.11.1</jackson.version>
+        <jackson.version>2.12.6.1</jackson.version>
         <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
     </properties>
 
