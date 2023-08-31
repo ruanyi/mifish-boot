@@ -20,4 +20,11 @@ public class MutiProcessUtilTest {
         int code = MutiProcessUtil.runSubProcess(pid, 1, TimeUnit.MINUTES, "sh", "-c", ffmpeg);
         System.out.println(code);
     }
+
+    @Test
+    public void testRunSubProcess2() {
+        String pid = UUIDUtil.obtainUUID();
+        int code = MutiProcessUtil.runSubProcess(pid, 1, TimeUnit.MINUTES, "sh", "-c", "ls -lah");
+        System.out.println(code);
+    }
 }
