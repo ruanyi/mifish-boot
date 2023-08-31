@@ -24,8 +24,7 @@ public enum MifishLogs implements KeyValueLogger {
     /**
      * 访问日志，一般代码不会用。用在tomcat和nginx中的访问日志。
      */
-    access("access"),
-    ;
+    access("access"),;
 
     /**
      * category

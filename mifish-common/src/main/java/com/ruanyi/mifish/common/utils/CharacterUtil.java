@@ -16,8 +16,7 @@ public final class CharacterUtil {
     /**
      * 判断某段文本是否是中文
      *
-     * @param str
-     *            文本
+     * @param str 文本
      */
     public static boolean isChinese(String str) {
         if (str == null || str.isEmpty()) {
@@ -30,8 +29,7 @@ public final class CharacterUtil {
     /**
      * 判断某个char 是否是英文字母
      *
-     * @param c
-     *            char
+     * @param c char
      */
     public static boolean isLetter(char c) {
         boolean f = c >= 65 && c <= 90;

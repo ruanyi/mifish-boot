@@ -318,10 +318,8 @@ public class CustomAccessLogValve extends ValveBase implements AccessLog {
      * <p>
      * 默认是3位小数，数值型，方便查询过滤。默认值 0 。
      *
-     * @param millis
-     *            是否使用毫秒表示
-     * @param time
-     *            毫秒表示的时间
+     * @param millis 是否使用毫秒表示
+     * @param time 毫秒表示的时间
      * @return
      */
     private double getResponseTimeSencond(boolean millis, long time) {

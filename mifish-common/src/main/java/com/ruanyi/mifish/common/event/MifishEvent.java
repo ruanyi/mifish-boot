@@ -18,7 +18,6 @@ public abstract class MifishEvent implements Serializable {
      */
     private String eventId;
 
-
     /**
      * MifishEvent
      */

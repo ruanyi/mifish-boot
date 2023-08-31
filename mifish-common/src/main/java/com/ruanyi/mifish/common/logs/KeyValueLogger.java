@@ -1,16 +1,17 @@
 package com.ruanyi.mifish.common.logs;
 
-import com.ruanyi.mifish.common.context.RequestContext;
-import com.ruanyi.mifish.common.utils.JackJsonUtil;
-import com.ruanyi.mifish.common.utils.ThrowableUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.slf4j.Logger;
+import static com.ruanyi.mifish.common.utils.ThreadUtils.getThreadName;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.ruanyi.mifish.common.utils.ThreadUtils.getThreadName;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.slf4j.Logger;
+
+import com.ruanyi.mifish.common.context.RequestContext;
+import com.ruanyi.mifish.common.utils.JacksonUtils;
+import com.ruanyi.mifish.common.utils.ThrowableUtil;
 
 /**
  * Description: com.mifish.common.logs.KeyValueLogger
@@ -110,7 +111,7 @@ public interface KeyValueLogger {
                     params.put(p.getLeft(), p.getRight());
                 }
             }
-            getLogger().trace("{}", JackJsonUtil.toJSONString(params));
+            getLogger().trace("{}", JacksonUtils.toJSONString(params));
         }
     }
 
@@ -133,7 +134,7 @@ public interface KeyValueLogger {
                     params.put(p.getLeft(), p.getRight());
                 }
             }
-            getLogger().debug("{}", JackJsonUtil.toJSONString(params));
+            getLogger().debug("{}", JacksonUtils.toJSONString(params));
         }
     }
 
@@ -158,7 +159,7 @@ public interface KeyValueLogger {
                 }
             }
             params.put("stackTrace", ThrowableUtil.getStackTrace(t));
-            getLogger().debug("{}", JackJsonUtil.toJSONString(params));
+            getLogger().debug("{}", JacksonUtils.toJSONString(params));
         }
     }
 
@@ -181,7 +182,7 @@ public interface KeyValueLogger {
                     params.put(p.getLeft(), p.getRight());
                 }
             }
-            getLogger().info("{}", JackJsonUtil.toJSONString(params));
+            getLogger().info("{}", JacksonUtils.toJSONString(params));
         }
     }
 
@@ -204,7 +205,7 @@ public interface KeyValueLogger {
                     params.put(p.getLeft(), p.getRight());
                 }
             }
-            getLogger().warn("{}", JackJsonUtil.toJSONString(params));
+            getLogger().warn("{}", JacksonUtils.toJSONString(params));
         }
     }
 
@@ -229,7 +230,7 @@ public interface KeyValueLogger {
                 }
             }
             params.put("stackTrace", ThrowableUtil.getStackTrace(t));
-            getLogger().warn("{}", JackJsonUtil.toJSONString(params));
+            getLogger().warn("{}", JacksonUtils.toJSONString(params));
         }
     }
 
@@ -253,7 +254,7 @@ public interface KeyValueLogger {
             }
         }
         params.put("stackTrace", ThrowableUtil.getStackTrace(t));
-        getLogger().error("{}", JackJsonUtil.toJSONString(params));
+        getLogger().error("{}", JacksonUtils.toJSONString(params));
     }
 
     /**
@@ -274,6 +275,6 @@ public interface KeyValueLogger {
                 params.put(p.getLeft(), p.getRight());
             }
         }
-        getLogger().error("{}", JackJsonUtil.toJSONString(params));
+        getLogger().error("{}", JacksonUtils.toJSONString(params));
     }
 }

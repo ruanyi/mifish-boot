@@ -12,13 +12,13 @@ import java.util.Collection;
  */
 public class PageList<T> extends ArrayList<T> implements Serializable {
 
-    /***pageSize*/
+    /*** pageSize */
     private int pageSize;
 
-    /***page*/
+    /*** page */
     private int page;
 
-    /***totalItems*/
+    /*** totalItems */
     private int totalItems;
 
     public PageList() {

@@ -18,10 +18,8 @@ public final class RandomUtil {
      * <p>
      * In Java 1.7 or later, the standard way to do this is as follows:
      *
-     * @param min
-     *            the min
-     * @param max
-     *            the max
+     * @param min the min
+     * @param max the max
      * @return int
      */
     public static int randomRange(int min, int max) {
@@ -39,10 +37,8 @@ public final class RandomUtil {
      * Returns a random integer within the specified range.
      * </p>
      *
-     * @param startInclusive
-     *            the smallest value that can be returned, must be non-negative
-     * @param endExclusive
-     *            the upper bound (not included)
+     * @param startInclusive the smallest value that can be returned, must be non-negative
+     * @param endExclusive the upper bound (not included)
      * @return the random integer, -1 if {@code startInclusive > endExclusive} or if {@code startInclusive} is negative
      */
     public static int randomInt(final int startInclusive, final int endExclusive) {
@@ -58,10 +54,8 @@ public final class RandomUtil {
     /**
      * 随机取 list 中一个数
      *
-     * @param <T>
-     *            the type parameter
-     * @param list
-     *            the list
+     * @param <T> the type parameter
+     * @param list the list
      * @return the t
      */
     public static <T> T randomSelectOne(List<T> list) {
@@ -74,12 +68,9 @@ public final class RandomUtil {
     /**
      * Random get n record list.
      *
-     * @param <T>
-     *            the type parameter
-     * @param list
-     *            the list
-     * @param n
-     *            the n
+     * @param <T> the type parameter
+     * @param list the list
+     * @param n the n
      * @return the list
      */
     public static <T> List<T> randomGetNRecord(List<T> list, int n) {

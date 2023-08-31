@@ -195,12 +195,9 @@ public final class DateUtil {
     /**
      * 获取指定日期偏移指定时间后的时间
      *
-     * @param date
-     *            基准日期
-     * @param calendarField
-     *            偏移的粒度大小（小时、天、月等）使用Calendar中的常数
-     * @param offsite
-     *            偏移量，正数为向后偏移，负数为向前偏移
+     * @param date 基准日期
+     * @param calendarField 偏移的粒度大小（小时、天、月等）使用Calendar中的常数
+     * @param offsite 偏移量，正数为向后偏移，负数为向前偏移
      * @return 偏移后的日期
      */
     public static Date offsiteDate(Date date, int calendarField, int offsite) {

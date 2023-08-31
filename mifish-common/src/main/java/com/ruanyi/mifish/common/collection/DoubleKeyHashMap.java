@@ -76,8 +76,7 @@ public class DoubleKeyHashMap<M, N, V> implements DoubleKeyMap<M, N, V> {
     /**
      * containsValue
      *
-     * @param value
-     *            value whose presence in this map is to be tested
+     * @param value value whose presence in this map is to be tested
      * @return
      */
     @Override

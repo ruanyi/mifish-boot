@@ -86,7 +86,7 @@ public final class IdAndName {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        IdAndName idAndName = (IdAndName) o;
+        IdAndName idAndName = (IdAndName)o;
         return id == idAndName.id && Objects.equals(name, idAndName.name);
     }
 

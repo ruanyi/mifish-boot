@@ -15,7 +15,9 @@ import java.io.Serializable;
  * <p>
  * <p>
  * 使用方法如下:
- * <pre><![CDATA[
+ * 
+ * <pre>
+ * <![CDATA[
  *
  *   // 创建一个翻页器，可以在此指定每页显示几项，也可以以后再指定。
  *   // 如果没有指定，则使用默认值每页最多显示10项。
@@ -65,7 +67,8 @@ import java.io.Serializable;
  *   System.out.println(pg);
  *   log.debug(pg);
  *
- * ]]></pre>
+ * ]]>
+ * </pre>
  * </p>
  *
  * @author: rls
@@ -73,25 +76,25 @@ import java.io.Serializable;
  */
 public class Paginator implements Serializable, Cloneable {
 
-    /***每页默认的项数(10)。*/
+    /*** 每页默认的项数(10)。 */
     public static final int DEFAULT_ITEMS_PER_PAGE = 10;
 
-    /***滑动窗口默认的大小(7)。*/
+    /*** 滑动窗口默认的大小(7)。 */
     public static final int DEFAULT_SLIDER_SIZE = 7;
 
-    /***表示项数未知(<code>Integer.MAX_VALUE</code>)。*/
+    /*** 表示项数未知(<code>Integer.MAX_VALUE</code>)。 */
     public static final int UNKNOWN_ITEMS = Integer.MAX_VALUE;
 
-    /***状态量 : 当前页码。(1-based)*/
+    /*** 状态量 : 当前页码。(1-based) */
     private int page;
 
-    /***总共项数*/
+    /*** 总共项数 */
     private int items;
 
-    /***每页项数。*/
+    /*** 每页项数。 */
     private int itemsPerPage;
 
-    /***创建一个分页器，初始项数为无限大<code>UNKNOWN_ITEMS</code>，默认每页显示<code>10</code>项。*/
+    /*** 创建一个分页器，初始项数为无限大<code>UNKNOWN_ITEMS</code>，默认每页显示<code>10</code>项。 */
     public Paginator() {
         this(0);
     }
@@ -109,7 +112,7 @@ public class Paginator implements Serializable, Cloneable {
      * 创建一个分页器，初始项数为无限大<code>UNKNOWN_ITEMS</code>，指定每页项数。
      *
      * @param itemsPerPage 每页项数。
-     * @param items        总项数
+     * @param items 总项数
      */
     public Paginator(int itemsPerPage, int items) {
         this.items = (items >= 0) ? items : 0;
@@ -123,7 +126,7 @@ public class Paginator implements Serializable, Cloneable {
      * @return 总页数
      */
     public int getPages() {
-        return (int) Math.ceil((double) items / itemsPerPage);
+        return (int)Math.ceil((double)items / itemsPerPage);
     }
 
     /**
@@ -161,8 +164,7 @@ public class Paginator implements Serializable, Cloneable {
      * @return 设置以后的总项数
      */
     public int setItems(int items) {
-        this.items = (items >= 0) ? items
-                : 0;
+        this.items = (items >= 0) ? items : 0;
         setPage(page);
         return this.items;
     }
@@ -185,11 +187,10 @@ public class Paginator implements Serializable, Cloneable {
     public int setItemsPerPage(int itemsPerPage) {
         int tmp = this.itemsPerPage;
 
-        this.itemsPerPage = (itemsPerPage > 0) ? itemsPerPage
-                : DEFAULT_ITEMS_PER_PAGE;
+        this.itemsPerPage = (itemsPerPage > 0) ? itemsPerPage : DEFAULT_ITEMS_PER_PAGE;
 
         if (page > 0) {
-            setPage((int) (((double) (page - 1) * tmp) / this.itemsPerPage) + 1);
+            setPage((int)(((double)(page - 1) * tmp) / this.itemsPerPage) + 1);
         }
 
         return this.itemsPerPage;
@@ -201,8 +202,7 @@ public class Paginator implements Serializable, Cloneable {
      * @return 偏移量
      */
     public int getOffset() {
-        return (page > 0) ? (itemsPerPage * (page - 1))
-                : 0;
+        return (page > 0) ? (itemsPerPage * (page - 1)) : 0;
     }
 
     /**
@@ -314,15 +314,14 @@ public class Paginator implements Serializable, Cloneable {
      * 判断指定页码是否被禁止，也就是说指定页码超出了范围或等于当前页码。
      *
      * @param page 页码
-     * @return boolean  是否为禁止的页码
+     * @return boolean 是否为禁止的页码
      */
     public boolean isDisabledPage(int page) {
         return ((page < 1) || (page > getPages()) || (page == this.page));
     }
 
     /**
-     * 取得默认大小(<code>DEFAULT_SLIDER_SIZE</code>)的页码滑动窗口，并将当前页尽可能地放在滑动窗口的中间部位。参见{@link #getSlider(int
-     * n)}。
+     * 取得默认大小(<code>DEFAULT_SLIDER_SIZE</code>)的页码滑动窗口，并将当前页尽可能地放在滑动窗口的中间部位。参见{@link #getSlider(int n)}。
      *
      * @return 包含页码的数组
      */
@@ -331,8 +330,8 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * 取得指定大小的页码滑动窗口，并将当前页尽可能地放在滑动窗口的中间部位。例如: 总共有13页，当前页是第5页，取得一个大小为5的滑动窗口，将包括 3，4，5，6,
-     * 7这几个页码，第5页被放在中间。如果当前页是12，则返回页码为 9，10，11，12，13。
+     * 取得指定大小的页码滑动窗口，并将当前页尽可能地放在滑动窗口的中间部位。例如: 总共有13页，当前页是第5页，取得一个大小为5的滑动窗口，将包括 3，4，5，6, 7这几个页码，第5页被放在中间。如果当前页是12，则返回页码为
+     * 9，10，11，12，13。
      *
      * @param width 滑动窗口大小
      * @return 包含页码的数组，如果指定滑动窗口大小小于1或总页数为0，则返回空数组。
@@ -376,9 +375,7 @@ public class Paginator implements Serializable, Cloneable {
         int pages = getPages();
 
         if (pages > 0) {
-            return (page < 1) ? 1
-                    : ((page > pages) ? pages
-                    : page);
+            return (page < 1) ? 1 : ((page > pages) ? pages : page);
         }
 
         return 0;
@@ -426,8 +423,8 @@ public class Paginator implements Serializable, Cloneable {
         }
 
         sb.append(" of ").append(getPages()).append(",\n");
-        sb.append("    Showing items ").append(getBeginIndex()).append(" to ").append(getEndIndex())
-                .append(" (total ").append(getItems()).append(" items), ");
+        sb.append("    Showing items ").append(getBeginIndex()).append(" to ").append(getEndIndex()).append(" (total ")
+            .append(getItems()).append(" items), ");
         sb.append("offset=").append(getOffset()).append(", length=").append(getLength());
         return sb.toString();
     }

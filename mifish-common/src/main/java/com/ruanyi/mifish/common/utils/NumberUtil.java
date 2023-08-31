@@ -36,8 +36,7 @@ public final class NumberUtil {
     /**
      * 判断是否为整数
      *
-     * @param str
-     *            传入的字符串
+     * @param str 传入的字符串
      * @return 是整数返回true, 否则返回false
      */
     public static boolean isInteger(String str) {
@@ -51,8 +50,7 @@ public final class NumberUtil {
     /**
      * 判断是否为浮点数，包括double和float
      *
-     * @param str
-     *            传入的字符串
+     * @param str 传入的字符串
      * @return 是浮点数返回true, 否则返回false
      */
     public static boolean isDouble(String str) {

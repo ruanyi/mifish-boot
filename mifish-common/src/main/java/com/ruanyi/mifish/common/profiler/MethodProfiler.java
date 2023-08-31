@@ -15,7 +15,7 @@ import java.util.List;
  */
 public final class MethodProfiler {
 
-    /***entryStack*/
+    /*** entryStack */
     private static final ThreadLocal<Entry> entryStack = new ThreadLocal<>();
 
     /**
@@ -38,7 +38,7 @@ public final class MethodProfiler {
         Entry currentEntry = getCurrentEntry();
         if (currentEntry != null) {
             currentEntry.enterSubEntry(message);
-        } else {//假如是第一个，则开始一个头
+        } else {// 假如是第一个，则开始一个头
             entryStack.set(new Entry(message, null, null));
         }
     }
@@ -156,9 +156,9 @@ public final class MethodProfiler {
         /**
          * 创建一个新的entry。
          *
-         * @param message     entry的信息，可以是<code>null</code>
+         * @param message entry的信息，可以是<code>null</code>
          * @param parentEntry 父entry，可以是<code>null</code>
-         * @param firstEntry  第一个entry，可以是<code>null</code>
+         * @param firstEntry 第一个entry，可以是<code>null</code>
          */
         private Entry(String message, Entry parentEntry, Entry firstEntry) {
             this.message = message;
@@ -357,7 +357,7 @@ public final class MethodProfiler {
         /**
          * 将entry转换成字符串的表示。
          *
-         * @param buffer  字符串buffer
+         * @param buffer 字符串buffer
          * @param prefix1 首行前缀
          * @param prefix2 后续行前缀
          */
@@ -371,13 +371,12 @@ public final class MethodProfiler {
             double percent = getPecentage();
             double percentOfAll = getPecentageOfAll();
 
-            Object[] params = new Object[]{
-                    message, // {0} - entry信息
-                    new Long(startTime), // {1} - 起始时间
-                    new Long(duration), // {2} - 持续总时间
-                    new Long(durationOfSelf), // {3} - 自身消耗的时间
-                    new Double(percent), // {4} - 在父entry中所占的时间比例
-                    new Double(percentOfAll) // {5} - 在总时间中所旧的时间比例
+            Object[] params = new Object[] {message, // {0} - entry信息
+                new Long(startTime), // {1} - 起始时间
+                new Long(duration), // {2} - 持续总时间
+                new Long(durationOfSelf), // {3} - 自身消耗的时间
+                new Double(percent), // {4} - 在父entry中所占的时间比例
+                new Double(percentOfAll) // {5} - 在总时间中所旧的时间比例
             };
 
             StringBuffer pattern = new StringBuffer("{1,number} ");
