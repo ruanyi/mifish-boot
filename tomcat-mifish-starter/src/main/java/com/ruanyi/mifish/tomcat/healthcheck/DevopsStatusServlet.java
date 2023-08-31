@@ -2,16 +2,12 @@ package com.ruanyi.mifish.tomcat.healthcheck;
 
 import java.io.IOException;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeansException;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.boot.actuate.health.Status;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.Lifecycle;
@@ -28,22 +24,15 @@ public class DevopsStatusServlet extends HttpServlet implements ApplicationConte
 
     public static final String HEALTH_CHECK_URL = "/devops/status";
 
-    /**
-     * applicationContext
-     */
+    /** applicationContext */
     private ApplicationContext applicationContext;
-
-    /** healthIndicator */
-    @Resource(name = "gracefulShutdownHealthCheck")
-    private HealthIndicator healthIndicator;
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest, HttpServletResponse)
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Health health = this.healthIndicator.health();
-        if (isSpringContextRunning() && health != null && health.getStatus() == Status.UP) {
+        if (isSpringContextRunning()) {
             resp.setStatus(HttpServletResponse.SC_OK);
         } else {
             resp.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);

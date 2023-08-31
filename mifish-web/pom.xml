@@ -10,11 +10,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mifish-web</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.ruanyi.mifish</groupId>
-            <artifactId>mifish-kernel</artifactId>
+            <artifactId>mifish-media</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ruanyi.mifish</groupId>
+            <artifactId>tomcat-mifish-starter</artifactId>
         </dependency>
     </dependencies>
     <build>

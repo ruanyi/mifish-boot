@@ -26,9 +26,9 @@ import com.ruanyi.mifish.kernel.utils.ApplicationContextHolder;
 
 /**
  * Description:
- * <p>
- * MeituHttpUtil
- *
+ * 
+ * MifishHttpUtil
+ * 
  * @author: rls
  * @Date: 2018-01-17 19:41
  */
@@ -203,7 +203,7 @@ public final class MifishHttpUtil {
      * @return
      */
     public static Cookie newCookie(String name, String value) {
-        return newCookie(name, value, "www.meitu.com", -1, "/", false);
+        return newCookie(name, value, "www.mifish.com", -1, "/", false);
     }
 
     /**
@@ -343,11 +343,11 @@ public final class MifishHttpUtil {
             message = ApplicationContextHolder.getApplicationContext().getMessage(key, args, locale);
         } catch (NoSuchMessageException ex) {
             if (MifishLogs.framework.isDebugEnabled()) {
-                MifishLogs.framework.debug(Pair.of("clazz", "MeituHttpUtil"), Pair.of("method", "getMessage"),
+                MifishLogs.framework.debug(Pair.of("clazz", "MifishHttpUtil"), Pair.of("method", "getMessage"),
                     Pair.of("key", key), Pair.of("error", "NoSuchMessageException"), Pair.of("message", message));
             }
         } catch (Exception e) {
-            MifishLogs.framework.error(e, Pair.of("clazz", "MeituHttpUtil"), Pair.of("method", "getMessage"),
+            MifishLogs.framework.error(e, Pair.of("clazz", "MifishHttpUtil"), Pair.of("method", "getMessage"),
                 Pair.of("key", key), Pair.of("status", "exceptions"));
         }
         return message;
@@ -401,7 +401,7 @@ public final class MifishHttpUtil {
     }
 
     /**
-     * MeituHttpUtil forbit instance
+     * MifishHttpUtil forbit instance
      */
     private MifishHttpUtil() {
 

@@ -19,7 +19,7 @@ public class VideoMetaServiceImpl implements VideoMetaService {
 
     /** CMD */
     private static final String CMD =
-        "ffprobe -v quiet -print_format json -show_format -show_streams -loglevel error %s";
+        "/usr/local/bin/ffprobe -v quiet -print_format json -show_format -show_streams -loglevel error %s";
 
     /**
      * @see VideoMetaService#obtainVideoMetaByFFprobe(String)

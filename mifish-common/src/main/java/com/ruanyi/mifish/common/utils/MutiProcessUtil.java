@@ -204,7 +204,6 @@ public final class MutiProcessUtil {
                             Pair.of("cmdStr", processResult.getCmdStr()));
                     }
                 }
-                //
                 if (isStdout) {
                     processResult.setStdout(result.toString());
                 } else {

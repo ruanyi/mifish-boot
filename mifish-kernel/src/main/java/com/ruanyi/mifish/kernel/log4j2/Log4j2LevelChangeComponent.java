@@ -22,7 +22,7 @@ import com.ruanyi.mifish.common.logs.MifishLoggerContainer;
 import com.ruanyi.mifish.common.logs.MifishLogs;
 
 /**
- * Description: com.meitu.xiuxiu.framework.log4j2
+ * Log4j2LevelChangeComponent
  *
  * @author: rls
  * @Date: 2019-01-15

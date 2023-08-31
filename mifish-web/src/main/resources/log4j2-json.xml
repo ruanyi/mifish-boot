@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Appenders>
+        <Console name="JsonConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <JSONLayout stacktraceAsString="true" compact="true" eventEol="true">
+                <KeyValuePair key="requestId" value="$${ctx:requestId}"/>
+                <KeyValuePair key="traceId" value="$${ctx:traceId}"/>
+            </JSONLayout>
+        </Console>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.logging.log4j" level="warn" additivity="false">
+            <AppenderRef ref="JsonConsoleAppender"/>
+        </Logger>
+
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="JsonConsoleAppender"/>
+        </Logger>
+
+        <Logger name="org.apache.catalina" level="info" additivity="false">
+            <AppenderRef ref="JsonConsoleAppender"/>
+        </Logger>
+
+        <Logger name="org.apache.coyote" level="info" additivity="false">
+            <AppenderRef ref="JsonConsoleAppender"/>
+        </Logger>
+
+        <Root level="warn">
+            <AppenderRef ref="JsonConsoleAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
