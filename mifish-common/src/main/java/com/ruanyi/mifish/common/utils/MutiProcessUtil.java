@@ -15,6 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.ruanyi.mifish.common.logs.MifishLogs;
+import com.ruanyi.mifish.common.model.ProcessResult;
 
 /**
  * Description:
@@ -37,8 +38,7 @@ public final class MutiProcessUtil {
     /** LOG_SUB_PROCESS_MSG_THREAD_POOL */
     private static final ThreadPoolExecutor LOG_SUB_PROCESS_MSG_THREAD_POOL =
         new ThreadPoolExecutor(2, 10, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(2),
-            new ThreadFactoryBuilder()
-                .setNameFormat("log-subprocess-msg-thread-%d").build(),
+            new ThreadFactoryBuilder().setNameFormat("log-subprocess-msg-thread-%d").build(),
             new ThreadPoolExecutor.AbortPolicy());
 
     /** MutiProcessUtil */
@@ -69,7 +69,7 @@ public final class MutiProcessUtil {
      * @param cmd
      * @return
      */
-    public static int runShellProcess(String pid, String cmd) {
+    public static ProcessResult runShellProcess(String pid, String cmd) {
         return runSubProcess(pid, 60, TimeUnit.MINUTES, "sh", "-c", cmd);
     }
 
@@ -80,7 +80,7 @@ public final class MutiProcessUtil {
      * @param cmd
      * @return
      */
-    public static int runSubProcess(String pid, String... cmd) {
+    public static ProcessResult runSubProcess(String pid, String... cmd) {
         return runSubProcess(pid, 60, TimeUnit.MINUTES, cmd);
     }
 
@@ -93,10 +93,10 @@ public final class MutiProcessUtil {
      * @param cmd
      * @return
      */
-    public static int runSubProcess(String pid, long timeout, TimeUnit unit, String... cmd) {
+    public static ProcessResult runSubProcess(String pid, long timeout, TimeUnit unit, String... cmd) {
         // 进程pid，已经存在
         if (PROCESS_CACHE.containsKey(pid)) {
-            return -1;
+            return ProcessResult.ALREADY_EXISTS(pid, cmd);
         }
         ProcessBuilder processBuilder = new ProcessBuilder(cmd);
         // 启动一子进程
@@ -104,7 +104,7 @@ public final class MutiProcessUtil {
         synchronized (MutiProcessUtil.class) {
             // 进程pid，已经存在
             if (PROCESS_CACHE.containsKey(pid)) {
-                return -1;
+                return ProcessResult.ALREADY_EXISTS(pid, cmd);
             }
             // 由于k8s容器内会不定时抛出open /dev/null: operation not permitted 的异常，因此这里增加两次重试
             for (int i = 0; i < 3; i++) {
@@ -120,17 +120,20 @@ public final class MutiProcessUtil {
                         Pair.of("pid", pid), Pair.of("cmd", cmd), Pair.of("curr_cnt", i),
                         Pair.of("message", "start a subprocess error"));
                     if (i == 2) {
-                        return -2;
+                        return ProcessResult.FAIL(pid, -2, cmd);
                     }
                 }
             }
         }
         // 等待进程执行结果
         try {
+            ProcessResult processResult = new ProcessResult();
+            processResult.setPid(pid);
+            processResult.setCmdStr(Arrays.toString(cmd));
             // std out //std err 目前仅仅是打印日志
-            LogLineMsg stdoutMsg = new LogLineMsg(pid, process.getInputStream(), Arrays.toString(cmd));
+            LogLineMsg stdoutMsg = new LogLineMsg(process.getInputStream(), processResult, true);
             LOG_SUB_PROCESS_MSG_THREAD_POOL.submit(stdoutMsg);
-            LogLineMsg stderrMsg = new LogLineMsg(pid, process.getErrorStream(), Arrays.toString(cmd));
+            LogLineMsg stderrMsg = new LogLineMsg(process.getErrorStream(), processResult, false);
             LOG_SUB_PROCESS_MSG_THREAD_POOL.submit(stderrMsg);
             // 其实，当算法输出
             boolean flag = process.waitFor(timeout, unit);
@@ -139,16 +142,17 @@ public final class MutiProcessUtil {
                 process.destroy();
                 PROCESS_CACHE.remove(pid);
                 // 超时退出
-                return -8;
+                return ProcessResult.FAIL(pid, -8, cmd);
             }
             // 获取进程的退出
             PROCESS_CACHE.remove(pid);
             // 获取子进程退出的数值
-            return process.exitValue();
+            processResult.setExitValue(process.exitValue());
+            return processResult;
         } catch (Exception ex) {
             LOG.error(ex, Pair.of("clazz", "MutiProcessUtil"), Pair.of("method", "runSubProcess"), Pair.of("pid", pid),
                 Pair.of("cmd", cmd), Pair.of("message", "start a subprocess error"));
-            return -9;
+            return ProcessResult.FAIL(pid, -9, cmd);
         }
     }
 
@@ -160,26 +164,26 @@ public final class MutiProcessUtil {
      */
     private static final class LogLineMsg implements Runnable {
 
-        /** pid */
-        private String pid;
-
         /** inputStream */
         private InputStream inputStream;
 
-        /** cmdStr */
-        private String cmdStr;
+        /** processResult */
+        private ProcessResult processResult;
+
+        /** isStdout */
+        private boolean isStdout;
 
         /**
          * LogLineMsg
          *
-         * @param pid
          * @param inputStream
-         * @param cmdStr
+         * @param processResult
+         * @param isStdout
          */
-        LogLineMsg(String pid, InputStream inputStream, String cmdStr) {
-            this.pid = pid;
+        public LogLineMsg(InputStream inputStream, ProcessResult processResult, boolean isStdout) {
             this.inputStream = inputStream;
-            this.cmdStr = cmdStr;
+            this.processResult = processResult;
+            this.isStdout = isStdout;
         }
 
         /**
@@ -191,16 +195,26 @@ public final class MutiProcessUtil {
                 // 这里的bytes.Buffer是动态空间的，内置的byte数组会自动调整。否则如果buffer的缓冲区满了，会阻塞住function进程的输出。
                 BufferedReader bufferReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = null;
+                StringBuilder result = new StringBuilder();
                 while ((line = bufferReader.readLine()) != null) {
+                    result.append(line);
                     if (LOG.isInfoEnabled()) {
-                        LOG.info(Pair.of("clazz", "LogLineMsg"), Pair.of("method", "run"), Pair.of("pid", pid),
-                            Pair.of("output", line), Pair.of("cmdStr", cmdStr));
+                        LOG.info(Pair.of("clazz", "LogLineMsg"), Pair.of("method", "run"),
+                            Pair.of("pid", processResult.getPid()), Pair.of("output", line),
+                            Pair.of("cmdStr", processResult.getCmdStr()));
                     }
+                }
+                //
+                if (isStdout) {
+                    processResult.setStdout(result.toString());
+                } else {
+                    processResult.setStderr(result.toString());
                 }
             } catch (Exception ex) {
                 // ingore
-                LOG.error(ex, Pair.of("clazz", "LogLineMsg"), Pair.of("method", "run"), Pair.of("pid", pid),
-                    Pair.of("message", "print error msg"), Pair.of("cmdStr", cmdStr));
+                LOG.error(ex, Pair.of("clazz", "LogLineMsg"), Pair.of("method", "run"),
+                    Pair.of("pid", processResult.getPid()), Pair.of("message", "print error msg"),
+                    Pair.of("cmdStr", processResult.getCmdStr()));
             }
         }
     }

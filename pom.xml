@@ -19,7 +19,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.2.RELEASE</version>
+        <version>2.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -35,7 +35,6 @@
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <groovy.version>2.5.13</groovy.version>
         <guava.version>23.0</guava.version>
         <yaml.version>1.20</yaml.version>
         <commons.lang3.version>3.8</commons.lang3.version>
@@ -44,6 +43,7 @@
         <mifish.log4j2.version>2.10.0</mifish.log4j2.version>
         <jackson.version>2.11.1</jackson.version>
         <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
+        <lombok.version>1.18.0</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -82,12 +82,6 @@
                 <version>${jackson.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-all</artifactId>
-                <version>${groovy.version}</version>
-            </dependency>
-
             <!--mifish dependency -->
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
@@ -111,6 +105,13 @@
                 <groupId>com.ruanyi.mifish</groupId>
                 <artifactId>mifish-web</artifactId>
                 <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>compile</scope>
             </dependency>
 
             <!--spring boot dependencies -->

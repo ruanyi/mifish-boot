@@ -26,8 +26,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->

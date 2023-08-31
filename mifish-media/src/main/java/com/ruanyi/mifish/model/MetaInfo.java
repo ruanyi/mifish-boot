@@ -3,10 +3,7 @@ package com.ruanyi.mifish.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.ruanyi.mifish.common.logs.MifishLogs;
-import com.ruanyi.mifish.common.utils.GroovyUtil;
 
 /**
  * Description:
@@ -97,28 +94,6 @@ public abstract class MetaInfo {
      */
     public String getDesc() {
         return desc;
-    }
-
-    /**
-     * getMeta
-     *
-     * @param path
-     * @param clazz
-     * @param <T>
-     * @return
-     */
-    public <T> T getMeta(String path, Class<T> clazz) {
-        try {
-            Object value = GroovyUtil.executeScript(path, this.metas);
-            if (value != null) {
-                return clazz.cast(value);
-            }
-            return null;
-        } catch (Exception e) {
-            LOG.error(e, Pair.of("clazz", "MetaInfo"), Pair.of("method", "getMeta"), Pair.of("path", path),
-                Pair.of("mediaInfo", this.mediaInfo), Pair.of("obtain_media_status", "exception"));
-            return null;
-        }
     }
 
     /**
