@@ -20,5 +20,22 @@ public interface FFmpegX264TcService {
      */
     boolean x264CrfTcBySourceMeta(AvInfo sourceMeta, String fromVideoPath, String toVideoPath);
 
+    /**
+     * x264AbrTc
+     *
+     * @param fromVideoPath
+     * @param toVideoPath
+     * @return
+     */
+    boolean x264AbrTc(String fromVideoPath, String toVideoPath);
+
+    /**
+     * twoPassTc
+     *
+     * @param fromVideoPath
+     * @param toVideoPath
+     * @return
+     */
+    boolean twoPassTc(String fromVideoPath, String toVideoPath);
 
 }

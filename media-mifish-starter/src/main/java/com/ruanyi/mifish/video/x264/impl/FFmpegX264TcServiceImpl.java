@@ -1,12 +1,11 @@
 package com.ruanyi.mifish.video.x264.impl;
 
-import org.springframework.stereotype.Service;
-
 import com.ruanyi.mifish.common.model.ProcessResult;
 import com.ruanyi.mifish.common.utils.MutiProcessUtil;
 import com.ruanyi.mifish.common.utils.UUIDUtil;
 import com.ruanyi.mifish.model.AvInfo;
 import com.ruanyi.mifish.video.x264.FFmpegX264TcService;
+import org.springframework.stereotype.Service;
 
 /**
  * Description:
@@ -31,5 +30,21 @@ public class FFmpegX264TcServiceImpl implements FFmpegX264TcService {
             String.format(CMD, fromVideoPath, sourceMeta.getVideoWidth(), sourceMeta.getVideoHeight(), toVideoPath);
         ProcessResult pr = MutiProcessUtil.runShellProcess(uuid, cmd);
         return pr.isSuccess();
+    }
+
+    /**
+     * @see FFmpegX264TcService#x264AbrTc(String, String)
+     */
+    @Override
+    public boolean x264AbrTc(String fromVideoPath, String toVideoPath) {
+        return false;
+    }
+
+    /**
+     * @see FFmpegX264TcService#twoPassTc(String, String)
+     */
+    @Override
+    public boolean twoPassTc(String fromVideoPath, String toVideoPath) {
+        return false;
     }
 }
