@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ruanyi.mifish.common.model.OperateResult;
+import com.ruanyi.mifish.web.service.ImageCompressService;
 import com.ruanyi.mifish.web.service.ImageResizeService;
 
 /**
@@ -22,6 +23,10 @@ public class ImageController {
     @Autowired
     private ImageResizeService imageResizeService;
 
+    /** imageCompressService */
+    @Autowired
+    private ImageCompressService imageCompressService;
+
     /**
      * batchResize
      *
@@ -32,6 +37,19 @@ public class ImageController {
         String fromImageDir = "/Users/rls/Documents/tmp/v19/封面图";
         String toImageDir = "/Users/rls/Documents/tmp/v19/img_rs";
         this.imageResizeService.asyncResize(fromImageDir, toImageDir);
+        return OperateResult.SUCCESS(true);
+    }
+
+    /**
+     * compress
+     *
+     * @return
+     */
+    @PostMapping(value = "/compress")
+    public OperateResult batchCompress() {
+        String fromImageDir = "/Users/rls/Documents/tmp/v19/封面图";
+        String toImageDir = "/Users/rls/Documents/tmp/v19/img_rs";
+        this.imageCompressService.asyncCompress(fromImageDir, toImageDir);
         return OperateResult.SUCCESS(true);
     }
 }

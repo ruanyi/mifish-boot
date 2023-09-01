@@ -25,10 +25,10 @@ public class FFmpegX264TcServiceImpl implements FFmpegX264TcService {
      * @see FFmpegX264TcService#x264CrfTcBySourceMeta(AvInfo, String, String)
      */
     @Override
-    public boolean x264CrfTcBySourceMeta(AvInfo sourceAvInfo, String fromVideoPath, String toVideoPath) {
+    public boolean x264CrfTcBySourceMeta(AvInfo sourceMeta, String fromVideoPath, String toVideoPath) {
         String uuid = UUIDUtil.obtainUUID();
         String cmd =
-            String.format(CMD, fromVideoPath, sourceAvInfo.getVideoWidth(), sourceAvInfo.getVideoHeight(), toVideoPath);
+            String.format(CMD, fromVideoPath, sourceMeta.getVideoWidth(), sourceMeta.getVideoHeight(), toVideoPath);
         ProcessResult pr = MutiProcessUtil.runShellProcess(uuid, cmd);
         return pr.isSuccess();
     }

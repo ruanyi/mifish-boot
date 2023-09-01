@@ -13,10 +13,12 @@ public interface FFmpegX264TcService {
     /**
      * x264CrfTcBySourceMeta
      *
-     * @param sourceAvInfo
+     * @param sourceMeta
      * @param fromVideoPath
      * @param toVideoPath
      * @return
      */
-    boolean x264CrfTcBySourceMeta(AvInfo sourceAvInfo, String fromVideoPath, String toVideoPath);
+    boolean x264CrfTcBySourceMeta(AvInfo sourceMeta, String fromVideoPath, String toVideoPath);
+
+
 }
