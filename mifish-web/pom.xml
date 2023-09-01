@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.ruanyi.mifish</groupId>
-            <artifactId>mifish-media</artifactId>
+            <artifactId>media-mifish-starter</artifactId>
         </dependency>
 
         <dependency>
