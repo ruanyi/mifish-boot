@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2017-12-18 23:15
  */
 public enum TimeWindowUnit {

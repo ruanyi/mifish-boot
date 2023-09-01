@@ -5,7 +5,7 @@ import com.google.common.eventbus.EventBus;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-04-15 10:06
  */
 public class MifishEventBus {

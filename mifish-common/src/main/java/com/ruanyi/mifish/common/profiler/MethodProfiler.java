@@ -10,7 +10,7 @@ import java.util.List;
  * <p>
  * 暂不支持多线程，只能在单线程下使用
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2017-11-02 22:09
  */
 public final class MethodProfiler {
@@ -134,7 +134,7 @@ public final class MethodProfiler {
     /**
      * 代表一个计时单元。
      *
-     * @author: rls
+     * @author: ruanyi
      * @Date: 2017-11-02 22:09
      */
     public static final class Entry {

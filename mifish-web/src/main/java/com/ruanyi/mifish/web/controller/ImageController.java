@@ -12,7 +12,7 @@ import com.ruanyi.mifish.web.service.ImageResizeService;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 18:31
  */
 @RestController
@@ -34,8 +34,8 @@ public class ImageController {
      */
     @PostMapping(value = "/resize")
     public OperateResult batchResize() {
-        String fromImageDir = "/Users/rls/Documents/tmp/v19/封面图";
-        String toImageDir = "/Users/rls/Documents/tmp/v19/img_rs";
+        String fromImageDir = "/Users/ruanyi/Documents/tmp/v19/封面图";
+        String toImageDir = "/Users/ruanyi/Documents/tmp/v19/img_rs";
         this.imageResizeService.asyncResize(fromImageDir, toImageDir);
         return OperateResult.SUCCESS(true);
     }
@@ -47,8 +47,8 @@ public class ImageController {
      */
     @PostMapping(value = "/compress")
     public OperateResult batchCompress() {
-        String fromImageDir = "/Users/rls/Documents/tmp/v19/封面图";
-        String toImageDir = "/Users/rls/Documents/tmp/v19/img_rs";
+        String fromImageDir = "/Users/ruanyi/Documents/tmp/v19/封面图";
+        String toImageDir = "/Users/ruanyi/Documents/tmp/v19/img_rs";
         this.imageCompressService.asyncCompress(fromImageDir, toImageDir);
         return OperateResult.SUCCESS(true);
     }

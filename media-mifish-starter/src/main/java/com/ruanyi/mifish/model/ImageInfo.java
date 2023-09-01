@@ -10,7 +10,7 @@ import com.ruanyi.mifish.common.utils.JacksonUtils;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2020-04-24 21:17
  */
 public final class ImageInfo extends MetaInfo {

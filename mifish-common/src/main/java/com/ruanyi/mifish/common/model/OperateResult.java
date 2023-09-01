@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-01-03 13:40
  */
 public class OperateResult implements Serializable {

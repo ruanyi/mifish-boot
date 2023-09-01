@@ -8,7 +8,7 @@ package com.ruanyi.mifish.common.ex;
  * B: 表示当前系统错误，一般是系统健壮性差，或者业务逻辑出错。 <br>
  * C: 表示依赖系统，调用的第三方服务错误。
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2020-04-03 16:44
  */
 public enum ErrorCode {

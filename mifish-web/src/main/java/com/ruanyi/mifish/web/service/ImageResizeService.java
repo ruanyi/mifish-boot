@@ -3,7 +3,7 @@ package com.ruanyi.mifish.web.service;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 20:12
  */
 public interface ImageResizeService {

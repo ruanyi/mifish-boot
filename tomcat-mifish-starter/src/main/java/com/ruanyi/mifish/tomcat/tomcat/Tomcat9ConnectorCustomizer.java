@@ -16,7 +16,7 @@ import com.ruanyi.mifish.common.utils.NumberUtil;
  * <p>
  * 不过，暂不打算通过：通过注解：ConfigurationProperties，而是通过代码写死的方式
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-08-30 16:46
  */
 public class Tomcat9ConnectorCustomizer implements TomcatConnectorCustomizer, EnvironmentAware {

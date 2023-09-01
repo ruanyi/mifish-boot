@@ -9,7 +9,7 @@ import com.ruanyi.mifish.video.x264.impl.FFmpegX264TcServiceImpl;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 17:30
  */
 public class FFmpegX264TcServiceImplTest {
@@ -20,8 +20,8 @@ public class FFmpegX264TcServiceImplTest {
 
     @Test
     public void test1() {
-        String fromVideoPath = "/Users/rls/Documents/tmp/v19/素材/933-11-02.mp4";
-        String toVideoPath = "/Users/rls/Documents/tmp/v19/video_rs/933-11-02_4k.mp4";
+        String fromVideoPath = "/Users/ruanyi/Documents/tmp/v19/素材/933-11-02.mp4";
+        String toVideoPath = "/Users/ruanyi/Documents/tmp/v19/video_rs/933-11-02_4k.mp4";
         AvInfo sourceAvInfo = videoMetaService.obtainVideoMetaByFFprobe(fromVideoPath);
         boolean isSuccess = ffmpegX264TcService.x264CrfTcBySourceMeta(sourceAvInfo, fromVideoPath, toVideoPath);
         System.out.println(isSuccess);

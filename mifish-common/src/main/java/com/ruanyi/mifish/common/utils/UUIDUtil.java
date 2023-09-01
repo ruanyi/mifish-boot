@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-05-22 11:14
  */
 public final class UUIDUtil {

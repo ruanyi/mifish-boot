@@ -10,7 +10,7 @@ import com.ruanyi.mifish.image.JpegoptimCompressService;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-09-01 14:30
  */
 @Service

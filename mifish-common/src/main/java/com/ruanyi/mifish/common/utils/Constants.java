@@ -5,7 +5,7 @@ package com.ruanyi.mifish.common.utils;
  *
  * 公用的一些常量类
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-04-09 10:30
  */
 public final class Constants {

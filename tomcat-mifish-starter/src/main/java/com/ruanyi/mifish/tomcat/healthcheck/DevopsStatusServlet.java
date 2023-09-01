@@ -17,7 +17,7 @@ import org.springframework.context.Lifecycle;
  *
  * 在当前应用新增health check的接口：devops/status
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-07-04 17:13
  */
 public class DevopsStatusServlet extends HttpServlet implements ApplicationContextAware {

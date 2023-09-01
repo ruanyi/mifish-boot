@@ -21,7 +21,7 @@ import com.ruanyi.mifish.common.logs.MifishLogs;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-08-22 14:24
  */
 public final class JacksonUtils {
@@ -174,7 +174,7 @@ public final class JacksonUtils {
     /**
      * Description:
      *
-     * @author: rls
+     * @author: ruanyi
      * @Date: 2022-07-01 14:40
      */
     private static class JacksonMapper {

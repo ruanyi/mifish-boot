@@ -7,7 +7,7 @@ import com.ruanyi.mifish.image.impl.JpegoptimCompressServiceImpl;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-09-01 14:37
  */
 public class JpegoptimCompressServiceImplTest {
@@ -16,8 +16,8 @@ public class JpegoptimCompressServiceImplTest {
 
     @Test
     public void test2() {
-        String fromImagePath = "/Users/rls/Documents/tmp/v19/封面图/1129-04-02.JPEG";
-        String outDir = "/Users/rls/Documents/tmp/v19/img_rs";
+        String fromImagePath = "/Users/ruanyi/Documents/tmp/v19/封面图/1129-04-02.JPEG";
+        String outDir = "/Users/ruanyi/Documents/tmp/v19/img_rs";
         jpegoptimCompressService.compress(50, fromImagePath, outDir);
     }
 }

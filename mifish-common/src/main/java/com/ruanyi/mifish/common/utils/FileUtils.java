@@ -10,7 +10,7 @@ import com.ruanyi.mifish.common.model.FilePathName;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 18:40
  */
 public final class FileUtils {

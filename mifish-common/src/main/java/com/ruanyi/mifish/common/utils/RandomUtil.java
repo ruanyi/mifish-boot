@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * <p>
  * https://stackoverflow.com/questions/363681/how-to-generate-random-integers-within-a-specific-range-in-java
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2017-08-26 14:26
  */
 public final class RandomUtil {

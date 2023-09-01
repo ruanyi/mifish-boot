@@ -3,7 +3,7 @@ package com.ruanyi.mifish.common.event;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-04-15 10:07
  */
 public class MifishEventListener {

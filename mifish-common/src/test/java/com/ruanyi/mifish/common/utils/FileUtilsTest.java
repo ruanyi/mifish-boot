@@ -13,22 +13,22 @@ import com.ruanyi.mifish.common.model.FilePathName;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 18:48
  */
 public class FileUtilsTest {
 
     @Test
     public void test1() {
-        String dir = "/Users/rls/Documents/tmp/v19/素材";
+        String dir = "/Users/ruanyi/Documents/tmp/v19/素材";
         List<FilePathName> paths = FileUtils.listAllPaths(dir);
         System.out.println(paths);
     }
 
     @Test
     public void test2() {
-        String fromVideoDir = "/Users/rls/Documents/tmp/v19/素材";
-        String toVideoDir = "/Users/rls/Documents/tmp/v19/video_rs";
+        String fromVideoDir = "/Users/ruanyi/Documents/tmp/v19/素材";
+        String toVideoDir = "/Users/ruanyi/Documents/tmp/v19/video_rs";
         List<FilePathName> fromPaths = FileUtils.listAllPaths(fromVideoDir);
         List<FilePathName> toPaths = FileUtils.listAllPaths(toVideoDir);
         List<FilePathName> diffs = new ArrayList<>();

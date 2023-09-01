@@ -3,7 +3,7 @@ package com.ruanyi.mifish.image;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-09-01 14:28
  */
 public interface JpegoptimCompressService {

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-08-22 17:29
  */
 public enum MifishLogs implements KeyValueLogger {

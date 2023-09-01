@@ -5,7 +5,7 @@ import com.ruanyi.mifish.model.AvInfo;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 13:51
  */
 public interface VideoMetaService {

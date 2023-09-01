@@ -71,7 +71,7 @@ import java.io.Serializable;
  * </pre>
  * </p>
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2017-11-05 22:14
  */
 public class Paginator implements Serializable, Cloneable {

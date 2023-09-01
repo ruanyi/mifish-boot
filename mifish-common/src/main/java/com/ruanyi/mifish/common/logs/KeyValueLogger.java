@@ -26,7 +26,7 @@ import com.ruanyi.mifish.common.utils.ThrowableUtil;
  * 第四：压测情况下，不打trace、debug、info日志</br>
  * 第五：KeyValueLogger固定使用log4j2来打印日志，默认实现容器化的：json化标准，暂不支持其他打印日志的方式（有没有必要，有待考量）</br>
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-01-21
  */
 public interface KeyValueLogger {

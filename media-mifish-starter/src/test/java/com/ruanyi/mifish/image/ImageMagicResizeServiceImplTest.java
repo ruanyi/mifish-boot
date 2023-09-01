@@ -8,7 +8,7 @@ import com.ruanyi.mifish.image.impl.ImageMagicResizeServiceImpl;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 18:26
  */
 public class ImageMagicResizeServiceImplTest {
@@ -17,8 +17,8 @@ public class ImageMagicResizeServiceImplTest {
 
     @Test
     public void test() {
-        String fromImagePath = "/Users/rls/Documents/tmp/v19/封面图/1129-04-02.JPEG";
-        String toImagePath = "/Users/rls/Documents/tmp/v19/img_rs/1129-04-02_1080.JPEG";
+        String fromImagePath = "/Users/ruanyi/Documents/tmp/v19/封面图/1129-04-02.JPEG";
+        String toImagePath = "/Users/ruanyi/Documents/tmp/v19/img_rs/1129-04-02_1080.JPEG";
         boolean isSuccess = imageMagicResizeService.resize1080(fromImagePath, toImagePath);
         Assert.assertTrue(isSuccess);
     }

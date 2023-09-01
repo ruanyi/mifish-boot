@@ -14,7 +14,7 @@ import com.ruanyi.mifish.common.logs.MifishLogs;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2017-12-04 18:33
  */
 public final class DateUtil {

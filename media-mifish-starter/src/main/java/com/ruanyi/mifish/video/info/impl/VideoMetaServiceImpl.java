@@ -11,7 +11,7 @@ import com.ruanyi.mifish.video.info.VideoMetaService;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 13:52
  */
 @Service

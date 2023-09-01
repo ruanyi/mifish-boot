@@ -16,7 +16,7 @@ import com.ruanyi.mifish.common.utils.JacksonUtils;
  * <p>
  * 描述视频的avinfo信息
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-09-24 14:41
  */
 public final class AvInfo extends MetaInfo {

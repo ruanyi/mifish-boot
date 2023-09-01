@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-03-27 20:11
  */
 public final class MifishLoggerContainer {
@@ -87,7 +87,7 @@ public final class MifishLoggerContainer {
     /**
      * Description:
      *
-     * @author: rls
+     * @author: ruanyi
      * @Date: 2019-03-27 20:11
      */
     private static class KeyValueLoggerContainerHolder {

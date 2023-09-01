@@ -11,7 +11,7 @@ import org.junit.Test;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-09-13 10:49
  */
 public class RandomUtilTest {

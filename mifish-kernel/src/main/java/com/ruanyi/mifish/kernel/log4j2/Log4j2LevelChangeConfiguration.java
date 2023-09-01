@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * 业务方麻烦请使用slf4j门面框架，参考阿里巴巴的代码规范
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-01-15
  */
 @Configuration

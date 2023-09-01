@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-07-04 17:24
  */
 @ConditionalOnWebApplication

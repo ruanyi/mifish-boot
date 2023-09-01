@@ -3,7 +3,7 @@ package com.ruanyi.mifish.common.ex;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2020-04-24 20:28
  */
 public class BusinessException extends RuntimeException {

@@ -8,7 +8,7 @@ import com.ruanyi.mifish.common.logs.MifishLogs;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2021-07-13 13:38
  */
 public abstract class MetaInfo {

@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-01-22 11:01
  */
 public interface DoubleKeyMap<M, N, V> {
@@ -162,7 +162,7 @@ public interface DoubleKeyMap<M, N, V> {
     /**
      * DoubleKeyEntry
      *
-     * @author: rls
+     * @author: ruanyi
      * @Date: 2018-01-22 11:01
      */
     interface DoubleKeyEntry<M, N, V> {

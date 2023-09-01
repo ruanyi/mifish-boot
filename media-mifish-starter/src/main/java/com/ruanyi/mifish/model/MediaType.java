@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 11:41
  */
 public enum MediaType {

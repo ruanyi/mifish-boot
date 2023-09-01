@@ -24,7 +24,7 @@ import com.ruanyi.mifish.common.logs.MifishLogs;
 /**
  * Log4j2LevelChangeComponent
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-01-15
  */
 public class Log4j2LevelChangeComponent implements InitializingBean {

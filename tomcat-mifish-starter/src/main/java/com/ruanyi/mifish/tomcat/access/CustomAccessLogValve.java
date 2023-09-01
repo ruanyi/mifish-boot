@@ -36,7 +36,7 @@ import com.ruanyi.mifish.common.utils.IPUtils;
  * <p>
  * 自定义tomcat access log规范，一般情况下，不允许自定义，属于一体化监控的范畴
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-02-05 13:46
  */
 public class CustomAccessLogValve extends ValveBase implements AccessLog {

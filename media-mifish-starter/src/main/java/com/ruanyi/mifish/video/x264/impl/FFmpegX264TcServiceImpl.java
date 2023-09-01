@@ -11,7 +11,7 @@ import com.ruanyi.mifish.video.x264.FFmpegX264TcService;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 17:17
  */
 @Service

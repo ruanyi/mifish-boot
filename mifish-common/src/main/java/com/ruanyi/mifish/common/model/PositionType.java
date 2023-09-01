@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-01-15 10:18
  */
 public enum PositionType {

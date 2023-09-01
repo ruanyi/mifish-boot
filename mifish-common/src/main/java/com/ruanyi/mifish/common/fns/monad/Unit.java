@@ -3,7 +3,7 @@ package com.ruanyi.mifish.common.fns.monad;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2017-11-05 18:38
  */
 public interface Unit<T, M extends Monad<?, T>> {

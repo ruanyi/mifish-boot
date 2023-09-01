@@ -295,7 +295,7 @@ public class DoubleKeyHashMap<M, N, V> implements DoubleKeyMap<M, N, V> {
     /**
      * Description:
      *
-     * @author: rls
+     * @author: ruanyi
      * @Date: 2018-01-22 11:17
      */
     private static class DoubleKeyNode<M, N, V> implements DoubleKeyEntry<M, N, V> {

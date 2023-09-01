@@ -7,7 +7,7 @@ import java.util.Objects;
  * <p>
  * 描述id跟名称的组合，在下拉框配置中
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2019-02-19 16:19
  */
 public final class IdAndName {

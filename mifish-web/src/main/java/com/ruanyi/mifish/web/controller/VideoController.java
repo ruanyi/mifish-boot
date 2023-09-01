@@ -11,7 +11,7 @@ import com.ruanyi.mifish.web.service.VideoX264TcService;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 18:30
  */
 @RestController
@@ -29,8 +29,8 @@ public class VideoController {
      */
     @PostMapping(value = "/x264/crf/tc")
     public OperateResult batchX264CrfTc() {
-        String fromVideoDir = "/Users/rls/Documents/tmp/v19/素材";
-        String toVideoDir = "/Users/rls/Documents/tmp/v19/video_rs";
+        String fromVideoDir = "/Users/ruanyi/Documents/tmp/v19/素材";
+        String toVideoDir = "/Users/ruanyi/Documents/tmp/v19/video_rs";
         this.videoX264TcService.asyncX264Tc(fromVideoDir, toVideoDir);
         return OperateResult.SUCCESS(true);
     }

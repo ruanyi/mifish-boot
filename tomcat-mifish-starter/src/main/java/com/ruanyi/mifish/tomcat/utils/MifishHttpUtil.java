@@ -29,7 +29,7 @@ import com.ruanyi.mifish.kernel.utils.ApplicationContextHolder;
  * 
  * MifishHttpUtil
  * 
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-01-17 19:41
  */
 public final class MifishHttpUtil {

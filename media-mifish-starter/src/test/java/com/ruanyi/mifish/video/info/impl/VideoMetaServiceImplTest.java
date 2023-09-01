@@ -8,7 +8,7 @@ import com.ruanyi.mifish.model.AvInfo;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-08-31 14:31
  */
 public class VideoMetaServiceImplTest {
@@ -17,7 +17,7 @@ public class VideoMetaServiceImplTest {
 
     @Test
     public void test1() {
-        String localVideoPath = "/Users/rls/Documents/tmp/v19/素材/933-11-02.mp4";
+        String localVideoPath = "/Users/ruanyi/Documents/tmp/v19/素材/933-11-02.mp4";
         AvInfo avInfo = videoMetaService.obtainVideoMetaByFFprobe(localVideoPath);
         System.out.println(avInfo.getMediaInfo());
         Assert.assertFalse(avInfo.isEmpty());

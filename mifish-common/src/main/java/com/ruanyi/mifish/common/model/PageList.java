@@ -7,7 +7,7 @@ import java.util.Collection;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2017-11-05 20:53
  */
 public class PageList<T> extends ArrayList<T> implements Serializable {

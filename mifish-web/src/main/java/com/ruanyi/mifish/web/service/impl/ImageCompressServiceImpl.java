@@ -20,7 +20,7 @@ import com.ruanyi.mifish.web.service.ImageCompressService;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-09-01 14:33
  */
 @Service

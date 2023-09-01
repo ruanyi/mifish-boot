@@ -6,7 +6,7 @@ import java.util.UUID;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2018-04-15 10:09
  */
 public abstract class MifishEvent implements Serializable {

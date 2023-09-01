@@ -20,7 +20,7 @@ import com.ruanyi.mifish.common.model.ProcessResult;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2022-11-23 13:54
  */
 public final class MutiProcessUtil {
@@ -159,7 +159,7 @@ public final class MutiProcessUtil {
     /**
      * Description:
      *
-     * @author: rls
+     * @author: ruanyi
      * @Date: 2022-11-23 13:54
      */
     private static final class LogLineMsg implements Runnable {
