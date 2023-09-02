@@ -3,7 +3,7 @@ package com.ruanyi.mifish.env;
 import java.io.File;
 
 import com.ruanyi.mifish.common.utils.UUIDUtil;
-import com.ruanyi.mifish.model.TmpWorkEnv;
+import com.ruanyi.mifish.model.object.TmpWorkEnv;
 
 /**
  * Description:

@@ -1,4 +1,4 @@
-package com.ruanyi.mifish.model;
+package com.ruanyi.mifish.model.video;
 
 /**
  * Description:

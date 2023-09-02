@@ -1,7 +1,7 @@
 package com.ruanyi.mifish.video.util;
 
-import com.ruanyi.mifish.model.AvInfo;
-import com.ruanyi.mifish.model.VideoResolution;
+import com.ruanyi.mifish.model.video.AvInfo;
+import com.ruanyi.mifish.model.video.VideoResolution;
 
 /**
  * Description:

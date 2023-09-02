@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.ruanyi.mifish.env.LocalTmpWorkEnv;
-import com.ruanyi.mifish.model.TmpWorkEnv;
+import com.ruanyi.mifish.model.object.TmpWorkEnv;
 import com.ruanyi.mifish.object.download.impl.CurlDownloadFileComponentImpl;
 
 /**

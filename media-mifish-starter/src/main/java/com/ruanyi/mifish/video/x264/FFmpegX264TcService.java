@@ -1,6 +1,6 @@
 package com.ruanyi.mifish.video.x264;
 
-import com.ruanyi.mifish.model.AvInfo;
+import com.ruanyi.mifish.model.video.AvInfo;
 
 /**
  * Description:

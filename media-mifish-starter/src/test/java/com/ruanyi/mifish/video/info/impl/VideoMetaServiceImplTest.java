@@ -3,7 +3,7 @@ package com.ruanyi.mifish.video.info.impl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ruanyi.mifish.model.AvInfo;
+import com.ruanyi.mifish.model.video.AvInfo;
 
 /**
  * Description:

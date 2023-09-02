@@ -1,4 +1,4 @@
-package com.ruanyi.mifish.model;
+package com.ruanyi.mifish.model.video;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +10,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.ruanyi.mifish.common.logs.MifishLogs;
 import com.ruanyi.mifish.common.utils.JacksonUtils;
+import com.ruanyi.mifish.model.MediaType;
+import com.ruanyi.mifish.model.MetaInfo;
 
 /**
  * Description:

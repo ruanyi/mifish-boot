@@ -2,7 +2,7 @@ package com.ruanyi.mifish.env;
 
 import org.junit.Test;
 
-import com.ruanyi.mifish.model.TmpWorkEnv;
+import com.ruanyi.mifish.model.object.TmpWorkEnv;
 
 /**
  * Description:

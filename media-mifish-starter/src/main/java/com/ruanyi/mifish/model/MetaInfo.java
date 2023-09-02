@@ -3,8 +3,6 @@ package com.ruanyi.mifish.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ruanyi.mifish.common.logs.MifishLogs;
-
 /**
  * Description:
  *
@@ -12,9 +10,6 @@ import com.ruanyi.mifish.common.logs.MifishLogs;
  * @Date: 2021-07-13 13:38
  */
 public abstract class MetaInfo {
-
-    /** LOG */
-    private static final MifishLogs LOG = MifishLogs.meida;
 
     /**
      * 计算失败时，有值，返回具体的：status
@@ -44,7 +39,7 @@ public abstract class MetaInfo {
      * @param status
      * @param desc
      */
-    MetaInfo(Integer status, String desc) {
+    protected MetaInfo(Integer status, String desc) {
         this.status = status;
         this.desc = desc;
     }
@@ -56,7 +51,7 @@ public abstract class MetaInfo {
      *
      * @param mediaInfo
      */
-    MetaInfo(String mediaInfo) {
+    protected MetaInfo(String mediaInfo) {
         this.mediaInfo = mediaInfo;
     }
 

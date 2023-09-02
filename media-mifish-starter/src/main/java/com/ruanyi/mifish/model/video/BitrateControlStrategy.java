@@ -1,4 +1,4 @@
-package com.ruanyi.mifish.video.bitrate;
+package com.ruanyi.mifish.model.video;
 
 /**
  * Description:

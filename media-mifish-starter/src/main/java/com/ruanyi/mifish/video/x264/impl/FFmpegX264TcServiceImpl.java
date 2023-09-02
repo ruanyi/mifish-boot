@@ -1,11 +1,12 @@
 package com.ruanyi.mifish.video.x264.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.ruanyi.mifish.common.model.ProcessResult;
 import com.ruanyi.mifish.common.utils.MutiProcessUtil;
 import com.ruanyi.mifish.common.utils.UUIDUtil;
-import com.ruanyi.mifish.model.AvInfo;
+import com.ruanyi.mifish.model.video.AvInfo;
 import com.ruanyi.mifish.video.x264.FFmpegX264TcService;
-import org.springframework.stereotype.Service;
 
 /**
  * Description:
