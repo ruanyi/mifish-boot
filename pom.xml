@@ -14,6 +14,8 @@
         <module>mifish-web</module>
         <module>tomcat-mifish-starter</module>
         <module>mifish-boot-dependencies</module>
+        <module>mifish-video-processor</module>
+        <module>mifish-image-processor</module>
     </modules>
 
     <parent>
