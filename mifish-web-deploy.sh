@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 修改APP_NAME为云效上的应用名
-APP_NAME=root-spring-boot.jar
+APP_NAME=root-spring-boot
 
 PROG_NAME=$0
 ACTION=$1
