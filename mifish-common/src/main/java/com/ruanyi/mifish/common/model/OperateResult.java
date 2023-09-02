@@ -87,16 +87,6 @@ public class OperateResult implements Serializable {
     }
 
     /**
-     * SUCCESS
-     *
-     * @param message
-     * @return
-     */
-    public static OperateResult SUCCESS(String message) {
-        return new OperateResult(true, message, null);
-    }
-
-    /**
      * FAILURE
      *
      * @param message

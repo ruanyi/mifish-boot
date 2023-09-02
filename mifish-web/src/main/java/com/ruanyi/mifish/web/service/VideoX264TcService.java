@@ -15,4 +15,12 @@ public interface VideoX264TcService {
      * @param toVideoDir
      */
     void asyncX264Tc(String fromVideoDir, String toVideoDir);
+
+    /**
+     * syncX264Tc
+     * 
+     * @param videoUrl
+     * @return
+     */
+    String syncX264Tc(String videoUrl);
 }

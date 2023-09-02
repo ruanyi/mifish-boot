@@ -14,7 +14,12 @@ import com.ruanyi.mifish.common.ex.ErrorCode;
 import com.ruanyi.mifish.common.logs.MifishLogs;
 import com.ruanyi.mifish.common.model.FilePathName;
 import com.ruanyi.mifish.common.utils.FileUtils;
+import com.ruanyi.mifish.common.utils.UUIDUtil;
+import com.ruanyi.mifish.env.LocalTmpWorkEnv;
 import com.ruanyi.mifish.model.AvInfo;
+import com.ruanyi.mifish.model.TmpWorkEnv;
+import com.ruanyi.mifish.object.download.CurlDownloadFileComponent;
+import com.ruanyi.mifish.object.url.ObjectUrlHelper;
 import com.ruanyi.mifish.video.info.VideoMetaService;
 import com.ruanyi.mifish.video.x264.FFmpegX264TcService;
 import com.ruanyi.mifish.web.service.VideoX264TcService;
@@ -38,6 +43,10 @@ public class VideoX264TcServiceImpl implements VideoX264TcService {
     /** fFmpegX264TcService */
     @Autowired
     private FFmpegX264TcService fFmpegX264TcService;
+
+    /** curlDownloadFileComponent */
+    @Autowired
+    private CurlDownloadFileComponent curlDownloadFileComponent;
 
     /** THREAD_POOL_EXECUTOR */
     private static final ExecutorService THREAD_POOL_EXECUTOR = Executors.newSingleThreadExecutor();
@@ -68,5 +77,26 @@ public class VideoX264TcServiceImpl implements VideoX264TcService {
                     Pair.of("toVideoPath", toVideoPath));
             }
         });
+    }
+
+    /**
+     * @see VideoX264TcService#syncX264Tc(String)
+     */
+    @Override
+    public String syncX264Tc(String videoUrl) {
+        TmpWorkEnv tmpWorkEnv = LocalTmpWorkEnv.prepareTmpEnv();
+        boolean downloadFlag = this.curlDownloadFileComponent.download(videoUrl, tmpWorkEnv.getWorkDir());
+        String lastKey = ObjectUrlHelper.parseLastKey(videoUrl);
+        String localVideoPath = tmpWorkEnv.getWorkDir() + "/" + lastKey;
+        AvInfo avInfo = this.videoMetaService.obtainVideoMetaByFFprobe(localVideoPath);
+        String suffix = ObjectUrlHelper.parseFileSuffix(videoUrl);
+        String toVideoPath = tmpWorkEnv.getWorkDir() + "/" + UUIDUtil.obtainUUID() + suffix;
+        boolean tcFlag = this.fFmpegX264TcService.x264CrfTcBySourceMeta(avInfo, localVideoPath, toVideoPath);
+        LocalTmpWorkEnv.cleanTmpEnv(tmpWorkEnv);
+        // just log some msg
+        LOG.warn(Pair.of("clazz", "ImageResizeService"), Pair.of("mehod", "syncX264Tc"),
+            Pair.of("fromVideoPath", localVideoPath), Pair.of("downloadFlag", downloadFlag), Pair.of("tcFlag", tcFlag),
+            Pair.of("toVideoPath", toVideoPath));
+        return toVideoPath;
     }
 }
