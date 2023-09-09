@@ -11,7 +11,7 @@ import com.ruanyi.mifish.object.url.ObjectUrlHelper;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-09-02 18:13
  */
 @Component

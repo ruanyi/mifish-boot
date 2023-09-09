@@ -16,19 +16,13 @@ import com.google.common.collect.Sets;
  */
 public class DoubleKeyHashMap<M, N, V> implements DoubleKeyMap<M, N, V> {
 
-    /**
-     * firstTable
-     */
+    /** firstTable */
     private ConcurrentHashMap<M, DoubleKeyNode<M, N, V>> firstTable = new ConcurrentHashMap<>();
 
-    /**
-     * secondTable
-     */
+    /** secondTable */
     private ConcurrentHashMap<N, DoubleKeyNode<M, N, V>> secondTable = new ConcurrentHashMap<>();
 
-    /**
-     * lock
-     */
+    /** lock */
     private final Lock lock = new ReentrantLock();
 
     /**

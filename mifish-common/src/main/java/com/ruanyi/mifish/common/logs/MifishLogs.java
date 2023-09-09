@@ -26,19 +26,13 @@ public enum MifishLogs implements KeyValueLogger {
      */
     access("access"),
 
-    /**
-     * 多媒体
-     */
-    meida("media");
+    /** 多媒体 */
+    media("media");
 
-    /**
-     * category
-     */
+    /** category */
     private String category;
 
-    /**
-     * log4j2
-     */
+    /** log4j2 */
     private Logger logger;
 
     /**

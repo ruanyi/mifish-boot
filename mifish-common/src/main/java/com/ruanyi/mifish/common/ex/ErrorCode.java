@@ -18,6 +18,9 @@ public enum ErrorCode {
 
     ILLEGAL_ARGUMENT("A0000", "请求参数不合法!"),
 
+    // 参数缺失
+    CLIENT_PARAM_MISS("A0002", "param miss"),
+
     OPERATE_DB_EXCEPTION("B9997", "操作db异常！"),
 
     SYSTEM_EXCEPTION("B9998", "系统异常！"),

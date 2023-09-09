@@ -1,6 +1,8 @@
 package com.ruanyi.mifish.common.utils;
 
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.type.TypeFactory;
@@ -100,10 +103,55 @@ public final class JacksonUtils {
         try {
             ObjectMapper objectMapper = JacksonMapper.getObjectMapper();
             return objectMapper.readValue(message, clazz);
-        } catch (IOException e) {
-            LOG.error(e, Pair.of("clazz", "JackJsonUtil"), Pair.of("method", "json2Obj"),
-                Pair.of("status", "exceptions"));
+        } catch (IOException ex) {
+            LOG.error(ex, Pair.of("clazz", "JackJsonUtil"), Pair.of("method", "json2Obj"),
+                Pair.of("msg", "json2Object by clazz error"), Pair.of("json", message));
             return null;
+        }
+    }
+
+    /**
+     * json2Obj
+     * 
+     * @param message
+     * @param type
+     * @param <T>
+     * @return
+     */
+    public static <T> T json2Obj(String message, Type type) {
+        try {
+            JavaType javaType = getJavaType(type);
+            ObjectMapper objectMapper = JacksonMapper.getObjectMapper();
+            return objectMapper.readValue(message, javaType);
+        } catch (Exception ex) {
+            LOG.error(ex, Pair.of("clazz", "JackJsonUtil"), Pair.of("method", "json2Obj"),
+                Pair.of("msg", "json to object by type error"), Pair.of("json", message));
+            return null;
+        }
+    }
+
+    /**
+     * 获取返回类的绑定信息
+     *
+     * @param type
+     * @return
+     */
+    private static JavaType getJavaType(Type type) {
+        // 判断是否带有泛型
+        if (type instanceof ParameterizedType) {
+            Type[] actualTypeArguments = ((ParameterizedType)type).getActualTypeArguments();
+            // 获取泛型类型
+            Class rowClass = (Class)((ParameterizedType)type).getRawType();
+            JavaType[] javaTypes = new JavaType[actualTypeArguments.length];
+            for (int i = 0; i < actualTypeArguments.length; i++) {
+                // 泛型也可能带有泛型，递归获取
+                javaTypes[i] = getJavaType(actualTypeArguments[i]);
+            }
+            return TypeFactory.defaultInstance().constructParametricType(rowClass, javaTypes);
+        } else {
+            // 简单类型直接用该类构建JavaType
+            Class<?> cla = (Class<?>)type;
+            return TypeFactory.defaultInstance().constructParametricType(cla, new JavaType[0]);
         }
     }
 

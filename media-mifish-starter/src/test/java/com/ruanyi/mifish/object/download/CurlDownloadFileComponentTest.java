@@ -10,7 +10,7 @@ import com.ruanyi.mifish.object.download.impl.CurlDownloadFileComponentImpl;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-09-02 19:02
  */
 public class CurlDownloadFileComponentTest {

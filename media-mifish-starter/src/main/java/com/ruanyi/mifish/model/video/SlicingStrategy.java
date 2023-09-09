@@ -3,7 +3,7 @@ package com.ruanyi.mifish.model.video;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-09-02 20:40
  */
 public enum SlicingStrategy {

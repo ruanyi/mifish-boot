@@ -3,7 +3,7 @@ package com.ruanyi.mifish.model.object;
 /**
  * Description:
  *
- * @author: rls
+ * @author: ruanyi
  * @Date: 2023-09-02 18:51
  */
 public class TmpWorkEnv {

@@ -16,6 +16,7 @@
         <module>mifish-boot-dependencies</module>
         <module>mifish-video-processor</module>
         <module>mifish-image-processor</module>
+        <module>kaproxy-mifish-starter</module>
     </modules>
 
     <parent>
@@ -82,6 +83,18 @@
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-xml</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-core</artifactId>
+                <version>${micrometer.version}</version>
             </dependency>
 
             <!--mifish dependency -->

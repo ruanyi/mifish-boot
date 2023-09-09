@@ -19,6 +19,16 @@
             <artifactId>mifish-common</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+        </dependency>
+
         <!-- spring开始 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

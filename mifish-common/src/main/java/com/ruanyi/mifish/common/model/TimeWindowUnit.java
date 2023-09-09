@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum TimeWindowUnit {
 
+    /** 秒级单位 */
     SECOND(1000, "s"),
 
     MINUTE(60 * SECOND.getMillisecond(), "m"),

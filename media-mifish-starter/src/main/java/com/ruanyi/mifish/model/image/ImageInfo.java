@@ -18,7 +18,7 @@ import com.ruanyi.mifish.model.MetaInfo;
 public final class ImageInfo extends MetaInfo {
 
     /** LOG */
-    private static final MifishLogs LOG = MifishLogs.meida;
+    private static final MifishLogs LOG = MifishLogs.media;
 
     /**
      * 不允许自主实例化
