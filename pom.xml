@@ -17,6 +17,7 @@
         <module>mifish-video-processor</module>
         <module>mifish-image-processor</module>
         <module>kaproxy-mifish-starter</module>
+        <module>x8583-mifish-starter</module>
     </modules>
 
     <parent>
