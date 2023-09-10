@@ -46,6 +46,7 @@ public class BasicISOField implements ISOField {
         this.value = value;
     }
 
+    @Override
     public void dump(OutputStream os) {
         try {
             os.write(value);
@@ -54,6 +55,7 @@ public class BasicISOField implements ISOField {
         }
     }
 
+    @Override
     public void dump(Writer writer, String charset) throws ISOX8583Exception {
         try {
             writer.write(new String(value, charset));
@@ -64,6 +66,7 @@ public class BasicISOField implements ISOField {
         }
     }
 
+    @Override
     public byte[] dump() throws ISOX8583Exception {
         return value;
     }

@@ -20,57 +20,57 @@ public final class BytesUtil {
      * @return
      */
     public static String toBinaryString(byte[] values) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < values.length; i++) {
             if ((values[i] & 0x80) != 0) {
-                buffer.append("1");
+                builder.append("1");
             } else {
-                buffer.append("0");
+                builder.append("0");
             }
 
             if ((values[i] & 0x40) != 0) {
-                buffer.append("1");
+                builder.append("1");
             } else {
-                buffer.append("0");
+                builder.append("0");
             }
 
             if ((values[i] & 0x20) != 0) {
-                buffer.append("1");
+                builder.append("1");
             } else {
-                buffer.append("0");
+                builder.append("0");
             }
 
             if ((values[i] & 0x10) != 0) {
-                buffer.append("1");
+                builder.append("1");
             } else {
-                buffer.append("0");
+                builder.append("0");
             }
 
             if ((values[i] & 0x08) != 0) {
-                buffer.append("1");
+                builder.append("1");
             } else {
-                buffer.append("0");
+                builder.append("0");
             }
 
             if ((values[i] & 0x04) != 0) {
-                buffer.append("1");
+                builder.append("1");
             } else {
-                buffer.append("0");
+                builder.append("0");
             }
 
             if ((values[i] & 0x02) != 0) {
-                buffer.append("1");
+                builder.append("1");
             } else {
-                buffer.append("0");
+                builder.append("0");
             }
 
             if ((values[i] & 0x01) != 0) {
-                buffer.append("1");
+                builder.append("1");
             } else {
-                buffer.append("0");
+                builder.append("0");
             }
         }
-        return buffer.toString();
+        return builder.toString();
     }
 
     /**
@@ -94,14 +94,14 @@ public final class BytesUtil {
      * @return
      */
     public static String toHexString(byte[] values) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < values.length; i++) {
             byte t = (byte)(values[i] & 0x0F);
             byte k = (byte)((values[i] >> 4) & 0x0F);
-            buffer.append(Integer.toHexString(k));
-            buffer.append(Integer.toHexString(t));
+            builder.append(Integer.toHexString(k));
+            builder.append(Integer.toHexString(t));
         }
-        return buffer.toString().toUpperCase();
+        return builder.toString().toUpperCase();
     }
 
     /**
@@ -130,7 +130,7 @@ public final class BytesUtil {
      * @return
      */
     public static List<byte[]> split(byte[] bytes, int length) {
-        List<byte[]> values = new ArrayList<byte[]>();
+        List<byte[]> values = new ArrayList<>();
 
         while (bytes.length >= length) {
             values.add(read(bytes, length));

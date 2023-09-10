@@ -1,6 +1,5 @@
 package com.ruanyi.mifish.common.utils;
 
-import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @Creator paladin.xiehai
- * @CreateTime 2008-10-17 $Author$ ${date} $Revision$ $Date$
+ * ResourceUtil
+ *
+ * @Creator ruanyi
+ * @CreateTime 2008-10-17
  */
 public final class ResourceUtil {
 
@@ -159,20 +160,6 @@ public final class ResourceUtil {
             return file;
         } catch (URISyntaxException e) {
             return null;
-        }
-    }
-
-    /**
-     * Not throw Exception
-     * 
-     * @param closeable
-     * @throws IOException
-     */
-    public static final void closeStream(Closeable closeable) throws IOException {
-        try {
-            closeable.close();
-        } catch (IOException e) {
-            // ingore
         }
     }
 }

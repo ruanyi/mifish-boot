@@ -32,4 +32,11 @@ public @interface UnsizedField {
      * @return
      */
     int lenlen() default 1;
+
+    /**
+     * 是否是bcd编码
+     *
+     * @return
+     */
+    boolean isBcd() default false;
 }

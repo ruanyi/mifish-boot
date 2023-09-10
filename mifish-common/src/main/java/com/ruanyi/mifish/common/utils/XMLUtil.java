@@ -20,15 +20,21 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
+ * XMLUtil
  * 
- * @author paladin.xiehai
- * @version 0.4
+ * @author ruanyi
  * @date 2008-3-18
  */
-public abstract class XMLUtil {
+public final class XMLUtil {
 
     public static final String INDENT = "  ";
 
+    /**
+     * printIndent
+     * 
+     * @param out
+     * @param indent
+     */
     public static void printIndent(PrintWriter out, int indent) {
         for (int i = 0; i < indent; i++) {
             out.print(INDENT);

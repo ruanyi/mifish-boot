@@ -6,8 +6,6 @@ package com.ruanyi.mifish.common.utils;
  * @Creator ruanyi
  *
  * @CreateTime 2008-11-6
- *
- *  $Author$ ${date} $Revision$ $Date$
  */
 public final class MathUtil {
 

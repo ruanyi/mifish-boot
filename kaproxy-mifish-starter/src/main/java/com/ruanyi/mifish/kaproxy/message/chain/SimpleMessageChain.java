@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import com.ruanyi.mifish.common.utils.ThreadUtil;
+import com.ruanyi.mifish.common.utils.ThreadUtils;
 import com.ruanyi.mifish.kaproxy.annotation.KaproxyConsumer;
 import com.ruanyi.mifish.kaproxy.message.MessageChain;
 import com.ruanyi.mifish.kaproxy.message.MessageHandler;
@@ -58,7 +58,7 @@ public class SimpleMessageChain implements MessageChain {
                 MessageStatus msgStatus = this.messageHandler.handle(message);
                 if (msgStatus == MessageStatus.RETRY && message.incInvokedCount() <= kaproxyConsumer.maxRetryCount()) {
                     // 休眠一段时间继续
-                    ThreadUtil.sleep(kaproxyConsumer.retryInterval());
+                    ThreadUtils.sleep(kaproxyConsumer.retryInterval());
                     continue;
                 } else {
                     // 否则，返回消息状态

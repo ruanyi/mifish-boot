@@ -16,11 +16,20 @@ import java.util.jar.JarFile;
 /**
  * ClassUtil
  * 
- * @Creator paladin.xiehai
- * @CreateTime 2008-11-5 $Author$ ${date} $Revision$ $Date$
+ * @Creator ruanyi
+ * @CreateTime 2008-11-5
  */
-public abstract class ClassUtil {
+public final class ClassUtil {
 
+    /**
+     * loadClassesFromPackage
+     * 
+     * @param packageName
+     * @param cls
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static Class<?>[] loadClassesFromPackage(String packageName, Class<? extends Annotation> cls)
         throws IOException, ClassNotFoundException {
         Class<?>[] clss = loadClassesFromPackage(packageName);
@@ -33,13 +42,21 @@ public abstract class ClassUtil {
         return set.toArray(new Class<?>[] {});
     }
 
+    /**
+     * loadClassesFromPackage
+     * 
+     * @param name
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static Class<?>[] loadClassesFromPackage(String name) throws IOException, ClassNotFoundException {
         if (name == null) {
             return new Class[] {};
         }
         Enumeration<URL> resources =
             Thread.currentThread().getContextClassLoader().getResources(name.replace('.', '/'));
-        Set<Class<?>> cls = new HashSet<Class<?>>();
+        Set<Class<?>> cls = new HashSet<>();
         for (; resources.hasMoreElements();) {
             URL url = resources.nextElement();
 

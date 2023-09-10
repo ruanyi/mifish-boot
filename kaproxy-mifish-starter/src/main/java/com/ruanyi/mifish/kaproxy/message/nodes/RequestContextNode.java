@@ -79,10 +79,10 @@ public class RequestContextNode implements MessageNode {
             return;
         }
         if (LOG.isInfoEnabled()) {
-            LOG.info(Pair.of("msgId", message.getMessageId()),
-                Pair.of("topic", message.getTopic()), Pair.of("partition", message.getPartition()),
-                Pair.of("group", message.getGroup()), Pair.of("offset", message.getOffset()),
-                Pair.of("status", msgStatus.name()), Pair.of("key", message.getMsgKey()),
+            LOG.info(Pair.of("msgId", message.getMessageId()), Pair.of("topic", message.getTopic()),
+                Pair.of("partition", message.getPartition()), Pair.of("group", message.getGroup()),
+                Pair.of("offset", message.getOffset()), Pair.of("status", msgStatus.name()),
+                Pair.of("key", message.getMsgKey()),
                 Pair.of("handle_elapse", (System.currentTimeMillis() - message.getDequeueTimeMillis())),
                 Pair.of("queue_elapse", (message.getDequeueTimeMillis() - message.getEnqueueTimeMillis())),
                 Pair.of("local_queue_elapse", message.getAttribute(LOCAL_QUEUE_ELAPSE, Long.class)),
@@ -105,11 +105,8 @@ public class RequestContextNode implements MessageNode {
         }
         // 清理一些线程=上线文的东东
         MethodProfiler.reset();
-        // // 清理RequestContext的相关信息
-        // RequestContext requestContext = RequestContext.get();
-        // if (requestContext != null) {
-        // requestContext.reset();
-        // }
+        // 清理RequestContext的相关信息
+        RequestContext.clear();
         // https://www.baeldung.com/mdc-in-log4j-2-logback
         MDC.clear();
     }

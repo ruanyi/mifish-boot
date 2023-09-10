@@ -56,7 +56,5 @@ public final class CharacterUtil {
     }
 
     /** forbit instance */
-    private CharacterUtil() {
-
-    }
+    private CharacterUtil() {}
 }

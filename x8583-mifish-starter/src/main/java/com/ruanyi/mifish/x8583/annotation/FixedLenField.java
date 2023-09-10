@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.ruanyi.mifish.x8583.model.PaddingWay;
+import com.ruanyi.mifish.x8583.model.PaddDirect;
 
 /**
  * Description:
@@ -38,5 +38,12 @@ public @interface FixedLenField {
      *
      * @return
      */
-    PaddingWay paddingWay() default PaddingWay.PADD_LEFT;
+    PaddDirect paddingWay() default PaddDirect.PADD_LEFT;
+
+    /**
+     * 是否是bcd编码
+     * 
+     * @return
+     */
+    boolean isBcd() default false;
 }
