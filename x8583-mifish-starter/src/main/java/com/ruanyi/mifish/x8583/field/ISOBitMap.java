@@ -1,13 +1,8 @@
 package com.ruanyi.mifish.x8583.field;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.BitSet;
 
-import com.ruanyi.mifish.x8583.ISOComponent;
-import com.ruanyi.mifish.x8583.ex.ISOX8583Exception;
+import com.ruanyi.mifish.x8583.ISOField;
 
 /**
  * 
@@ -16,7 +11,7 @@ import com.ruanyi.mifish.x8583.ex.ISOX8583Exception;
  * @Creator ruanyi
  * @Create-DateTime 2011-9-2
  */
-public class ISOBitMap implements ISOComponent {
+public class ISOBitMap implements ISOField {
 
     protected static byte B_1 = (byte)0x80;
 
@@ -40,11 +35,8 @@ public class ISOBitMap implements ISOComponent {
 
     private int index;
 
-    public ISOBitMap(Integer length) {
-        bs = new BitSet(length);
-    }
-
-    public ISOBitMap(byte[] values) {
+    public ISOBitMap(int index, byte[] values) {
+        this.index = index;
         if (values.length == 8) {
             bs = new BitSet(64);
         } else if (values.length == 16) {
@@ -73,61 +65,33 @@ public class ISOBitMap implements ISOComponent {
         return index;
     }
 
-    @Override
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    @Override
-    public void dump(OutputStream os) throws ISOX8583Exception {
-        try {
-            os.write(dump());
-        } catch (IOException e) {
-            throw new ISOX8583Exception(e);
-        }
-    }
-
-    @Override
-    public void dump(Writer writer, String charset) throws ISOX8583Exception {
-        String str = null;
-        try {
-            str = new String(this.dump(), charset);
-        } catch (UnsupportedEncodingException e) {
-            str = new String(this.dump());
-        }
-        try {
-            writer.write(str);
-        } catch (IOException e) {
-            throw new ISOX8583Exception(e);
-        }
-    }
-
-    @Override
-    public byte[] dump() throws ISOX8583Exception {
-        int length = 8;
-        if (bs.get(1)) {
-            length = 16;
-        }
-        byte[] values = new byte[length];
-        for (int i = 0; i < length; i++) {
-            values[i] = (byte)0x00;
-            for (int j = 1; j <= 8; j++) {
-                int k = i * 8 + j;
-                if (bs.get(k)) {
-                    int index = j - 1;
-                    values[i] = (byte)(values[i] | BS[index]);
-                }
-            }
-        }
-        return values;
-    }
-
+    /**
+     * isExsits
+     * 
+     * @param index
+     * @return
+     */
     public boolean isExsits(int index) {
         return bs.get(index);
     }
 
+    /**
+     * getValuesLength
+     * 
+     * @return
+     */
+    public int getValuesLength() {
+        byte[] data = this.bs.toByteArray();
+        return data.length;
+    }
+
+    /**
+     * getValue
+     * 
+     * @return
+     */
     @Override
-    public byte[] getValue() {
-        return this.dump();
+    public byte[] getValues() {
+        return this.bs.toByteArray();
     }
 }

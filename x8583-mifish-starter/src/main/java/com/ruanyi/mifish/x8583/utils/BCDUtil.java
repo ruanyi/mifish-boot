@@ -8,7 +8,7 @@ package com.ruanyi.mifish.x8583.utils;
  * 否则，数据会丢失
  *
  * @Creator ruanyi
- * @CreateTime 2008-10-23 $Author$ ${date} $Revision$ $Date$
+ * @CreateTime 2010-10-23 $Author$ ${date} $Revision$ $Date$
  */
 public final class BCDUtil {
 
@@ -53,7 +53,7 @@ public final class BCDUtil {
             } else {
                 // 最开始
                 h = 0;
-                l = (byte)(nchar2byte(array[0]));
+                l = nchar2byte(array[0]);
                 result[0] = (byte)(h | l);
                 for (int i = 1; i < bslen; i++) {
                     h = (byte)(nchar2byte(array[2 * i - 1]) << 4);

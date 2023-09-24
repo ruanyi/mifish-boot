@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 public class X8583Model {
 
-    @FixedLenField(order = 0, length = 4)
+    @FixedLenField(order = 0, length = 4, paddingByte = (byte)38)
     private String mti;
 
     @BitMapField(order = 1)

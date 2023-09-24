@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.ruanyi.mifish.x8583.model.IntEncodeType;
 import com.ruanyi.mifish.x8583.model.PaddDirect;
 
 /**
@@ -16,7 +17,7 @@ import com.ruanyi.mifish.x8583.model.PaddDirect;
  * @Date: 2023-09-10 11:16
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 public @interface FixedLenField {
 
     /**
@@ -41,9 +42,16 @@ public @interface FixedLenField {
     PaddDirect paddingWay() default PaddDirect.PADD_LEFT;
 
     /**
-     * 是否是bcd编码
+     * 请配置指定的asccii码值
      * 
      * @return
      */
-    boolean isBcd() default false;
+    byte paddingByte() default 32;
+
+    /**
+     * 获取十进制数据后的编码类型
+     * 
+     * @return
+     */
+    IntEncodeType intEncodeType() default IntEncodeType.NONE;
 }

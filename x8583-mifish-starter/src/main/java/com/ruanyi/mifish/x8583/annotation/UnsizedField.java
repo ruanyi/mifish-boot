@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.ruanyi.mifish.x8583.model.IntEncodeType;
+
 /**
  * Description:
  *
@@ -12,7 +14,7 @@ import java.lang.annotation.Target;
  * @Date: 2023-09-10 11:49
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 public @interface UnsizedField {
 
     /**
@@ -34,9 +36,9 @@ public @interface UnsizedField {
     int lenlen() default 1;
 
     /**
-     * 是否是bcd编码
+     * 获取十进制数据后的编码类型
      *
      * @return
      */
-    boolean isBcd() default false;
+    IntEncodeType intEncodeType() default IntEncodeType.NONE;
 }

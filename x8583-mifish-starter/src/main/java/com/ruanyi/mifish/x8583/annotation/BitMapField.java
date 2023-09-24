@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * @Date: 2023-09-10 11:42
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 public @interface BitMapField {
 
     /**

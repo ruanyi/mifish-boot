@@ -1,7 +1,5 @@
 package com.ruanyi.mifish.x8583;
 
-import com.ruanyi.mifish.x8583.ex.ISOX8583Exception;
-
 /**
  * Description:
  *
@@ -10,19 +8,4 @@ import com.ruanyi.mifish.x8583.ex.ISOX8583Exception;
  */
 public interface ISOType {
 
-    void setLength(int length);
-
-    int getLength();
-
-    byte[] pack(ISOComponent component) throws ISOX8583Exception;
-
-    ISOComponent unpack(Integer index, byte[] values) throws ISOX8583Exception;
-
-    byte[] read(byte[] msg);
-
-    byte[] take(byte[] msg);
-
-    void setCharset(String charset);
-
-    String getCharset();
 }
