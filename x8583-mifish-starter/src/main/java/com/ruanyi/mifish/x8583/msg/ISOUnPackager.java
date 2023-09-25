@@ -1,6 +1,7 @@
 package com.ruanyi.mifish.x8583.msg;
 
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Map;
@@ -39,7 +40,33 @@ public final class ISOUnPackager {
         if (isoField == null || isoField.getValues() == null) {
             return null;
         }
-        return null;
+        byte[] datas = isoField.getValues();
+        if (field.getType().isPrimitive()) {
+            if (Integer.TYPE == field.getType()) {
+                int v = ByteBuffer.allocate(4).put(datas).getInt();
+                return v;
+            }
+            if (Float.TYPE == field.getType()) {
+                float v = ByteBuffer.allocate(4).put(datas).getFloat();
+                return v;
+            }
+            if (Double.TYPE == field.getType()) {
+                double v = ByteBuffer.allocate(8).put(datas).getDouble();
+                return v;
+            }
+            if (Long.TYPE == field.getType()) {
+                long v = ByteBuffer.allocate(8).put(datas).getLong();
+                return v;
+            }
+            if (Byte.TYPE == field.getType()) {
+                return null;
+            }
+            if (Character.TYPE == field.getType()) {
+                char v = ByteBuffer.allocate(2).put(datas).getChar();
+                return v;
+            }
+        }
+        return new String(datas, charset);
     }
 
     /**

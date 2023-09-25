@@ -26,7 +26,7 @@ import com.ruanyi.mifish.x8583.msg.ISOUnPackager;
  * @author: rls
  * @Date: 2023-09-10 15:28
  */
-public class X8583Object {
+public final class X8583Object {
 
     /**
      * toX8583Bytes
