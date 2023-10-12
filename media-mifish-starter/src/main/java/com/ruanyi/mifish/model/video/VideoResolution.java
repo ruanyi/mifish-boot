@@ -37,7 +37,7 @@ public enum VideoResolution {
     /** maxShortEdge */
     private int maxShortEdge;
 
-    /** 推荐码率 */
+    /** 推荐码率，经验值 */
     private int bitrate;
 
     /**

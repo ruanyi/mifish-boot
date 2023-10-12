@@ -8,11 +8,11 @@ package com.ruanyi.mifish.model.video;
  */
 public enum SlicingStrategy {
 
-    /** 片与片之间，会有重叠帧 */
-    OVERLAPPING_FRAMES(1, "重叠帧"),
+    /** 按时长切片 */
+    DURATION(1, "按时长切片"),
 
-    /** 没有多余帧的概念，正常切片 */
-    NORMAL_FRAMES(2, "正常切片"),
+    /** 按关键帧切片 */
+    KEY_FRAMES(2, "按关键帧切片"),
 
     /** 稀疏帧切片 */
     SPARSE_FRAMES(3, "稀疏帧切片");
