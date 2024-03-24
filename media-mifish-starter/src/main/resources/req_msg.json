@@ -1,0 +1,30 @@
+{
+  "create_time": 111112232,
+  "msg_id": "19dc3271b5054216a939eb8f029e748c",
+  "notify_url": "",
+  "priority": 1,
+  "params": {
+    "": "",
+    "": ""
+  },
+  "input_files": [
+    {
+      "url": "",
+      "type": "",
+      "cloud": "",
+      "bucket": "",
+      "key": ""
+    }
+  ],
+  "output_files": [
+    {
+      "cloud": "",
+      "bucket": "",
+      "key": ""
+    }
+  ],
+  "cmd": "",
+  "extra": {
+    "pre_download": true
+  }
+}

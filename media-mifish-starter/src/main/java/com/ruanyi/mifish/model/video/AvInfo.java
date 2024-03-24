@@ -195,6 +195,25 @@ public final class AvInfo extends MetaInfo {
     }
 
     /**
+     * getNbFrames
+     * 
+     * @return
+     */
+    public int getNbFrames() {
+        try {
+            Map<String, Object> videoS = getVideoStream();
+            if (videoS != null && !videoS.isEmpty()) {
+                String framesStr = videoS.get("nb_frames") + "";
+                return Integer.parseInt(framesStr);
+            }
+        } catch (Exception ex) {
+            LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("getNbFrames", "getPrimaries"),
+                Pair.of("video_nb_frames_status", "exception"), Pair.of("avInfo", getAvInfo()));
+        }
+        return -1;
+    }
+
+    /**
      * getFileSize
      *
      * @return

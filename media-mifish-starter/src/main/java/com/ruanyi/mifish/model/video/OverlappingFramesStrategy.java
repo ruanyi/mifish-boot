@@ -9,14 +9,16 @@ package com.ruanyi.mifish.model.video;
 public enum OverlappingFramesStrategy {
 
     /**
-     * 没有重叠帧，正常切片
+     * 没有重叠帧，正常、精确切片
      */
-    NO(0, "没有重叠帧"),
+    PRECISE(0, "精确切片"),
 
     /**
      * 片与片之间，前向重叠帧
      */
     PRE(1, "前向重叠帧"),
+
+    POST(2, "后置重叠帧"),
 
     /**
      * 片与片之间，双向重叠帧

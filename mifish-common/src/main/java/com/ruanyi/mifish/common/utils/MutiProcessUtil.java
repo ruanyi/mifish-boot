@@ -198,16 +198,14 @@ public final class MutiProcessUtil {
                 StringBuilder result = new StringBuilder();
                 while ((line = bufferReader.readLine()) != null) {
                     result.append(line);
-                    if (LOG.isInfoEnabled()) {
-                        LOG.info(Pair.of("clazz", "LogLineMsg"), Pair.of("method", "run"),
-                            Pair.of("pid", processResult.getPid()), Pair.of("output", line),
-                            Pair.of("cmdStr", processResult.getCmdStr()));
-                    }
                 }
                 if (isStdout) {
                     processResult.setStdout(result.toString());
                 } else {
                     processResult.setStderr(result.toString());
+                    LOG.warn(Pair.of("clazz", "LogLineMsg"), Pair.of("method", "run"),
+                        Pair.of("pid", processResult.getPid()), Pair.of("output", result.toString()),
+                        Pair.of("cmdStr", processResult.getCmdStr()));
                 }
             } catch (Exception ex) {
                 // ingore

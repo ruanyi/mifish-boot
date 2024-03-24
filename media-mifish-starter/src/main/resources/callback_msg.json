@@ -1,0 +1,19 @@
+{
+  "msg_id": "",
+  "code": "",
+  "message": "",
+  "success": true,
+  "output_files": [
+    {
+      "cmd": "",
+      "code": "",
+      "message": "",
+      "bucket": "",
+      "key": "",
+      "extra": {
+        "file_size": 1111,
+        "file_type": "jpg"
+      }
+    }
+  ]
+}

@@ -37,6 +37,18 @@ public class VideoController {
     }
 
     /**
+     * batchCheckFrameNums
+     *
+     * @return
+     */
+    @PostMapping(value = "/check/frame/nums/batch")
+    public OperateResult batchCheckFrameNums() {
+        String fromVideoDir = "/Users/rls/Documents/tmp/v38";
+        this.videoX264TcService.asyncCheckFrameNums(fromVideoDir);
+        return OperateResult.SUCCESS(true);
+    }
+
+    /**
      * singleX264CrfTc
      *
      * @return

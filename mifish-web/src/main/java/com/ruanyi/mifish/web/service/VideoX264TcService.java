@@ -23,4 +23,11 @@ public interface VideoX264TcService {
      * @return
      */
     String syncX264Tc(String videoUrl);
+
+    /**
+     * asyncCheckFrameNums
+     * 
+     * @param fromVideoDir
+     */
+    void asyncCheckFrameNums(String fromVideoDir);
 }

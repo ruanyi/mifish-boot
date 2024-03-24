@@ -99,4 +99,27 @@ public class VideoX264TcServiceImpl implements VideoX264TcService {
             Pair.of("toVideoPath", toVideoPath));
         return toVideoPath;
     }
+
+    /**
+     * @see VideoX264TcService#asyncCheckFrameNums(String)
+     */
+    @Override
+    public void asyncCheckFrameNums(String fromVideoDir) {
+        for (int i = 0; i < 57; i++) {
+            final int index = i;
+            THREAD_POOL_EXECUTOR.submit(() -> {
+                AvInfo segmentAvInfo =
+                    this.videoMetaService.obtainVideoMetaByFFprobe(fromVideoDir + "/videoSegment_" + index + ".mp4");
+                int segmentFrames = segmentAvInfo.getNbFrames();
+                AvInfo openApiAvInfo =
+                    this.videoMetaService.obtainVideoMetaByFFprobe(fromVideoDir + "/open_api_" + index + ".mp4");
+                int openApiFrames = openApiAvInfo.getNbFrames();
+                // just log some msg
+                LOG.warn(Pair.of("clazz", "ImageResizeService"), Pair.of("mehod", "asyncCheckFrameNums"),
+                    Pair.of("segment_video_path", fromVideoDir + "/videoSegment_" + index + ".mp4"),
+                    Pair.of("open_api_video_path", fromVideoDir + "/open_api_" + index + ".mp4"),
+                    Pair.of("segmentFrames", segmentFrames), Pair.of("openApiFrames", openApiFrames));
+            });
+        }
+    }
 }

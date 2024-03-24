@@ -18,9 +18,11 @@ public enum BitrateControlStrategy {
     W_H_FPS(0, "根据width*height * fps"),
 
     /**
-     * 与原始视频保持一致
+     * 原始视频的倍数
+     *
+     * 默认值：1倍，也就是原始视频的码率
      */
-    FOLLOW_SOURCE_VIDEO(1, "与原始视频保持一致"),
+    SOURCE_VIDEO_MULTIPLE(1, "原始视频的倍数"),
 
     /**
      * 根据分辨率的经验值
@@ -32,7 +34,7 @@ public enum BitrateControlStrategy {
      * 2k:10000 Kbps <br/>
      * 4k: 20000 Kbps
      */
-    RESOLUTION_EXP(2, "根据分辨率的经验值"),
+    RESOLUTION_EXPERIENCE(2, "根据分辨率的经验值"),
 
     /**
      * 自定义值，由业务方直接传入
