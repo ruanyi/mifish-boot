@@ -27,11 +27,11 @@ public class SimpleMifishCheckChain implements MifishCheckChain {
     /**
      * SimpleMifishAuthChain
      * 
-     * @param authNodes
+     * @param checkNodes
      */
-    public SimpleMifishCheckChain(List<MifishCheckNode> authNodes) {
-        checkArgument(authNodes != null, "authNodes cannot be null in SimpleMifishAuthChain");
-        this.iterator = authNodes.iterator();
+    public SimpleMifishCheckChain(List<MifishCheckNode> checkNodes) {
+        checkArgument(checkNodes != null, "checkNodes cannot be null in SimpleMifishCheckChain");
+        this.iterator = checkNodes.iterator();
     }
 
     /**

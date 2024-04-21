@@ -28,7 +28,7 @@ public class MifishSignCheckNode extends AbstractMifishCheckNode {
      * @see MifishCheckNode#doNode(MifishCheck, MifishCheckContext, MifishCheckChain)
      */
     @Override
-    public void doNode(MifishCheck mifishCheck, MifishCheckContext authContext, MifishCheckChain checkChain)
+    public void doNode(MifishCheck mifishCheck, MifishCheckContext checkContext, MifishCheckChain checkChain)
         throws BusinessException {
 
     }

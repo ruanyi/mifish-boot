@@ -14,12 +14,12 @@ public interface MifishCheckNode extends Comparable<MifishCheckNode> {
      * doChain
      *
      * @param mifishCheck
-     * @param authContext
+     * @param checkContext
      * @param checkChain
      * @return
      * @throws BusinessException
      */
-    void doNode(MifishCheck mifishCheck, MifishCheckContext authContext, MifishCheckChain checkChain)
+    void doNode(MifishCheck mifishCheck, MifishCheckContext checkContext, MifishCheckChain checkChain)
         throws BusinessException;
 
     /**
