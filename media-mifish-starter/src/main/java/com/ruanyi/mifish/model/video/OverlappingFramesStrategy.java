@@ -18,6 +18,7 @@ public enum OverlappingFramesStrategy {
      */
     PRE(1, "前向重叠帧"),
 
+    /** 片与片之间，后置重叠帧 */
     POST(2, "后置重叠帧"),
 
     /**

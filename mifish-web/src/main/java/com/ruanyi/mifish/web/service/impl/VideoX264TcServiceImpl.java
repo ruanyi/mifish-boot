@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ruanyi.mifish.common.ex.BusinessException;
-import com.ruanyi.mifish.common.ex.ErrorCode;
+import com.ruanyi.mifish.common.ex.MifishErrorCode;
 import com.ruanyi.mifish.common.logs.MifishLogs;
 import com.ruanyi.mifish.common.model.FilePathName;
 import com.ruanyi.mifish.common.utils.FileUtils;
@@ -57,11 +57,11 @@ public class VideoX264TcServiceImpl implements VideoX264TcService {
     @Override
     public void asyncX264Tc(String fromVideoDir, String toVideoDir) {
         if (StringUtils.isBlank(fromVideoDir) || StringUtils.isBlank(toVideoDir)) {
-            throw new BusinessException("fromVideoDir or toVideoDir is blank", ErrorCode.ILLEGAL_ARGUMENT);
+            throw new BusinessException("fromVideoDir or toVideoDir is blank", MifishErrorCode.ILLEGAL_ARGUMENT);
         }
         List<FilePathName> filePathNames = FileUtils.listAllPaths(fromVideoDir);
         if (filePathNames == null || filePathNames.isEmpty()) {
-            throw new BusinessException("fromVideoDir has no files", ErrorCode.ILLEGAL_ARGUMENT);
+            throw new BusinessException("fromVideoDir has no files", MifishErrorCode.ILLEGAL_ARGUMENT);
         }
         THREAD_POOL_EXECUTOR.submit(() -> {
             for (FilePathName filePathName : filePathNames) {

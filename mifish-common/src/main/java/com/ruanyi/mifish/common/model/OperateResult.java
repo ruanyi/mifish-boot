@@ -10,19 +10,13 @@ import java.io.Serializable;
  */
 public class OperateResult implements Serializable {
 
-    /**
-     * success
-     */
+    /** success */
     private boolean success;
 
-    /**
-     * message
-     */
+    /** message */
     private String message;
 
-    /**
-     * data
-     */
+    /** data */
     private Object data;
 
     /**

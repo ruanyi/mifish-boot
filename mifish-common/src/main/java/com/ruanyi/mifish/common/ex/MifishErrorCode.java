@@ -11,21 +11,21 @@ package com.ruanyi.mifish.common.ex;
  * @author: ruanyi
  * @Date: 2020-04-03 16:44
  */
-public enum ErrorCode {
+public enum MifishErrorCode {
 
     /** 成功 */
-    SUCCESS("00000", "处理成功!"),
+    SUCCESS("000000", "处理成功!"),
 
-    ILLEGAL_ARGUMENT("A0000", "请求参数不合法!"),
+    ILLEGAL_ARGUMENT("A00000", "请求参数不合法!"),
 
     // 参数缺失
-    CLIENT_PARAM_MISS("A0002", "param miss"),
+    CLIENT_PARAM_MISS("A00002", "param miss"),
 
-    OPERATE_DB_EXCEPTION("B9997", "操作db异常！"),
+    OPERATE_DB_EXCEPTION("B99997", "操作db异常！"),
 
-    SYSTEM_EXCEPTION("B9998", "系统异常！"),
+    SYSTEM_EXCEPTION("B99998", "系统异常！"),
 
-    UNKNOW_EXCEPTION("B9999", "未知异常！"),
+    UNKNOW_EXCEPTION("B99999", "未知异常！"),
 
     /**
      * 以下是C类当前系统的错误码
@@ -44,7 +44,7 @@ public enum ErrorCode {
      * @param code
      * @param desc
      */
-    ErrorCode(String code, String desc) {
+    MifishErrorCode(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ruanyi.mifish.common.ex.BusinessException;
-import com.ruanyi.mifish.common.ex.ErrorCode;
+import com.ruanyi.mifish.common.ex.MifishErrorCode;
 import com.ruanyi.mifish.common.logs.MifishLogs;
 import com.ruanyi.mifish.common.model.FilePathName;
 import com.ruanyi.mifish.common.utils.FileUtils;
@@ -42,11 +42,11 @@ public class ImageCompressServiceImpl implements ImageCompressService {
     @Override
     public void asyncCompress(String fromImageDir, String toImageDir) {
         if (StringUtils.isBlank(fromImageDir) || StringUtils.isBlank(toImageDir)) {
-            throw new BusinessException("fromImageDir or toImageDir is blank", ErrorCode.ILLEGAL_ARGUMENT);
+            throw new BusinessException("fromImageDir or toImageDir is blank", MifishErrorCode.ILLEGAL_ARGUMENT);
         }
         List<FilePathName> filePathNames = FileUtils.listAllPaths(fromImageDir);
         if (filePathNames == null || filePathNames.isEmpty()) {
-            throw new BusinessException("fromImageDir has no files", ErrorCode.ILLEGAL_ARGUMENT);
+            throw new BusinessException("fromImageDir has no files", MifishErrorCode.ILLEGAL_ARGUMENT);
         }
         THREAD_POOL_EXECUTOR.submit(() -> {
             for (FilePathName filePathName : filePathNames) {

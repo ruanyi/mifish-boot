@@ -18,8 +18,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.ruanyi.mifish.common.ex.BusinessException;
-import com.ruanyi.mifish.common.ex.ErrorCode;
+import com.ruanyi.mifish.common.ex.MifishErrorCode;
 import com.ruanyi.mifish.common.logs.MifishLogs;
+import com.ruanyi.mifish.common.model.MifishResponse;
 import com.ruanyi.mifish.common.model.OperateResult;
 
 /**
@@ -44,7 +45,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = {BindException.class, MissingServletRequestParameterException.class,
         MethodArgumentTypeMismatchException.class})
-    public OperateResult handleBindException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+    public MifishResponse handleBindException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         // other case
         LOG.error(ex, Pair.of("clazz", "GlobalExceptionHandler"), Pair.of("method", "handleBindException"),
             Pair.of("action", request.getRequestURI()), Pair.of("query_string", request.getQueryString()),
@@ -53,13 +54,14 @@ public class GlobalExceptionHandler {
             return buildCommonParamCheckResp((BindException)ex, request);
         } else if (ex instanceof MissingServletRequestParameterException) {
             MissingServletRequestParameterException missEx = (MissingServletRequestParameterException)ex;
-            return OperateResult.FAILURE("Miss parameter(" + missEx.getParameterName() + ")",
-                ErrorCode.ILLEGAL_ARGUMENT);
+            return MifishResponse.FAILURE("Miss parameter(" + missEx.getParameterName() + ")",
+                MifishErrorCode.ILLEGAL_ARGUMENT);
         } else if (ex instanceof MethodArgumentTypeMismatchException) {
             MethodArgumentTypeMismatchException matmex = (MethodArgumentTypeMismatchException)ex;
-            return OperateResult.FAILURE("Parameter(" + matmex.getName() + ") invalid", ErrorCode.ILLEGAL_ARGUMENT);
+            return MifishResponse.FAILURE("Parameter(" + matmex.getName() + ") invalid",
+                MifishErrorCode.ILLEGAL_ARGUMENT);
         } else {
-            return OperateResult.FAILURE("system error", ErrorCode.UNKNOW_EXCEPTION);
+            return MifishResponse.FAILURE("system error", MifishErrorCode.UNKNOW_EXCEPTION);
         }
     }
 
@@ -91,7 +93,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = {ClientAbortException.class})
     @ResponseBody
-    public OperateResult handleClientAbortException(ClientAbortException cax, HttpServletRequest request,
+    public MifishResponse handleClientAbortException(ClientAbortException cax, HttpServletRequest request,
         HttpServletResponse response) {
         // 返回499
         response.setStatus(499);
@@ -101,7 +103,7 @@ public class GlobalExceptionHandler {
                 Pair.of("action", request.getRequestURI()), Pair.of("query_string", request.getQueryString()),
                 Pair.of("status", "exception"), Pair.of("http_status", response.getStatus()));
         }
-        return OperateResult.FAILURE("system error", ErrorCode.UNKNOW_EXCEPTION);
+        return MifishResponse.FAILURE("system error", MifishErrorCode.UNKNOW_EXCEPTION);
     }
 
     /**
@@ -114,14 +116,15 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = {BusinessException.class})
     @ResponseBody
-    public OperateResult handleBusinessException(BusinessException ex, HttpServletRequest request,
+    public MifishResponse handleBusinessException(BusinessException ex, HttpServletRequest request,
         HttpServletResponse response) {
         // business exception
-        ErrorCode errorCode = (ex.getErrorCode() != null ? ex.getErrorCode() : ErrorCode.UNKNOW_EXCEPTION);
+        MifishErrorCode mifishErrorCode =
+            (ex.getErrorCode() != null ? ex.getErrorCode() : MifishErrorCode.UNKNOW_EXCEPTION);
         LOG.error(ex, Pair.of("clazz", "GlobalExceptionHandler"), Pair.of("method", "BusinessException"),
             Pair.of("action", request.getRequestURI()), Pair.of("query_string", request.getQueryString()),
-            Pair.of("http_status", response.getStatus()), Pair.of("errorCode", errorCode.getCode()));
-        return OperateResult.FAILURE(ex.getMessage(), ex.getErrorCode());
+            Pair.of("http_status", response.getStatus()), Pair.of("errorCode", mifishErrorCode.getCode()));
+        return MifishResponse.FAILURE(ex.getMessage(), ex.getErrorCode());
     }
 
     /**
@@ -132,12 +135,12 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = {Exception.class})
     @ResponseBody
-    public OperateResult handleException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+    public MifishResponse handleException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         // other case
         LOG.error(ex, Pair.of("clazz", "GlobalExceptionHandler"), Pair.of("method", "handleException"),
             Pair.of("action", request.getRequestURI()), Pair.of("query_string", request.getQueryString()),
             Pair.of("status", "exception"), Pair.of("http_status", response.getStatus()));
-        return OperateResult.FAILURE("system error", ErrorCode.UNKNOW_EXCEPTION);
+        return MifishResponse.FAILURE("system error", MifishErrorCode.UNKNOW_EXCEPTION);
     }
 
     /**
@@ -148,15 +151,16 @@ public class GlobalExceptionHandler {
      * @param request
      * @return
      */
-    private OperateResult buildCommonParamCheckResp(BindException bex, HttpServletRequest request) {
+    private MifishResponse buildCommonParamCheckResp(BindException bex, HttpServletRequest request) {
         BindingResult br = bex.getBindingResult();
         FieldError fieldError = br.getFieldError();
         Object fieldValue = fieldError.getRejectedValue();
         if (fieldValue == null) {
-            return OperateResult.FAILURE("Miss parameter(" + fieldError.getField() + ")", ErrorCode.ILLEGAL_ARGUMENT);
+            return MifishResponse.FAILURE("Miss parameter(" + fieldError.getField() + ")",
+                MifishErrorCode.ILLEGAL_ARGUMENT);
         } else {
-            return OperateResult.FAILURE("Parameter(" + fieldError.getField() + ") invalid",
-                ErrorCode.ILLEGAL_ARGUMENT);
+            return MifishResponse.FAILURE("Parameter(" + fieldError.getField() + ") invalid",
+                MifishErrorCode.ILLEGAL_ARGUMENT);
         }
     }
 }

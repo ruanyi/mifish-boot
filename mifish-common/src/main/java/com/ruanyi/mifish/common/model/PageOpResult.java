@@ -10,34 +10,22 @@ import java.io.Serializable;
  */
 public class PageOpResult implements Serializable {
 
-    /**
-     * success
-     */
+    /** success */
     private boolean success;
 
-    /**
-     * message
-     */
+    /** message */
     private String message;
 
-    /**
-     * data
-     */
+    /** data */
     private Object data;
 
-    /**
-     * pageSize
-     */
+    /** pageSize */
     private int pageSize = 10;
 
-    /**
-     * pageNum
-     */
+    /** pageNum */
     private int pageNum = 1;
 
-    /**
-     * totalItems
-     */
+    /** totalItems */
     private int pageTotal = 1;
 
     /**

@@ -1,0 +1,23 @@
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+  error:
+    whitelabel:
+      enabled: false
+  port: 80
+spring:
+  http:
+    multipart:
+      max-file-size: 100Mb
+      max-request-size: 100Mb
+  jpa:
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+  mvc:
+    throw-exception-if-no-handler-found: true
+  profiles:
+    active: local

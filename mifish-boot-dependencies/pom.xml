@@ -102,7 +102,25 @@
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
+                <artifactId>kaproxy-mifish-starter</artifactId>
+                <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruanyi.mifish</groupId>
                 <artifactId>mifish-web</artifactId>
+                <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruanyi.mifish</groupId>
+                <artifactId>mifish-image-processor</artifactId>
+                <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruanyi.mifish</groupId>
+                <artifactId>mifish-video-processor</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 

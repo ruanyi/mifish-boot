@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.ruanyi.mifish.common.ex.BusinessException;
-import com.ruanyi.mifish.common.ex.ErrorCode;
+import com.ruanyi.mifish.common.ex.MifishErrorCode;
 import com.ruanyi.mifish.common.ex.MissingRequestParameterException;
 import com.ruanyi.mifish.common.logs.MifishLogs;
 import com.ruanyi.mifish.kaproxy.message.ConsumerExceptionResolver;
@@ -60,7 +60,7 @@ public class KaproxyConsumerExceptionResolver implements ConsumerExceptionResolv
         String clientId = message.getAttribute(QueueMessage.CLIENT_ID, String.class);
         Long offset = message.getAttribute(QueueMessage.OFFSET, Long.class);
         // add error code
-        message.addAttribute(RESP_ERROR_CODE, ErrorCode.UNKNOW_EXCEPTION.getCode());
+        message.addAttribute(RESP_ERROR_CODE, MifishErrorCode.UNKNOW_EXCEPTION.getCode());
         LOG.error(th, Pair.of("clazz", "BajieConsumerExceptionResolver"), Pair.of("method", "handleException"),
             Pair.of("group", message.getGroup()), Pair.of("partition", message.getPartition()),
             Pair.of("topic", message.getTopic()), Pair.of("message", message.getMessage()), Pair.of("key", key),
@@ -85,19 +85,19 @@ public class KaproxyConsumerExceptionResolver implements ConsumerExceptionResolv
             Pair.of("clientId", clientId), Pair.of("offset", offset));
         if (ex instanceof MissingRequestParameterException) {
             // add error code
-            message.addAttribute(RESP_ERROR_CODE, ErrorCode.CLIENT_PARAM_MISS.getCode());
+            message.addAttribute(RESP_ERROR_CODE, MifishErrorCode.CLIENT_PARAM_MISS.getCode());
             return MessageStatus.FAILURE;
         } else if (ex instanceof IllegalArgumentException) {
             // add error code
-            message.addAttribute(RESP_ERROR_CODE, ErrorCode.ILLEGAL_ARGUMENT.getCode());
+            message.addAttribute(RESP_ERROR_CODE, MifishErrorCode.ILLEGAL_ARGUMENT.getCode());
             return MessageStatus.FAILURE;
         } else if (ex instanceof ClassCastException) {
             // add error code
-            message.addAttribute(RESP_ERROR_CODE, ErrorCode.ILLEGAL_ARGUMENT.getCode());
+            message.addAttribute(RESP_ERROR_CODE, MifishErrorCode.ILLEGAL_ARGUMENT.getCode());
             return MessageStatus.FAILURE;
         }
         // add error code
-        message.addAttribute(RESP_ERROR_CODE, ErrorCode.UNKNOW_EXCEPTION.getCode());
+        message.addAttribute(RESP_ERROR_CODE, MifishErrorCode.UNKNOW_EXCEPTION.getCode());
         return MessageStatus.FAILURE;
     }
 
@@ -111,26 +111,26 @@ public class KaproxyConsumerExceptionResolver implements ConsumerExceptionResolv
      * @return
      */
     private MessageStatus handleBusinessException(BusinessException bex, QueueMessage message) {
-        ErrorCode errorCode = bex.getErrorCode();
+        MifishErrorCode mifishErrorCode = bex.getErrorCode();
         String key = message.getAttribute(QueueMessage.MSG_KEY, String.class);
         String clientId = message.getAttribute(QueueMessage.CLIENT_ID, String.class);
         Long offset = message.getAttribute(QueueMessage.OFFSET, Long.class);
         // add error code
-        message.addAttribute(RESP_ERROR_CODE, errorCode.getCode());
-        if (errorCode == ErrorCode.CLIENT_PARAM_MISS || errorCode == ErrorCode.ILLEGAL_ARGUMENT) {
+        message.addAttribute(RESP_ERROR_CODE, mifishErrorCode.getCode());
+        if (mifishErrorCode == MifishErrorCode.CLIENT_PARAM_MISS || mifishErrorCode == MifishErrorCode.ILLEGAL_ARGUMENT) {
             // log for detail something
             LOG.warn(bex, Pair.of("clazz", "BajieConsumerExceptionResolver"),
                 Pair.of("method", "handleBusinessException"), Pair.of("group", message.getGroup()),
                 Pair.of("partition", message.getPartition()), Pair.of("topic", message.getTopic()),
                 Pair.of("message", message.getMessage()), Pair.of("key", key), Pair.of("clientId", clientId),
-                Pair.of("offset", offset), Pair.of("error_code", errorCode.getCode()));
+                Pair.of("offset", offset), Pair.of("error_code", mifishErrorCode.getCode()));
         } else {
             // log for detail something
             LOG.error(bex, Pair.of("clazz", "BajieConsumerExceptionResolver"),
                 Pair.of("method", "handleBusinessException"), Pair.of("group", message.getGroup()),
                 Pair.of("partition", message.getPartition()), Pair.of("topic", message.getTopic()),
                 Pair.of("message", message.getMessage()), Pair.of("key", key), Pair.of("clientId", clientId),
-                Pair.of("offset", offset), Pair.of("error_code", errorCode.getCode()));
+                Pair.of("offset", offset), Pair.of("error_code", mifishErrorCode.getCode()));
         }
         return MessageStatus.FAILURE;
     }

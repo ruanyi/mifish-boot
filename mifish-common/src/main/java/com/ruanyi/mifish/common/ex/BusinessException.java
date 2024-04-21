@@ -9,7 +9,7 @@ package com.ruanyi.mifish.common.ex;
 public class BusinessException extends RuntimeException {
 
     /** errorCode */
-    private final ErrorCode errorCode;
+    private final MifishErrorCode mifishErrorCode;
 
     /** throwable */
     private Throwable throwable;
@@ -17,45 +17,45 @@ public class BusinessException extends RuntimeException {
     /**
      * BusinessException
      *
-     * @param errorCode
+     * @param mifishErrorCode
      */
-    public BusinessException(ErrorCode errorCode) {
-        this.errorCode = errorCode;
+    public BusinessException(MifishErrorCode mifishErrorCode) {
+        this.mifishErrorCode = mifishErrorCode;
     }
 
     /**
      * BusinessException
      *
      * @param message
-     * @param errorCode
+     * @param mifishErrorCode
      */
-    public BusinessException(String message, ErrorCode errorCode) {
+    public BusinessException(String message, MifishErrorCode mifishErrorCode) {
         super(message);
-        this.errorCode = errorCode;
+        this.mifishErrorCode = mifishErrorCode;
     }
 
     /**
      * BusinessException
      *
-     * @param errorCode
+     * @param mifishErrorCode
      * @param throwable
      */
-    public BusinessException(ErrorCode errorCode, Throwable throwable) {
+    public BusinessException(MifishErrorCode mifishErrorCode, Throwable throwable) {
         super(throwable);
-        this.errorCode = errorCode;
+        this.mifishErrorCode = mifishErrorCode;
         this.throwable = throwable;
     }
 
     /**
      * BusinessException
      * 
-     * @param errorCode
+     * @param mifishErrorCode
      * @param message
      * @param cause
      */
-    public BusinessException(ErrorCode errorCode, String message, Throwable cause) {
+    public BusinessException(MifishErrorCode mifishErrorCode, String message, Throwable cause) {
         super(message, cause);
-        this.errorCode = errorCode;
+        this.mifishErrorCode = mifishErrorCode;
     }
 
     /**
@@ -63,8 +63,8 @@ public class BusinessException extends RuntimeException {
      *
      * @return
      */
-    public ErrorCode getErrorCode() {
-        return errorCode;
+    public MifishErrorCode getErrorCode() {
+        return mifishErrorCode;
     }
 
     /**

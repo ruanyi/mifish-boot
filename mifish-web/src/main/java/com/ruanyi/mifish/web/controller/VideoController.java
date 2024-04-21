@@ -1,12 +1,12 @@
 package com.ruanyi.mifish.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import com.ruanyi.mifish.common.model.MifishResponse;
 import com.ruanyi.mifish.common.model.OperateResult;
+import com.ruanyi.mifish.kernel.check.MifishCheck;
+import com.ruanyi.mifish.media.MediaAsyncRequest;
 import com.ruanyi.mifish.web.service.VideoX264TcService;
 
 /**
@@ -22,6 +22,21 @@ public class VideoController {
     /** videoX264TcService */
     @Autowired
     private VideoX264TcService videoX264TcService;
+
+    /**
+     * asyncInvoke
+     * 
+     * @param fnCode
+     * @param mediaAsyncRequest
+     * @return
+     */
+    @MifishCheck(isSignCheck = true)
+    @PostMapping(value = "/async/{fn_code}")
+    public MifishResponse asyncInvoke(@PathVariable("fn_code") String fnCode,
+        @RequestBody MediaAsyncRequest mediaAsyncRequest) {
+        String msgId = null;
+        return MifishResponse.SUCCESS(msgId);
+    }
 
     /**
      * batchX264CrfTc
