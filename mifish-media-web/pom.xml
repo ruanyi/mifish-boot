@@ -9,20 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kaproxy-mifish-starter</artifactId>
+    <artifactId>mifish-media-web</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.ruanyi.mifish</groupId>
-            <artifactId>mifish-kernel</artifactId>
+            <artifactId>nantian-mifish-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.ruanyi.mifish</groupId>
             <artifactId>tomcat-mifish-starter</artifactId>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -50,20 +50,20 @@
                     </archive>
                 </configuration>
             </plugin>
-            <!-- 要将源码放上去，需要加入这个插件 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <finalName>root</finalName>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>com.ruanyi.mifish.web.Bootstrap</mainClass>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

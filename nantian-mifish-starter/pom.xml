@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>mifish-boot</artifactId>
         <groupId>com.ruanyi.mifish</groupId>
+        <artifactId>mifish-boot</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kaproxy-mifish-starter</artifactId>
+    <artifactId>nantian-mifish-starter</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -17,12 +17,13 @@
             <groupId>com.ruanyi.mifish</groupId>
             <artifactId>mifish-kernel</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>com.ruanyi.mifish</groupId>
-            <artifactId>tomcat-mifish-starter</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -50,23 +51,7 @@
                     </archive>
                 </configuration>
             </plugin>
-            <!-- 要将源码放上去，需要加入这个插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+
 </project>

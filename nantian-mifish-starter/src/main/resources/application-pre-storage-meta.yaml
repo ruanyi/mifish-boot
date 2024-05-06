@@ -1,0 +1,34 @@
+storage_meta:
+  - aliyun:
+      - mifish-video-1:
+          hosts:
+            - host: mifish.video1.cdn.outer.com
+              tags:
+                - jdcdn
+                - wangsucdn
+            - host: mifish.video1.inner.com
+              tags:
+                - inner
+          auth:
+            - ak: ''
+              sk: ''
+              tag: 'read'
+            - ak: ''
+              sk: ''
+              tag: 'write'
+      - mifish-video-2:
+          hosts:
+            - host: mifish.video2.cdn.outer.com
+              tags:
+                - jdcdn
+                - wangsucdn
+            - host: mifish.video2.inner.com
+              tags:
+                - inner
+          auth:
+            - ak: ''
+              sk: ''
+              tag: 'read'
+            - ak: ''
+              sk: ''
+              tag: 'write'

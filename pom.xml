@@ -10,14 +10,15 @@
     <modules>
         <module>mifish-common</module>
         <module>mifish-kernel</module>
-        <module>media-mifish-starter</module>
-        <module>mifish-web</module>
+        <module>mifish-media-web</module>
         <module>tomcat-mifish-starter</module>
         <module>mifish-boot-dependencies</module>
-        <module>mifish-video-processor</module>
-        <module>mifish-image-processor</module>
+        <module>mifish-video-trigger</module>
+        <module>mifish-image-trigger</module>
         <module>kaproxy-mifish-starter</module>
         <module>x8583-mifish-starter</module>
+        <module>tianbing-mifish-starter</module>
+        <module>nantian-mifish-starter</module>
     </modules>
 
     <parent>
@@ -113,7 +114,13 @@
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>media-mifish-starter</artifactId>
+                <artifactId>tianbing-mifish-starter</artifactId>
+                <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruanyi.mifish</groupId>
+                <artifactId>nantian-mifish-starter</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
@@ -131,19 +138,19 @@
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>mifish-web</artifactId>
+                <artifactId>mifish-media-web</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>mifish-image-processor</artifactId>
+                <artifactId>mifish-image-trigger</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>mifish-video-processor</artifactId>
+                <artifactId>mifish-video-trigger</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 

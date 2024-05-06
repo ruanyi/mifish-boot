@@ -9,17 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kaproxy-mifish-starter</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>mifish-image-trigger</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.ruanyi.mifish</groupId>
-            <artifactId>mifish-kernel</artifactId>
+            <artifactId>tianbing-mifish-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.ruanyi.mifish</groupId>
-            <artifactId>tomcat-mifish-starter</artifactId>
+            <artifactId>kaproxy-mifish-starter</artifactId>
         </dependency>
     </dependencies>
 

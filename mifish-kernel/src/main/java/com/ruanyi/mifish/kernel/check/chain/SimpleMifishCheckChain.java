@@ -40,9 +40,9 @@ public class SimpleMifishCheckChain implements MifishCheckChain {
     @Override
     public void doChain(MifishCheck mifishCheck, MifishCheckContext checkContext) throws BusinessException {
         if (this.iterator.hasNext()) {
-            MifishCheckNode authNode = this.iterator.next();
-            if (authNode != null) {
-                authNode.doNode(mifishCheck, checkContext, this);
+            MifishCheckNode checkNode = this.iterator.next();
+            if (checkNode != null) {
+                checkNode.doNode(mifishCheck, checkContext, this);
             }
         }
     }
@@ -50,11 +50,11 @@ public class SimpleMifishCheckChain implements MifishCheckChain {
     /**
      * buildSimpleChain
      *
-     * @param authNodes
+     * @param checkNodes
      * @return
      */
-    public static SimpleMifishCheckChain buildSimpleChain(MifishCheckNode... authNodes) {
-        List<MifishCheckNode> nodeList = Lists.newArrayList(authNodes);
+    public static SimpleMifishCheckChain buildSimpleChain(MifishCheckNode... checkNodes) {
+        List<MifishCheckNode> nodeList = Lists.newArrayList(checkNodes);
         Collections.sort(nodeList);
         return new SimpleMifishCheckChain(nodeList);
     }
@@ -62,12 +62,12 @@ public class SimpleMifishCheckChain implements MifishCheckChain {
     /**
      * buildSimpleChain
      *
-     * @param authNodes
+     * @param checkNodes
      * @return
      */
-    public static SimpleMifishCheckChain buildSimpleChain(List<MifishCheckNode> authNodes) {
-        checkArgument(authNodes != null, "authNodes cannot be null in SimpleMifishAuthChain");
-        Collections.sort(authNodes);
-        return new SimpleMifishCheckChain(authNodes);
+    public static SimpleMifishCheckChain buildSimpleChain(List<MifishCheckNode> checkNodes) {
+        checkArgument(checkNodes != null, "checkNodes cannot be null in SimpleMifishCheckChain");
+        Collections.sort(checkNodes);
+        return new SimpleMifishCheckChain(checkNodes);
     }
 }

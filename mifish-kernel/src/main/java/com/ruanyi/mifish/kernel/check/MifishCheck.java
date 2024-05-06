@@ -20,7 +20,7 @@ public @interface MifishCheck {
      *
      * @return
      */
-    boolean isSignCheck() default true;
+    boolean isSign() default true;
 
     /**
      * 是否进行登录校验

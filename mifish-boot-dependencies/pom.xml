@@ -90,7 +90,13 @@
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>media-mifish-starter</artifactId>
+                <artifactId>tianbing-mifish-starter</artifactId>
+                <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruanyi.mifish</groupId>
+                <artifactId>nantian-mifish-starter</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
@@ -108,19 +114,19 @@
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>mifish-web</artifactId>
+                <artifactId>mifish-media-web</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>mifish-image-processor</artifactId>
+                <artifactId>mifish-image-trigger</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>mifish-video-processor</artifactId>
+                <artifactId>mifish-video-trigger</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 
