@@ -1,6 +1,9 @@
-package com.ruanyi.mifish.env;
+package com.ruanyi.mifish.model.env;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import com.ruanyi.mifish.env.LocalTmpWorkEnv;
 
 /**
  * Description:
@@ -15,5 +18,6 @@ public class LocalTmpWorkEnvTest {
         TmpWorkEnv tmpWorkEnv = LocalTmpWorkEnv.prepareTmpEnv();
         System.out.println(tmpWorkEnv.getWorkDir());
         LocalTmpWorkEnv.cleanTmpEnv(tmpWorkEnv);
+        Assert.assertNotNull(tmpWorkEnv);
     }
 }

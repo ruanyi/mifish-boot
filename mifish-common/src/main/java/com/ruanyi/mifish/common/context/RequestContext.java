@@ -10,35 +10,39 @@ public final class RequestContext {
 
     private static final ThreadLocal<RequestContext> CONTEXT = new ThreadLocal<>();
 
-    /** requestId */
-    private final String requestId;
+    /**
+     * traceId
+     */
+    private final String traceId;
 
-    /** resourceUrl */
+    /**
+     * resourceUrl
+     */
     private final String resourceUrl;
 
     /**
      * RequestContext
      *
-     * @param requestId
+     * @param traceId
      * @param resourceUrl
      */
-    private RequestContext(String requestId, String resourceUrl) {
-        this.requestId = requestId;
+    private RequestContext(String traceId, String resourceUrl) {
+        this.traceId = traceId;
         this.resourceUrl = resourceUrl;
     }
 
     /**
-     * getRequestId
+     * getTraceId
      *
      * @return
      */
-    public String getRequestId() {
-        return requestId;
+    public String getTraceId() {
+        return traceId;
     }
 
     /**
      * getResourceUrl
-     * 
+     *
      * @return
      */
     public String getResourceUrl() {
@@ -48,11 +52,11 @@ public final class RequestContext {
     /**
      * init
      *
-     * @param requestId
+     * @param traceId
      * @param resourceUrl
      */
-    public static void init(String requestId, String resourceUrl) {
-        RequestContext requestContext = new RequestContext(requestId, resourceUrl);
+    public static void init(String traceId, String resourceUrl) {
+        RequestContext requestContext = new RequestContext(traceId, resourceUrl);
         CONTEXT.set(requestContext);
     }
 
@@ -65,7 +69,7 @@ public final class RequestContext {
 
     /**
      * 获取当前上下文
-     * 
+     *
      * @return
      */
     public static RequestContext get() {
@@ -73,21 +77,21 @@ public final class RequestContext {
     }
 
     /**
-     * getRequestId
-     * 
+     * getCurrentTraceId
+     *
      * @return
      */
-    public static String getCurrentRequestId() {
+    public static String getCurrentTraceId() {
         RequestContext requestContext = CONTEXT.get();
         if (requestContext != null) {
-            return requestContext.requestId;
+            return requestContext.traceId;
         }
         return null;
     }
 
     /**
      * getCurrentResourceUrl
-     * 
+     *
      * @return
      */
     public static String getCurrentResourceUrl() {
@@ -100,7 +104,7 @@ public final class RequestContext {
 
     /**
      * 一般用于父子线程上下文中使用
-     * 
+     *
      * @param parentContext
      */
     public static void spawn(RequestContext parentContext) {

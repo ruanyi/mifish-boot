@@ -18,17 +18,16 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
 
 import com.ruanyi.mifish.common.logs.MifishLogs;
+import com.ruanyi.mifish.kaproxy.MessageExecutorService;
 import com.ruanyi.mifish.kaproxy.ProcessorConsumer;
 import com.ruanyi.mifish.kaproxy.ProcessorConsumerContainer;
 import com.ruanyi.mifish.kaproxy.StartupConsumerMetaFactory;
 import com.ruanyi.mifish.kaproxy.consumer.KaproxyOkHttpConsumer;
 import com.ruanyi.mifish.kaproxy.exceptions.ConsumerCreateException;
 import com.ruanyi.mifish.kaproxy.exceptions.NoSuchConsumerException;
-import com.ruanyi.mifish.kaproxy.message.MessageDigestEngine;
 import com.ruanyi.mifish.kaproxy.model.ConsumerStartupStrategy;
 import com.ruanyi.mifish.kaproxy.model.GroupTopic;
 import com.ruanyi.mifish.kaproxy.model.StartupConsumerMeta;
-
 
 /**
  * Description:
@@ -48,8 +47,8 @@ public class KaproxyProcessorConsumerContainer
     /** startupConsumerMetaFactory */
     private StartupConsumerMetaFactory startupConsumerMetaFactory;
 
-    /** messageDigestEngine */
-    private MessageDigestEngine messageDigestEngine;
+    /** messageExecutorService */
+    private MessageExecutorService messageExecutorService;
 
     /** environment */
     private Environment environment;
@@ -65,19 +64,19 @@ public class KaproxyProcessorConsumerContainer
      *
      * @param effectGroupTopics
      * @param startupConsumerMetaFactory
-     * @param messageDigestEngine
+     * @param messageExecutorService
      */
-    public KaproxyProcessorConsumerContainer(String effectGroupTopics, StartupConsumerMetaFactory startupConsumerMetaFactory,
-                                             MessageDigestEngine messageDigestEngine) {
+    public KaproxyProcessorConsumerContainer(String effectGroupTopics,
+        StartupConsumerMetaFactory startupConsumerMetaFactory, MessageExecutorService messageExecutorService) {
         checkArgument(StringUtils.isNotBlank(effectGroupTopics),
-                "effectGroupTopics cannot be blank in KaproxyProcessorConsumerContainer");
+            "effectGroupTopics cannot be blank in KaproxyProcessorConsumerContainer");
         checkArgument(startupConsumerMetaFactory != null,
-                "StartupConsumerMetaFactory cannot be null in KaproxyProcessorConsumerContainer");
-        checkArgument(messageDigestEngine != null,
-                "MessageDigestEngine cannot be null in KaproxyProcessorConsumerContainer");
+            "StartupConsumerMetaFactory cannot be null in KaproxyProcessorConsumerContainer");
+        checkArgument(messageExecutorService != null,
+            "MessageExecutorService cannot be null in KaproxyProcessorConsumerContainer");
         this.effectGroupTopics.addAll(GroupTopic.parse2Set(effectGroupTopics));
         this.startupConsumerMetaFactory = startupConsumerMetaFactory;
-        this.messageDigestEngine = messageDigestEngine;
+        this.messageExecutorService = messageExecutorService;
     }
 
     /**
@@ -146,7 +145,7 @@ public class KaproxyProcessorConsumerContainer
                 this.startupConsumerMetaFactory.batchBuild(this.effectGroupTopics, strategy);
             for (StartupConsumerMeta startupConsumerMeta : startupConsumerMetas) {
                 KaproxyOkHttpConsumer kaproxyOkHttpConsumer =
-                    new KaproxyOkHttpConsumer(startupConsumerMeta, this.messageDigestEngine);
+                    new KaproxyOkHttpConsumer(startupConsumerMeta, this.messageExecutorService);
                 // 注意：是策略优化的反向，再次放回容器中
                 for (GroupTopic groupTopic : startupConsumerMeta.getGroupTopics()) {
                     this.processorConsumers.put(groupTopic, kaproxyOkHttpConsumer);

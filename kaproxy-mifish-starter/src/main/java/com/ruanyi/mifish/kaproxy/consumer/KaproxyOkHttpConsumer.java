@@ -11,8 +11,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.ruanyi.mifish.common.logs.MifishLogs;
 import com.ruanyi.mifish.common.utils.JacksonUtils;
+import com.ruanyi.mifish.kaproxy.MessageExecutorService;
 import com.ruanyi.mifish.kaproxy.ProcessorConsumer;
-import com.ruanyi.mifish.kaproxy.message.MessageDigestEngine;
 import com.ruanyi.mifish.kaproxy.model.ConsumerStatus;
 import com.ruanyi.mifish.kaproxy.model.StartupConsumerMeta;
 
@@ -30,8 +30,8 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
     /** startupConsumerMeta */
     private StartupConsumerMeta startupConsumerMeta;
 
-    /** messageDigestEngine */
-    private MessageDigestEngine messageDigestEngine;
+    /** messageExecutorService */
+    private MessageExecutorService messageExecutorService;
 
     /**
      * 目前，一个StartupConsumerMeta 对应一个OkHttpConsumerTask 等后面有其他业务场景，再重新设计
@@ -48,11 +48,12 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
      * KaproxyOkHttpConsumer
      *
      * @param startupConsumerMeta
-     * @param messageDigestEngine
+     * @param messageExecutorService
      */
-    public KaproxyOkHttpConsumer(StartupConsumerMeta startupConsumerMeta, MessageDigestEngine messageDigestEngine) {
+    public KaproxyOkHttpConsumer(StartupConsumerMeta startupConsumerMeta,
+        MessageExecutorService messageExecutorService) {
         this.startupConsumerMeta = startupConsumerMeta;
-        this.messageDigestEngine = messageDigestEngine;
+        this.messageExecutorService = messageExecutorService;
     }
 
     @Override
@@ -71,11 +72,11 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
                 this.executors = new ThreadPoolExecutor(1, 10, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(),
                     (Runnable runnable) -> {
                         Thread thread = new Thread(runnable);
-                        thread.setName("kafka-consumer-featcher-%d");
+                        thread.setName("kaproxy-consumer-featcher-%d");
                         return thread;
                     });
                 this.okHttpConsumerTask = new OkHttpConsumerTask(this.startupConsumerMeta, this.getOkHttpClient());
-                this.okHttpConsumerTask.setMessageDigestEngine(this.messageDigestEngine);
+                this.okHttpConsumerTask.setMessageExecutorService(this.messageExecutorService);
                 // 标记处于Running状态
                 this.status = ConsumerStatus.RUNNING;
                 if (LOG.isInfoEnabled()) {

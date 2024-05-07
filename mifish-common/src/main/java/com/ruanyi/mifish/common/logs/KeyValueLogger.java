@@ -104,7 +104,7 @@ public interface KeyValueLogger {
                 params.put("level", "trace");
             }
             params.put("category", getCategory());
-            params.put("requestId", RequestContext.getCurrentRequestId());
+            params.put("trace_id", RequestContext.getCurrentTraceId());
             params.put("threadName", getThreadName());
             for (Pair<?, ?> p : pairs) {
                 if (p != null) {
@@ -127,7 +127,7 @@ public interface KeyValueLogger {
                 params.put("level", "debug");
             }
             params.put("category", getCategory());
-            params.put("requestId", RequestContext.getCurrentRequestId());
+            params.put("trace_id", RequestContext.getCurrentTraceId());
             params.put("threadName", getThreadName());
             for (Pair<?, ?> p : pairs) {
                 if (p != null) {
@@ -151,7 +151,7 @@ public interface KeyValueLogger {
                 params.put("level", "debug");
             }
             params.put("category", getCategory());
-            params.put("requestId", RequestContext.getCurrentRequestId());
+            params.put("trace_id", RequestContext.getCurrentTraceId());
             params.put("threadName", getThreadName());
             for (Pair<?, ?> p : pairs) {
                 if (p != null) {
@@ -175,7 +175,7 @@ public interface KeyValueLogger {
                 params.put("level", "info");
             }
             params.put("category", getCategory());
-            params.put("requestId", RequestContext.getCurrentRequestId());
+            params.put("trace_id", RequestContext.getCurrentTraceId());
             params.put("threadName", getThreadName());
             for (Pair<?, ?> p : pairs) {
                 if (p != null) {
@@ -195,7 +195,7 @@ public interface KeyValueLogger {
         if (isWarnEnabled()) {
             Map<Object, Object> params = new HashMap<>(pairs.length + 4);
             params.put("category", getCategory());
-            params.put("requestId", RequestContext.getCurrentRequestId());
+            params.put("trace_id", RequestContext.getCurrentTraceId());
             if (!StringUtils.equals(getCategory(), ACCESS)) {
                 params.put("level", "warn");
             }
@@ -222,7 +222,7 @@ public interface KeyValueLogger {
                 params.put("level", "warn");
             }
             params.put("category", getCategory());
-            params.put("requestId", RequestContext.getCurrentRequestId());
+            params.put("trace_id", RequestContext.getCurrentTraceId());
             params.put("threadName", getThreadName());
             for (Pair<?, ?> p : pairs) {
                 if (p != null) {
@@ -247,7 +247,7 @@ public interface KeyValueLogger {
             params.put("level", "error");
         }
         params.put("threadName", getThreadName());
-        params.put("requestId", RequestContext.getCurrentRequestId());
+        params.put("trace_id", RequestContext.getCurrentTraceId());
         for (Pair<?, ?> p : pairs) {
             if (p != null) {
                 params.put(p.getLeft(), p.getRight());
@@ -267,7 +267,7 @@ public interface KeyValueLogger {
         if (!StringUtils.equals(getCategory(), ACCESS)) {
             params.put("level", "error");
         }
-        params.put("requestId", RequestContext.getCurrentRequestId());
+        params.put("trace_id", RequestContext.getCurrentTraceId());
         params.put("category", getCategory());
         params.put("threadName", getThreadName());
         for (Pair<?, ?> p : pairs) {

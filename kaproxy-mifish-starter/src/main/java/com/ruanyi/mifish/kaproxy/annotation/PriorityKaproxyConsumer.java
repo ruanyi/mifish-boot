@@ -10,16 +10,14 @@ import com.ruanyi.mifish.common.model.MessageType;
 /**
  * Description:
  *
- * 基于kaproxy实现的消费机制，
- * 
- * 一个group + ":"+ topic，对应一个消费线程，彼此之间相互独立
+ * 单个进程里，只有一个消费线程，按照优先级消费
  *
  * @author: ruanyi
- * @Date: 2022-11-17 13:49
+ * @Date: 2024-05-07 23:27
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-public @interface KaproxyConsumer {
+public @interface PriorityKaproxyConsumer {
 
     /**
      * 必须配置，支持多topic消费
@@ -76,8 +74,8 @@ public @interface KaproxyConsumer {
 
     /**
      * 不同系统之间传输和共享的特殊结构化数据的标准或规范。
-     * 
-     * 默认是：json
+     *
+     * 默认是：json，暂不支持：其他报文协议
      *
      * @return
      */
@@ -89,4 +87,11 @@ public @interface KaproxyConsumer {
      * @return
      */
     String poolName() default "default";
+
+    /**
+     * 消费优先级
+     * 
+     * @return
+     */
+    int priority() default 5;
 }

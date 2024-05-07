@@ -15,8 +15,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.util.concurrent.RateLimiter;
 import com.ruanyi.mifish.common.logs.MifishLogs;
 import com.ruanyi.mifish.common.utils.JacksonUtils;
+import com.ruanyi.mifish.kaproxy.MessageExecutorService;
 import com.ruanyi.mifish.kaproxy.container.KaproxyConsumerMetaContainer;
-import com.ruanyi.mifish.kaproxy.message.MessageDigestEngine;
 import com.ruanyi.mifish.kaproxy.model.KaproxyRequestMessage;
 import com.ruanyi.mifish.kaproxy.model.KaproxyResponseMessage;
 import com.ruanyi.mifish.kaproxy.model.QueueMessage;
@@ -28,6 +28,8 @@ import okhttp3.Response;
 
 /**
  * Description:
+ * 
+ * 消费线程
  *
  * @author: ruanyi
  * @Date: 2022-11-17 22:20
@@ -43,8 +45,8 @@ class OkHttpConsumerTask implements Runnable {
     /** okHttpClient 发起http请求 */
     private OkHttpClient okHttpClient = null;
 
-    /** messageDigestEngine */
-    private MessageDigestEngine messageDigestEngine;
+    /** messageExecutorService */
+    private MessageExecutorService messageExecutorService;
 
     /** 表示该任务是否已经结束 */
     private volatile boolean done = false;
@@ -195,10 +197,8 @@ class OkHttpConsumerTask implements Runnable {
             // add default error code
             message.addAttribute(RESP_ERROR_CODE, "RET_SUCCESS");
             message.addAttribute(RESP_DETAIL_ERROR_CODE, "000000");
-            // 触发业务处理
-            this.messageDigestEngine.digest(KaproxyConsumerMetaContainer.getInstance()
-                .getKaproxyConsumer(kaproxyRequestMessage.getGroup(), kaproxyResponseMessage.getTopic()), message);
-
+            // 消费线程与业务线程拆开，避免相互影响
+            this.messageExecutorService.submit(message);
         } catch (Exception ex) {
             // for now just log some message
             LOG.error(ex, Pair.of("clazz", "OkHttpConsumerTask"), Pair.of("method", "doConsumeKaproxyMessage"),
@@ -238,11 +238,11 @@ class OkHttpConsumerTask implements Runnable {
     }
 
     /**
-     * setMessageDigestEngine
-     *
-     * @param messageDigestEngine
+     * setMessageExecutorService
+     * 
+     * @param messageExecutorService
      */
-    public void setMessageDigestEngine(MessageDigestEngine messageDigestEngine) {
-        this.messageDigestEngine = messageDigestEngine;
+    public void setMessageExecutorService(MessageExecutorService messageExecutorService) {
+        this.messageExecutorService = messageExecutorService;
     }
 }

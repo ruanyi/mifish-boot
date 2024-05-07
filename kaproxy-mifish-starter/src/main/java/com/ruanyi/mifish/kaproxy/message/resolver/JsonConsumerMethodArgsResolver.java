@@ -34,7 +34,7 @@ public class JsonConsumerMethodArgsResolver implements ConsumerMethodArgsResolve
     public Object[] resolveArguments(KaproxyConsumerMeta kaproxyConsumerMeta, QueueMessage message) throws Exception {
         Method method = kaproxyConsumerMeta.getMethod();
         Parameter[] params = method.getParameters();
-        // 假如没有参数
+        // 一般情况下，不存在没有参数的情况，仅仅存在于：测试情况
         if (params.length < 1) {
             return new Object[] {};
         }

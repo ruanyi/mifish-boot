@@ -49,12 +49,12 @@ public class RequestContextNode implements MessageNode {
     @Override
     public MessageStatus doNode(KaproxyConsumer kaproxyConsumer, QueueMessage message, MessageChain chain) {
         try {
-            // init requestId
+            // init trace_id
             String resourceUrl = KaproxyConsumerMeta.buildKey(message.getGroup(), message.getTopic());
-            String requestId = UUIDUtil.obtainUUID();
-            RequestContext.init(requestId, resourceUrl);
-            // MDC放置：requestId
-            MDC.put("requestId", requestId);
+            String traceId = UUIDUtil.obtainUUID();
+            RequestContext.init(traceId, resourceUrl);
+            // MDC放置：trace_id
+            MDC.put("trace_id", traceId);
             // 开启方法耗时打印
             MessageStatus msgStatus = chain.doChain(kaproxyConsumer, message);
             // log processor access log

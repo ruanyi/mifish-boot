@@ -3,7 +3,7 @@
     <Appenders>
         <Console name="JsonConsoleAppender" target="SYSTEM_OUT" follow="true">
             <JSONLayout stacktraceAsString="true" compact="true" eventEol="true">
-                <KeyValuePair key="requestId" value="$${ctx:requestId}"/>
+                <KeyValuePair key="trace_id" value="$${ctx:trace_id}"/>
             </JSONLayout>
         </Console>
         <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">

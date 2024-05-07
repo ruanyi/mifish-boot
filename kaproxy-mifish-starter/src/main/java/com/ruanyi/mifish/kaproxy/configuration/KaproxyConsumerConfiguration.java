@@ -1,5 +1,9 @@
 package com.ruanyi.mifish.kaproxy.configuration;
 
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -8,9 +12,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.ruanyi.mifish.kaproxy.KaproxyConsumerProcessor;
+import com.ruanyi.mifish.kaproxy.MessageExecutorService;
 import com.ruanyi.mifish.kaproxy.ProcessorConsumerContainer;
 import com.ruanyi.mifish.kaproxy.StartupConsumerMetaFactory;
 import com.ruanyi.mifish.kaproxy.container.KaproxyProcessorConsumerContainer;
+import com.ruanyi.mifish.kaproxy.executor.SimpleMessageExecutorService;
 import com.ruanyi.mifish.kaproxy.factory.SimpleStartupConsumerMetaFactory;
 import com.ruanyi.mifish.kaproxy.message.MessageDigestEngine;
 import com.ruanyi.mifish.kaproxy.message.MessageHandler;
@@ -48,15 +54,17 @@ public class KaproxyConsumerConfiguration {
      * 
      * 其中,start方法，由：KaproxyConsumerProcessor，基于事件去启动 stop方法，由优雅关闭去关闭
      *
+     * @param startupConsumerMetaFactory
+     * @param messageExecutorService
      * @return
      */
     @Bean(name = "queueConsumerContainer")
     public ProcessorConsumerContainer newQueueConsumerContainer(StartupConsumerMetaFactory startupConsumerMetaFactory,
-        MessageDigestEngine messageDigestEngine) {
+        MessageExecutorService messageExecutorService) {
         String effectGroupTopics = obtainEffectGroupTopics();
-        KaproxyProcessorConsumerContainer xiuxiuQueueConsumerContainer =
-            new KaproxyProcessorConsumerContainer(effectGroupTopics, startupConsumerMetaFactory, messageDigestEngine);
-        return xiuxiuQueueConsumerContainer;
+        KaproxyProcessorConsumerContainer kaproxyConsumerContainer = new KaproxyProcessorConsumerContainer(
+            effectGroupTopics, startupConsumerMetaFactory, messageExecutorService);
+        return kaproxyConsumerContainer;
     }
 
     /**
@@ -88,6 +96,21 @@ public class KaproxyConsumerConfiguration {
     @Bean
     public MessageDigestEngine newMessageDigestEngine(MessageHandler messageHandler) {
         return new SimpleMessageDigestEngine(messageHandler);
+    }
+
+    /**
+     * newMessageExecutorService
+     *
+     * @param messageDigestEngine
+     * @return
+     */
+    @Bean(destroyMethod = "shutdown")
+    public MessageExecutorService newMessageExecutorService(MessageDigestEngine messageDigestEngine) {
+        ThreadPoolExecutor threadPoolExecutor =
+            new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<>());
+        SimpleMessageExecutorService multiQueuedMessageExecutorService =
+            new SimpleMessageExecutorService(messageDigestEngine, threadPoolExecutor);
+        return multiQueuedMessageExecutorService;
     }
 
     /**
