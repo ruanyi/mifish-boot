@@ -41,11 +41,11 @@ tianbing-mifish-starter：算法工程化
 
     多进程通讯
 
-kaproxy-mifish-starter：
+mqproxy-mifish-starter：
 
     处理进程，一般不直连MQ，例如：kafka，正是因为：它是cpu密集型，假设直连kakfa，会导致kafka的boker不间断断地认为：处理进程已死，触发Partitions不断地reblance
     
-    因此，将消费与处理拆成2个进程来处理。kaproxy是一种：消费进程的解决方案。
+    因此，将消费与处理拆成2个进程来处理。mqproxy是一种：消费进程的解决方案。
 
 mifish-video-processor：
 

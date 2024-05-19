@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.ruanyi.mifish.tomcat.healthcheck.DevopsStatusServletConfiguration,\
-  com.ruanyi.mifish.kaproxy.configuration.KaproxyConsumerConfiguration,\
-com.ruanyi.mifish.kaproxy.configuration.ConsumerCustomizeConfiguration

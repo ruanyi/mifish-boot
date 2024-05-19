@@ -2,9 +2,9 @@ package com.ruanyi.mifish.image.trigger;
 
 import org.springframework.stereotype.Component;
 
-import com.ruanyi.mifish.kaproxy.annotation.KaproxyConsumer;
-import com.ruanyi.mifish.kaproxy.model.MessageStatus;
 import com.ruanyi.mifish.kernel.model.msg.StdMessage;
+import com.ruanyi.mifish.mqproxy.annotation.MqproxyConsumer;
+import com.ruanyi.mifish.mqproxy.model.MessageStatus;
 
 /**
  * Description:
@@ -20,7 +20,7 @@ public class ImageStdTrigger {
      * 
      * @param stdMessage
      */
-    @KaproxyConsumer(group = "mifish_image_group", topicPattern = "mifish.image.topics")
+    @MqproxyConsumer(group = "mifish_image_group", topicPattern = "mifish.image.topics")
     public MessageStatus doConsume(StdMessage stdMessage) {
         return MessageStatus.SUCCESS;
     }

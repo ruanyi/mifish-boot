@@ -19,7 +19,7 @@
 
         <dependency>
             <groupId>com.ruanyi.mifish</groupId>
-            <artifactId>kaproxy-mifish-starter</artifactId>
+            <artifactId>mqproxy-mifish-starter</artifactId>
         </dependency>
     </dependencies>
 

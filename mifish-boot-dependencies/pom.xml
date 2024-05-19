@@ -90,6 +90,12 @@
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
+                <artifactId>flow-mifish-starter</artifactId>
+                <version>${mifish.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruanyi.mifish</groupId>
                 <artifactId>tianbing-mifish-starter</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
@@ -108,7 +114,7 @@
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>kaproxy-mifish-starter</artifactId>
+                <artifactId>mqproxy-mifish-starter</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 

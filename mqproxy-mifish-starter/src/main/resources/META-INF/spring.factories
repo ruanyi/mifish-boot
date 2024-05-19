@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ruanyi.mifish.tomcat.healthcheck.DevopsStatusServletConfiguration,\
+  com.ruanyi.mifish.mqproxy.configuration.MqproxyConsumerConfiguration,\
+com.ruanyi.mifish.mqproxy.configuration.ConsumerCustomizeConfiguration
