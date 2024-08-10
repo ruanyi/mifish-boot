@@ -44,12 +44,14 @@
         <guava.version>23.0</guava.version>
         <yaml.version>1.20</yaml.version>
         <commons.lang3.version>3.8</commons.lang3.version>
+        <commons.io.version>2.16.1</commons.io.version>
         <junit.version>4.13.1</junit.version>
         <slf4j.version>1.7.21</slf4j.version>
         <mifish.log4j2.version>2.10.0</mifish.log4j2.version>
         <jackson.version>2.11.1</jackson.version>
         <spring.boot.version>2.5.12</spring.boot.version>
         <lombok.version>1.18.0</lombok.version>
+        <aws.version>1.12.728</aws.version>
     </properties>
 
     <dependencyManagement>
@@ -59,6 +61,13 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons.lang3.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
@@ -98,6 +107,13 @@
                 <groupId>io.micrometer</groupId>
                 <artifactId>micrometer-core</artifactId>
                 <version>${micrometer.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>${aws.version}</version>
             </dependency>
 
             <!--mifish dependency -->

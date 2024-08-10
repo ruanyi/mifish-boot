@@ -10,14 +10,10 @@ public final class RequestContext {
 
     private static final ThreadLocal<RequestContext> CONTEXT = new ThreadLocal<>();
 
-    /**
-     * traceId
-     */
+    /** traceId */
     private final String traceId;
 
-    /**
-     * resourceUrl
-     */
+    /** resourceUrl */
     private final String resourceUrl;
 
     /**

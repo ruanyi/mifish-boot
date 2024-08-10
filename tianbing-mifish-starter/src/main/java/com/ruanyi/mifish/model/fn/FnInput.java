@@ -14,6 +14,8 @@ import lombok.Setter;
  * @author: ruanyi
  * @Date: 2024-05-04 10:52
  */
+@Getter
+@Setter
 public class FnInput {
 
     /** workPath */

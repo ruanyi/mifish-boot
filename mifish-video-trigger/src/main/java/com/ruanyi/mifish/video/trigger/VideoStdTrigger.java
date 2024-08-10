@@ -21,7 +21,7 @@ public class VideoStdTrigger {
      *
      * @param stdMessage
      */
-    @MqproxyConsumer(group = "mifish_video_group", topicPattern = "mifish.video.topics")
+    @MqproxyConsumer(group = "mifish_video_group", topics = {"video_0", "video_1", "video_2"})
     public MessageStatus doConsume(StdMessage stdMessage) {
 
         return MessageStatus.SUCCESS;

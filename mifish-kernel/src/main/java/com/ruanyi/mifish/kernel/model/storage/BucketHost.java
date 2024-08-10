@@ -1,4 +1,4 @@
-package com.ruanyi.mifish.model.storage;
+package com.ruanyi.mifish.kernel.model.storage;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.ruanyi.mifish.download;
 
-import com.ruanyi.mifish.common.ex.BusinessException;
-import com.ruanyi.mifish.kernel.model.uri.ObjectURI;
+import com.ruanyi.mifish.kernel.model.uri.DownloadURI;
 
 /**
  * Description:
@@ -14,18 +13,9 @@ public interface ObjectDownloadComponent {
     /**
      * download
      * 
-     * @param objectURI
+     * @param downloadURI
      * @param savesPath
      * @return
-     * @throws BusinessException
      */
-    boolean download(ObjectURI objectURI, String savesPath) throws BusinessException;
-
-    /**
-     * getCloud
-     * 
-     * @return
-     */
-    String getCloud();
-
+    boolean download(DownloadURI downloadURI, String savesPath);
 }

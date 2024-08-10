@@ -1,4 +1,4 @@
-package com.ruanyi.mifish.model.storage;
+package com.ruanyi.mifish.kernel.model.storage;
 
 import java.util.List;
 
@@ -21,6 +21,9 @@ public class BucketMeta {
 
     /** cloud */
     private String cloud;
+
+    /** supportS3 */
+    private boolean supportS3;
 
     /** bucket */
     private String bucket;

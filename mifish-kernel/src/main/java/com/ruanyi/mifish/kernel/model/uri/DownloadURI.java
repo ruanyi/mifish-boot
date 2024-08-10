@@ -1,5 +1,7 @@
 package com.ruanyi.mifish.kernel.model.uri;
 
+import com.ruanyi.mifish.kernel.model.storage.Credential;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,11 +9,11 @@ import lombok.Setter;
  * Description:
  *
  * @author: ruanyi
- * @Date: 2024-04-28 23:50
+ * @Date: 2024-05-30 23:16
  */
 @Getter
 @Setter
-public class ObjectURI {
+public class DownloadURI {
 
     /** cloud */
     private String cloud;
@@ -28,4 +30,6 @@ public class ObjectURI {
     /** url */
     private String url;
 
+    /** credential */
+    private Credential credential;
 }

@@ -1,6 +1,7 @@
 package com.ruanyi.mifish.kernel.model.msg;
 
 import com.ruanyi.mifish.common.annotation.OpenApi;
+import com.ruanyi.mifish.kernel.model.storage.Credential;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,11 @@ import lombok.Setter;
 @OpenApi(scene = "输入文件")
 public class InputFile {
 
-    /** url */
+    /** 原始文件地址url */
     private String url;
+
+    /** 构建下载的url地址 */
+    private String downloadUrl;
 
     /** type */
     private String type;
@@ -32,6 +36,9 @@ public class InputFile {
 
     /** 输入文件标识 */
     private String key = "video";
+
+    /** credential */
+    private Credential credential;
 
     /** preDownload */
     private boolean preDownload;

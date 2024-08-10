@@ -20,7 +20,7 @@ public class ImageStdTrigger {
      * 
      * @param stdMessage
      */
-    @MqproxyConsumer(group = "mifish_image_group", topicPattern = "mifish.image.topics")
+    @MqproxyConsumer(group = "mifish_image_group", topics = {"img_0", "img_1", "img_2"})
     public MessageStatus doConsume(StdMessage stdMessage) {
         return MessageStatus.SUCCESS;
     }

@@ -3,6 +3,7 @@ package com.ruanyi.mifish.kernel.model.msg;
 import java.util.Map;
 
 import com.ruanyi.mifish.common.annotation.OpenApi;
+import com.ruanyi.mifish.kernel.model.storage.Credential;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +36,9 @@ public class OutputFile {
 
     /** key */
     private String key;
+
+    /** credential */
+    private Credential credential;
 
     /** extra */
     private Map<String, Object> extra;

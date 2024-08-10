@@ -37,6 +37,8 @@ nantian-mifish-starter：提供处理的基础代码
 
     对图片做一些处理：缩略、毛玻璃、加水印、圆角等
 
+    使用s3协议：实现通用的文件上传 + 下载
+
 tianbing-mifish-starter：算法工程化
 
     多进程通讯

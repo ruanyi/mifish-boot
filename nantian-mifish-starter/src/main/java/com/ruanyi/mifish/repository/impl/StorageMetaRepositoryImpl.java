@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import com.ruanyi.mifish.model.storage.BucketHost;
-import com.ruanyi.mifish.model.storage.BucketMeta;
+import com.ruanyi.mifish.kernel.model.storage.BucketHost;
+import com.ruanyi.mifish.kernel.model.storage.BucketMeta;
 import com.ruanyi.mifish.repository.StorageMetaLoader;
 import com.ruanyi.mifish.repository.StorageMetaRepository;
 

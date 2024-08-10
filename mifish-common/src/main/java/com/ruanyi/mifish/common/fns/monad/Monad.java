@@ -5,7 +5,8 @@ import com.ruanyi.mifish.common.fns.Fn1;
 /**
  * Description:
  *
- * @author: ruanyi Date: 2017-11-05 18:36
+ * @author: ruanyi
+ * @Date: 2017-11-05 18:36
  */
 public interface Monad<M, T> {
 

@@ -52,7 +52,6 @@ public class ObjectURIParseServiceImpl implements ObjectURIParseService {
                 path = path.substring(1);
             }
             // 坑、巨坑，url 中带有：%2B，将这个符号处理成：+
-            // 例如：https://xxtool-release.obs.cn-north-4.myhuaweicloud.com:443/pc/user_custom/bvc4tp096mqup0ogub10%2B1467594298.jpeg
             if (StringUtils.contains(path, "%2B")) {
                 path = ObjectUrlHelper.decode(path);
             }

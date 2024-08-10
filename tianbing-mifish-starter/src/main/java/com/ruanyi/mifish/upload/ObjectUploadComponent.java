@@ -7,13 +7,13 @@ import com.ruanyi.mifish.kernel.model.uri.UploadURI;
  * Description:
  *
  * @author: ruanyi
- * @Date: 2024-05-04 10:21
+ * @Date: 2024-05-23 22:49
  */
-public interface ObjectUploader {
+public interface ObjectUploadComponent {
 
     /**
      * upload
-     * 
+     *
      * @param localPath
      * @param uploadURI
      * @return
