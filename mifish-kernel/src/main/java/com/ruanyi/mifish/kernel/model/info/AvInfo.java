@@ -143,17 +143,7 @@ public final class AvInfo extends MetaInfo {
      * @return
      */
     public Integer getVideoWidth() {
-        try {
-            Map<String, Object> videoS = getVideoStream();
-            if (videoS != null && !videoS.isEmpty()) {
-                Integer w = Integer.parseInt(videoS.get("width") + "");
-                return w;
-            }
-        } catch (Exception ex) {
-            LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("method", "getVideoWidth"),
-                Pair.of("video_width_status", "exception"), Pair.of("avInfo", getAvInfo()));
-        }
-        return -1;
+        return getVideoInteger("width", -1);
     }
 
     /**
@@ -162,17 +152,73 @@ public final class AvInfo extends MetaInfo {
      * @return
      */
     public Integer getVideoHeight() {
+        return getVideoInteger("height", -1);
+    }
+
+    /**
+     * getVideoInteger
+     * 
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public Integer getVideoInteger(String key, Integer defaultValue) {
         try {
             Map<String, Object> videoS = getVideoStream();
             if (videoS != null && !videoS.isEmpty()) {
-                Integer h = Integer.parseInt(videoS.get("height") + "");
+                Integer h = Integer.parseInt(videoS.get(key) + "");
                 return h;
             }
         } catch (Exception ex) {
-            LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("method", "getVideoHeight"),
-                Pair.of("video_height_status", "exception"), Pair.of("avInfo", getAvInfo()));
+            LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("method", "getVideoInteger"),
+                Pair.of("video_integer_status", "exception"), Pair.of("avInfo", getAvInfo()));
         }
-        return -1;
+        return defaultValue;
+    }
+
+    /**
+     * getVideoString
+     * 
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public String getVideoString(String key, String defaultValue) {
+        try {
+            Map<String, Object> videoS = getVideoStream();
+            if (videoS != null && !videoS.isEmpty()) {
+                return videoS.get(key) + "";
+            }
+        } catch (Exception ex) {
+            LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("method", "getVideoString"),
+                Pair.of("video_string_status", "exception"), Pair.of("avInfo", getAvInfo()));
+        }
+        return defaultValue;
+    }
+
+    /**
+     * 获取视频播放时的，真实宽
+     *
+     * @return
+     */
+    public Integer getVideoPlayerWidth() {
+        int rotation = getVideoRotate();
+        // 如果当前视频是翻转的
+        if ((rotation == 90 || rotation == -90 || rotation == 270 || rotation == -270)) {
+            return getVideoHeight();
+        } else {
+            return getVideoWidth();
+        }
+    }
+
+    /**
+     * 这是指视频帧在编码过程中所使用的宽度。 由于视频编码的技术限制，视频帧的宽度可能需要对齐到某个特定的倍数（通常是8或16）。 这意味着实际编码过程中可能会使用比width更大的值来确保视频帧的数据对齐。
+     * coded_width通常是实际宽度向上对齐后的值。例如，某些情况下一个宽度为1920像素的视频可能会在编码过程中使用1920或1928像素的编码宽度。
+     *
+     * @return
+     */
+    public Integer getVideoCodedWidth() {
+        return getVideoInteger("coded_width", -1);
     }
 
     /**
@@ -181,16 +227,7 @@ public final class AvInfo extends MetaInfo {
      * @return
      */
     public String getPrimaries() {
-        try {
-            Map<String, Object> videoS = getVideoStream();
-            if (videoS != null && !videoS.isEmpty()) {
-                return videoS.get("color_primaries") + "";
-            }
-        } catch (Exception ex) {
-            LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("method", "getPrimaries"),
-                Pair.of("video_primaries_status", "exception"), Pair.of("avInfo", getAvInfo()));
-        }
-        return null;
+        return getVideoString("color_primaries", null);
     }
 
     /**
@@ -198,18 +235,8 @@ public final class AvInfo extends MetaInfo {
      * 
      * @return
      */
-    public int getNbFrames() {
-        try {
-            Map<String, Object> videoS = getVideoStream();
-            if (videoS != null && !videoS.isEmpty()) {
-                String framesStr = videoS.get("nb_frames") + "";
-                return Integer.parseInt(framesStr);
-            }
-        } catch (Exception ex) {
-            LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("getNbFrames", "getPrimaries"),
-                Pair.of("video_nb_frames_status", "exception"), Pair.of("avInfo", getAvInfo()));
-        }
-        return -1;
+    public Integer getNbFrames() {
+        return getVideoInteger("nb_frames", -1);
     }
 
     /**
@@ -322,17 +349,8 @@ public final class AvInfo extends MetaInfo {
      * @return
      */
     public int getVideoBitrate() {
-        try {
-            Map<String, Object> videoS = getVideoStream();
-            if (videoS != null && !videoS.isEmpty()) {
-                int b = Integer.parseInt(videoS.get("bit_rate") + "") / 1000;
-                return b;
-            }
-        } catch (Exception ex) {
-            LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("method", "getVideoBitrate"),
-                Pair.of("video_bitrate_status", "exception"), Pair.of("avInfo", getAvInfo()));
-        }
-        return -1;
+        Integer b = getVideoInteger("bit_rate", -1);
+        return (b < 0) ? b : b / 1000;
     }
 
     /**
@@ -395,21 +413,25 @@ public final class AvInfo extends MetaInfo {
     public int getVideoRotate() {
         try {
             Map<String, Object> videoS = getVideoStream();
+            Object rotation = null;
             if (videoS != null && !videoS.isEmpty() && videoS.containsKey("side_data_list")) {
                 List<Map<String, Object>> sideDataList = (List<Map<String, Object>>)videoS.get("side_data_list");
                 if (sideDataList != null && !sideDataList.isEmpty()) {
-                    Map<String, Object> sideData = sideDataList.get(0);
-                    Object obj = sideData.get("rotation");
-                    if (Objects.isNull(obj)) {
-                        return 0;
-                    }
-                    if (obj instanceof Number) {
-                        return ((Number)obj).intValue();
-                    } else {
-                        String str = obj + "";
-                        return Integer.parseInt(str);
+                    for (Map<String, Object> sideData : sideDataList) {
+                        if (sideData != null && sideData.containsKey("rotation")) {
+                            rotation = sideData.get("rotation");
+                        }
                     }
                 }
+            }
+            if (Objects.isNull(rotation)) {
+                return 0;
+            }
+            if (rotation instanceof Number) {
+                return ((Number)rotation).intValue();
+            } else {
+                String str = rotation + "";
+                return Integer.parseInt(str);
             }
         } catch (Exception ex) {
             LOG.error(ex, Pair.of("clazz", "AvInfo"), Pair.of("method", "getVideoBitrate"),
@@ -426,8 +448,8 @@ public final class AvInfo extends MetaInfo {
     public int getVideoFps() {
         try {
             Map<String, Object> videoS = getVideoStream();
-            if (videoS != null && !videoS.isEmpty() && videoS.containsKey("r_frame_rate")) {
-                String fpsStr = videoS.get("r_frame_rate") + "";
+            if (videoS != null && !videoS.isEmpty() && videoS.containsKey("avg_frame_rate")) {
+                String fpsStr = videoS.get("avg_frame_rate") + "";
                 String[] fpsArray = StringUtils.split(fpsStr, "/");
                 if (fpsArray != null && fpsArray.length == 1) {
                     return Integer.parseInt(fpsArray[0]);

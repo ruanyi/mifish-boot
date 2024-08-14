@@ -10,29 +10,19 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum MediaType {
 
-    /**
-     * 图片媒体
-     */
+    /** 图片媒体 */
     IMAGE(1, "图片"),
 
-    /**
-     * 视频媒体
-     */
+    /** 视频媒体 */
     VIDEO(2, "视频"),
 
-    /**
-     * 音频媒体
-     */
+    /** 音频媒体 */
     AUDIO(3, "音频");
 
-    /**
-     * code
-     */
+    /** code */
     private int code;
 
-    /**
-     * desc
-     */
+    /** desc */
     private String desc;
 
     /**
@@ -91,12 +81,12 @@ public enum MediaType {
                 return MediaType.VIDEO;
             }
             if (StringUtils.endsWithIgnoreCase(key, "mp3") || StringUtils.endsWithIgnoreCase(key, "aac")
-                    || StringUtils.endsWithIgnoreCase(key, "wav")) {
+                || StringUtils.endsWithIgnoreCase(key, "wav")) {
                 return MediaType.AUDIO;
             }
             if (StringUtils.endsWithIgnoreCase(key, "jpg") || StringUtils.endsWithIgnoreCase(key, "png")
-                    || StringUtils.endsWithIgnoreCase(key, "jpeg") || StringUtils.endsWithIgnoreCase(key, "webp")
-                    || StringUtils.endsWithIgnoreCase(key, "heic") || StringUtils.endsWithIgnoreCase(key, "gif")) {
+                || StringUtils.endsWithIgnoreCase(key, "jpeg") || StringUtils.endsWithIgnoreCase(key, "webp")
+                || StringUtils.endsWithIgnoreCase(key, "heic") || StringUtils.endsWithIgnoreCase(key, "gif")) {
                 return MediaType.IMAGE;
             }
         }

@@ -13,9 +13,7 @@ import com.ruanyi.mifish.kernel.model.MediaType;
  */
 public abstract class MetaInfo {
 
-    /**
-     * 计算失败时，有值，返回具体的：status
-     */
+    /** 计算失败时，有值，返回具体的：status */
     private String code;
 
     /**
