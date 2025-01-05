@@ -2,6 +2,7 @@ package com.ruanyi.mifish.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,6 +19,8 @@ import com.ruanyi.mifish.common.logs.MifishLogs;
  * @Date: 2017-12-04 18:33
  */
 public final class DateUtil {
+
+    public static final String[] WEEK_DAY_OF_CHINESE = new String[] {"周日", "周一", "周二", "周三", "周四", "周五", "周六"};
 
     /**
      * 毫秒
@@ -200,11 +203,47 @@ public final class DateUtil {
      * @param offsite 偏移量，正数为向后偏移，负数为向前偏移
      * @return 偏移后的日期
      */
-    public static Date offsiteDate(Date date, int calendarField, int offsite) {
+    private static Date offsiteDate(Date date, int calendarField, int offsite) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(calendarField, offsite);
         return cal.getTime();
+    }
+
+    /**
+     * 将时间转成：每周几
+     * 
+     * @param date
+     * @return
+     */
+    public static String dateToWeek(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return WEEK_DAY_OF_CHINESE[cal.get(WEEK_DAY_OF_CHINESE.length) - 1];
+    }
+
+    public static LocalDateTime addSecond(LocalDateTime date, int second) {
+        return date.plusSeconds(second);
+    }
+
+    public static LocalDateTime addMinute(LocalDateTime date, int minute) {
+        return date.plusMinutes(minute);
+    }
+
+    public static LocalDateTime addHour(LocalDateTime date, int hour) {
+        return date.plusHours(hour);
+    }
+
+    public static LocalDateTime addDay(LocalDateTime date, int day) {
+        return date.plusDays(day);
+    }
+
+    public static LocalDateTime addMonth(LocalDateTime date, int month) {
+        return date.plusMonths(month);
+    }
+
+    public static LocalDateTime addYear(LocalDateTime date, int year) {
+        return date.plusYears(year);
     }
 
     /**

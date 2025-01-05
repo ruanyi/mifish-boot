@@ -1,6 +1,7 @@
 package com.ruanyi.mifish.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.ruanyi.mifish.common.model.MifishResponse;
@@ -21,11 +22,11 @@ import com.ruanyi.mifish.web.service.ImageResizeService;
 public class ImageController {
 
     /** imageResizeService */
-    @Autowired
+    @Resource
     private ImageResizeService imageResizeService;
 
     /** imageCompressService */
-    @Autowired
+    @Resource
     private ImageCompressService imageCompressService;
 
     /**

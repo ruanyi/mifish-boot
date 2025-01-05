@@ -141,7 +141,7 @@ public final class JacksonUtils {
         if (type instanceof ParameterizedType) {
             Type[] actualTypeArguments = ((ParameterizedType)type).getActualTypeArguments();
             // 获取泛型类型
-            Class rowClass = (Class)((ParameterizedType)type).getRawType();
+            Class<?> rowClass = (Class<?>)((ParameterizedType)type).getRawType();
             JavaType[] javaTypes = new JavaType[actualTypeArguments.length];
             for (int i = 0; i < actualTypeArguments.length; i++) {
                 // 泛型也可能带有泛型，递归获取

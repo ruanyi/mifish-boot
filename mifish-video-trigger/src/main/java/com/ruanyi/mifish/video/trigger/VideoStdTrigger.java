@@ -2,9 +2,9 @@ package com.ruanyi.mifish.video.trigger;
 
 import org.springframework.stereotype.Component;
 
+import com.ruanyi.mifish.kaproxy.annotation.KaproxyConsumer;
+import com.ruanyi.mifish.kaproxy.model.MessageStatus;
 import com.ruanyi.mifish.kernel.model.msg.StdMessage;
-import com.ruanyi.mifish.mqproxy.annotation.MqproxyConsumer;
-import com.ruanyi.mifish.mqproxy.model.MessageStatus;
 
 /**
  * Description:
@@ -21,7 +21,7 @@ public class VideoStdTrigger {
      *
      * @param stdMessage
      */
-    @MqproxyConsumer(group = "mifish_video_group", topics = {"video_0", "video_1", "video_2"})
+    @KaproxyConsumer(group = "mifish_video_group", topics = {"video_0", "video_1", "video_2"})
     public MessageStatus doConsume(StdMessage stdMessage) {
 
         return MessageStatus.SUCCESS;

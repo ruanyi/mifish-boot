@@ -33,7 +33,7 @@ public final class ClassUtil {
     public static Class<?>[] loadClassesFromPackage(String packageName, Class<? extends Annotation> cls)
         throws IOException, ClassNotFoundException {
         Class<?>[] clss = loadClassesFromPackage(packageName);
-        Set<Class<?>> set = new HashSet<Class<?>>();
+        Set<Class<?>> set = new HashSet<>();
         for (int i = 0; i < clss.length; i++) {
             if (clss[i].isAnnotationPresent(cls)) {
                 set.add(clss[i]);
@@ -76,7 +76,7 @@ public final class ClassUtil {
     public static Class<?>[] loadClassesFromJar(String pkgname, JarFile jarFile) throws ClassNotFoundException {
         Enumeration<JarEntry> entries = jarFile.entries();
 
-        Set<Class<?>> cls = new HashSet<Class<?>>();
+        Set<Class<?>> cls = new HashSet<>();
         for (; entries.hasMoreElements();) {
             JarEntry je = entries.nextElement();
             String name = je.getName();
@@ -152,45 +152,45 @@ public final class ClassUtil {
     public static Field[] getDeclaredField(Class<?> cls, Class<? extends Annotation> annoCls) {
         Field[] fields = cls.getDeclaredFields();
 
-        List<Field> ls = new ArrayList<Field>();
+        List<Field> ls = new ArrayList<>();
 
-        for (int i = 0; i < fields.length; i++) {
-            if (fields[i].getAnnotation(annoCls) == null) {
+        for (Field field : fields) {
+            if (field.getAnnotation(annoCls) == null) {
                 continue;
             }
-            fields[i].setAccessible(true);
-            ls.add(fields[i]);
+            field.setAccessible(true);
+            ls.add(field);
         }
 
         return ls.toArray(new Field[] {});
     }
 
     public static Field[] getDeclaredField(Class<?> cls, Class<? extends Annotation> annoCls, String[] fieldNames) {
-        Set<String> set = new HashSet<String>(Arrays.asList(fieldNames));
-        List<Field> fs = new ArrayList<Field>();
+        Set<String> set = new HashSet<>(Arrays.asList(fieldNames));
+        List<Field> fs = new ArrayList<>();
 
         Field[] fields = cls.getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            if (set.contains(fields[i].getName())) {
-                if (fields[i].getAnnotation(annoCls) == null) {
+        for (Field field : fields) {
+            if (set.contains(field.getName())) {
+                if (field.getAnnotation(annoCls) == null) {
                     continue;
                 }
-                fields[i].setAccessible(true);
-                fs.add(fields[i]);
+                field.setAccessible(true);
+                fs.add(field);
             }
         }
         return fs.toArray(new Field[] {});
     }
 
     public static Field[] getDeclaredField(Class<?> cls, String[] fieldNames) {
-        Set<String> set = new HashSet<String>(Arrays.asList(fieldNames));
-        List<Field> fs = new ArrayList<Field>();
+        Set<String> set = new HashSet<>(Arrays.asList(fieldNames));
+        List<Field> fs = new ArrayList<>();
 
         Field[] fields = cls.getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            if (set.contains(fields[i].getName())) {
-                fields[i].setAccessible(true);
-                fs.add(fields[i]);
+        for (Field field : fields) {
+            if (set.contains(field.getName())) {
+                field.setAccessible(true);
+                fs.add(field);
             }
         }
         return fs.toArray(new Field[] {});

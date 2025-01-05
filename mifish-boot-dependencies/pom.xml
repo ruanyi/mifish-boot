@@ -39,6 +39,7 @@
         <spring.boot.version>2.5.12</spring.boot.version>
         <lombok.version>1.18.0</lombok.version>
         <aws.version>1.12.728</aws.version>
+        <aliyun.oss.version>3.17.4</aliyun.oss.version>
     </properties>
 
     <dependencyManagement>
@@ -91,6 +92,12 @@
                 <version>${aws.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun.oss.version}</version>
+            </dependency>
+
             <!--mifish dependency -->
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
@@ -130,7 +137,7 @@
 
             <dependency>
                 <groupId>com.ruanyi.mifish</groupId>
-                <artifactId>mqproxy-mifish-starter</artifactId>
+                <artifactId>kaproxy-mifish-starter</artifactId>
                 <version>${mifish.boot.version}</version>
             </dependency>
 

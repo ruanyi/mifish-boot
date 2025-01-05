@@ -12,8 +12,8 @@ import com.ruanyi.mifish.kernel.model.uri.UploadURI;
 public interface ObjectUploader {
 
     /**
-     * upload
-     * 
+     * 如果OSS文件存在，则上传的数据会覆盖该文件的内容；如果OSS文件不存在，则会新建该文件。
+     *
      * @param localPath
      * @param uploadURI
      * @return

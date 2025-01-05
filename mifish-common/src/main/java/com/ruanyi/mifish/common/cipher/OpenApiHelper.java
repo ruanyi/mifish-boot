@@ -78,7 +78,7 @@ public final class OpenApiHelper {
      * @param len
      * @return
      */
-    public static final String generateApiKey(int len) {
+    public static String generateApiKey(int len) {
         return obtainRandomCode(3, len);
     }
 
@@ -88,7 +88,7 @@ public final class OpenApiHelper {
      * @param len
      * @return
      */
-    public static final String generateApiSecret(int len) {
+    public static String generateApiSecret(int len) {
         return obtainRandomCode(3, len);
     }
 
@@ -97,7 +97,7 @@ public final class OpenApiHelper {
      * 
      * @return
      */
-    public static final String generate32ApiKey() {
+    public static String generate32ApiKey() {
         return obtainRandomCode(4, 32);
     }
 
@@ -106,7 +106,7 @@ public final class OpenApiHelper {
      * 
      * @return
      */
-    public static final String generate32ApiSecret() {
+    public static String generate32ApiSecret() {
         return obtainRandomCode(4, 32);
     }
 }
