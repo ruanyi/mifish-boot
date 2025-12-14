@@ -8,7 +8,7 @@ import com.ruanyi.mifish.common.utils.JacksonUtils;
  * @author: rls
  * @Date: 2023-03-20 14:13
  */
-public class StdMqproxy {
+public class StdKaproxy {
 
     /** stdMessage */
     private StdMessage stdMessage;
@@ -84,16 +84,16 @@ public class StdMqproxy {
      * @param token
      * @return
      */
-    public static StdMqproxy from(StdMessage stdMessage, String host, String token) {
-        StdMqproxy stdMqproxy = new StdMqproxy();
-        stdMqproxy.stdMessage = stdMessage;
-        stdMqproxy.host = host;
-        stdMqproxy.token = token;
-        return stdMqproxy;
+    public static StdKaproxy from(StdMessage stdMessage, String host, String token) {
+        StdKaproxy stdKaproxy = new StdKaproxy();
+        stdKaproxy.stdMessage = stdMessage;
+        stdKaproxy.host = host;
+        stdKaproxy.token = token;
+        return stdKaproxy;
     }
 
     /** StdMqproxy */
-    private StdMqproxy() {
+    private StdKaproxy() {
 
     }
 }

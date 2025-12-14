@@ -90,9 +90,9 @@ public class KaproxyProcessorConsumerContainer
                 return;
             }
             String effectGroupTopics = this.kaproxyStartupMeta.getEffectGroupTopics();
-            // 1、实例化mq proxy request message
+            // 1、实例化kaproxy request message
             this.kaproxyRequestMessageFactory.batchBuild(effectGroupTopics);
-            // 2、实例化多个MqproxyOkHttpConsumer
+            // 2、实例化多个KaproxyOkHttpConsumer
             for (int i = 0; i < this.kaproxyStartupMeta.getConsumeConcurrency(); i++) {
                 KaproxyOkHttpConsumer kaproxyOkHttpConsumer = new KaproxyOkHttpConsumer(this.messageExecutorService,
                     this.kaproxyStartupMeta.getConsumptionRate());
@@ -103,12 +103,12 @@ public class KaproxyProcessorConsumerContainer
                 kaproxyOkHttpConsumer.startRead();
             }
             this.running = true;
-            LOG.warn(Pair.of("clazz", "MqProxyProcessorConsumerContainer"), Pair.of("method", "start"),
+            LOG.warn(Pair.of("clazz", "KaproxyProcessorConsumerContainer"), Pair.of("method", "start"),
                 Pair.of("effectGroupTopics", effectGroupTopics), Pair.of("running", this.running),
                 Pair.of("consumerThreadNum", this.processorConsumers.size()));
         } catch (ConsumerCreateException ex) {
             // 1、打印错误日志
-            LOG.error(ex, Pair.of("clazz", "MqProxyProcessorConsumerContainer"), Pair.of("method", "start"),
+            LOG.error(ex, Pair.of("clazz", "KaproxyProcessorConsumerContainer"), Pair.of("method", "start"),
                 Pair.of("group", ex.getGroup()), Pair.of("topic", ex.getTopic()),
                 Pair.of("message", "mq proxy processor queue consumers cannot be started"),
                 Pair.of("running", this.running));
@@ -123,7 +123,7 @@ public class KaproxyProcessorConsumerContainer
                 topic = nex.getTopic();
             }
             // 1、打印错误日志
-            LOG.error(ex, Pair.of("clazz", "MqProxyProcessorConsumerContainer"), Pair.of("method", "start"),
+            LOG.error(ex, Pair.of("clazz", "KaproxyProcessorConsumerContainer"), Pair.of("method", "start"),
                 Pair.of("group", group), Pair.of("topic", topic), Pair.of("running", this.running),
                 Pair.of("message", "queue consumers cannot be started"));
             // 2、停止目前已经启动好的：队列处理机
@@ -146,7 +146,7 @@ public class KaproxyProcessorConsumerContainer
         // set running false
         this.running = false;
         // log message
-        LOG.warn(Pair.of("clazz", "MqProxyProcessorConsumerContainer"), Pair.of("method", "stop"),
+        LOG.warn(Pair.of("clazz", "KaproxyProcessorConsumerContainer"), Pair.of("method", "stop"),
             Pair.of("effectGroupTopics", effectGroupTopics), Pair.of("running", this.running),
             Pair.of("size_of_consumers", this.processorConsumers.size()));
 

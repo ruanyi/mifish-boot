@@ -47,14 +47,14 @@ public class KaproxyConsumerConfiguration implements EnvironmentAware {
      * @return
      */
     @Bean
-    public KaproxyRequestMessageFactory newMqproxyRequestMessageFactory() {
+    public KaproxyRequestMessageFactory newKaproxyRequestMessageFactory() {
         return new SimpleKaproxyRequestMessageFactory();
     }
 
     /**
      * 一般情况下，单实例启动
      * <p>
-     * 其中,start方法，由：MqproxyConsumerProcessor，基于事件去启动 stop方法，由优雅关闭去关闭
+     * 其中,start方法，由：KaproxyConsumerProcessor，基于事件去启动 stop方法，由优雅关闭去关闭
      *
      * @param kaproxyStartupMeta
      * @param kaproxyRequestMessageFactory
@@ -63,26 +63,23 @@ public class KaproxyConsumerConfiguration implements EnvironmentAware {
      */
     @Bean(name = "queueConsumerContainer")
     public ProcessorConsumerContainer newQueueConsumerContainer(final KaproxyStartupMeta kaproxyStartupMeta,
-                                                                KaproxyRequestMessageFactory kaproxyRequestMessageFactory, MessageExecutorService messageExecutorService) {
-        KaproxyProcessorConsumerContainer mqproxyConsumerContainer = new KaproxyProcessorConsumerContainer(
-                kaproxyStartupMeta, kaproxyRequestMessageFactory, messageExecutorService);
-        return mqproxyConsumerContainer;
+        KaproxyRequestMessageFactory kaproxyRequestMessageFactory, MessageExecutorService messageExecutorService) {
+        return new KaproxyProcessorConsumerContainer(kaproxyStartupMeta, kaproxyRequestMessageFactory,
+            messageExecutorService);
     }
 
     /**
-     * 构建 mq proxy 启动的配置信息
+     * 构建kaproxy 启动的配置信息
      *
      * @return
      */
     @Bean
-    public KaproxyStartupMeta newMqproxyStartupMeta() {
+    public KaproxyStartupMeta newKaproxyStartupMeta() {
         String effectGroupTopics = obtainEffectGroupTopics();
         int consumeConcurrency = obtainConsumeConcurrency();
         int consumptionRate = obtainConsumptionRate();
         int handleConcurrency = obtainHandleConcurrency();
-        KaproxyStartupMeta kaproxyStartupMeta =
-            KaproxyStartupMeta.of(effectGroupTopics, consumeConcurrency, consumptionRate, handleConcurrency);
-        return kaproxyStartupMeta;
+        return KaproxyStartupMeta.of(effectGroupTopics, consumeConcurrency, consumptionRate, handleConcurrency);
     }
 
     /**
@@ -147,9 +144,7 @@ public class KaproxyConsumerConfiguration implements EnvironmentAware {
      * @return
      */
     private String obtainEffectGroupTopics() {
-        String str =
-            obtainStaticConfigurationValue("MQ_EFFECT_GROUP_TOPICS", "mifish.processor.mqproxy.effect-group-topics");
-        return str;
+        return obtainStaticConfigurationValue("MQ_EFFECT_GROUP_TOPICS", "mifish.processor.mqproxy.effect-group-topics");
     }
 
     /**
@@ -172,13 +167,11 @@ public class KaproxyConsumerConfiguration implements EnvironmentAware {
      */
     @Bean(destroyMethod = "shutdown")
     public MessageExecutorService newMessageExecutorService(KaproxyStartupMeta kaproxyStartupMeta,
-                                                            MessageDigestEngine messageDigestEngine) {
+        MessageDigestEngine messageDigestEngine) {
         int handleConcurrency = kaproxyStartupMeta.getHandleConcurrency();
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(handleConcurrency, handleConcurrency, 60L,
             TimeUnit.SECONDS, new SynchronousQueue<>());
-        SimpleMessageExecutorService multiQueuedMessageExecutorService =
-            new SimpleMessageExecutorService(messageDigestEngine, threadPoolExecutor);
-        return multiQueuedMessageExecutorService;
+        return new SimpleMessageExecutorService(messageDigestEngine, threadPoolExecutor);
     }
 
     /**
@@ -212,7 +205,7 @@ public class KaproxyConsumerConfiguration implements EnvironmentAware {
      *
      * @return
      */
-    @Bean("mqproxyConsumerProcessor")
+    @Bean("kaproxyConsumerProcessor")
     public static KaproxyConsumerProcessor newMqproxyConsumerProcessor() {
         return new KaproxyConsumerProcessor();
     }

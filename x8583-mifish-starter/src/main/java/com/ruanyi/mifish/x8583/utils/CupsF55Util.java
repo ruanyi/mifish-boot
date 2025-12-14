@@ -19,12 +19,26 @@ public final class CupsF55Util {
     /** 不允许实例化 */
     private CupsF55Util() {}
 
-    /** 解开55域 */
+    /**
+     * 解开55域
+     *
+     * 
+     * * if (retVal.containsKey("9A")) { retVal.put("9A", * AntBCD(retVal.get("9A"))); }if (retVal.containsKey("9C")) {
+     * * retVal.put("9C", AntBCD(retVal.get("9C"))); } if * (retVal.containsKey("9F02")) { retVal.put("9F02", *
+     * AntBCD(retVal.get("9F02"))); } if (retVal.containsKey("5F2A")) { * retVal.put("5F2A",
+     * AntBCD(retVal.get("5F2A"))); } if * (retVal.containsKey("9F1A")) { retVal.put("9F1A", *
+     * AntBCD(retVal.get("9F1A"))); } if (retVal.containsKey("9F03")) { * retVal.put("9F03",
+     * AntBCD(retVal.get("9F03"))); } if * (retVal.containsKey("5F2A")) { retVal.put("9F35", *
+     * AntBCD(retVal.get("9F35"))); } if (retVal.containsKey("9F41")) { * retVal.put("9F41",
+     * AntBCD(retVal.get("9F41"))); }
+     * 
+     * 
+     * @param values
+     * @return
+     */
     public static Map<String, byte[]> unpack55(byte[] values) {
         Map<String, byte[]> retVal = new HashMap<>();
-        byte[] tb = new byte[] {};
-        byte[] lb = new byte[] {};
-        byte[] vb = new byte[] {};
+        byte[] tb, lb, vb;
         int length = 0;
         for (int i = 0; i < values.length;) {
             // 判断TAG位数
@@ -54,20 +68,6 @@ public final class CupsF55Util {
             i = i + length;
         }
         return retVal;
-        /*
-         * if (retVal.containsKey("9A")) { retVal.put("9A",
-         * AntBCD(retVal.get("9A"))); } if (retVal.containsKey("9C")) {
-         * retVal.put("9C", AntBCD(retVal.get("9C"))); } if
-         * (retVal.containsKey("9F02")) { retVal.put("9F02",
-         * AntBCD(retVal.get("9F02"))); } if (retVal.containsKey("5F2A")) {
-         * retVal.put("5F2A", AntBCD(retVal.get("5F2A"))); } if
-         * (retVal.containsKey("9F1A")) { retVal.put("9F1A",
-         * AntBCD(retVal.get("9F1A"))); } if (retVal.containsKey("9F03")) {
-         * retVal.put("9F03", AntBCD(retVal.get("9F03"))); } if
-         * (retVal.containsKey("5F2A")) { retVal.put("9F35",
-         * AntBCD(retVal.get("9F35"))); } if (retVal.containsKey("9F41")) {
-         * retVal.put("9F41", AntBCD(retVal.get("9F41"))); }
-         */
     }
 
     /** 55域打包 */
@@ -94,7 +94,7 @@ public final class CupsF55Util {
                 if (vb == null || vb.length == 0) {
                     continue;
                 }
-                byte[] lb = new byte[] {};
+                byte[] lb;
                 int length = vb.length;
                 if (length > 127) {
                     lb = new byte[] {(byte)0x82, (byte)length};

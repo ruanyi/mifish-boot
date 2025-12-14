@@ -33,7 +33,7 @@ public class KaproxyConsumerProcessor implements BeanPostProcessor, PriorityOrde
     private static final MifishLogs LOG = MifishLogs.framework;
 
     /** consumerMetaContainer */
-    private KaproxyConsumerMetaContainer mqProxyConsumerMetaContainer = KaproxyConsumerMetaContainer.getInstance();
+    private KaproxyConsumerMetaContainer kaProxyConsumerMetaContainer = KaproxyConsumerMetaContainer.getInstance();
 
     /** 动态获取配置信息 */
     private Environment environment;
@@ -50,10 +50,10 @@ public class KaproxyConsumerProcessor implements BeanPostProcessor, PriorityOrde
                 KaproxyConsumer kaproxyConsumer = AnnotationUtils.findAnnotation(method, KaproxyConsumer.class);
                 if (kaproxyConsumer != null) {
                     Set<String> topics = parseMqproxyTopics(kaproxyConsumer);
-                    this.mqProxyConsumerMetaContainer
+                    this.kaProxyConsumerMetaContainer
                         .putConsumerMetas(AnnotationConsumerMeta.parse2List(kaproxyConsumer, topics, bean, method));
                     if (LOG.isInfoEnabled()) {
-                        LOG.info(Pair.of("clazz", "MqproxyConsumerProcessor"),
+                        LOG.info(Pair.of("clazz", "KaproxyConsumerProcessor"),
                             Pair.of("method", "postProcessBeforeInitialization"), Pair.of("beanName", beanName),
                             Pair.of("methodName", method.getName()), Pair.of("group", kaproxyConsumer.group()),
                             Pair.of("config_topics", Arrays.toString(kaproxyConsumer.topics())),

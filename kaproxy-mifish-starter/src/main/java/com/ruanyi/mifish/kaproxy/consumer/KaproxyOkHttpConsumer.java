@@ -86,11 +86,11 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
         this.executors =
             new ThreadPoolExecutor(1, 2, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<>(), (Runnable runnable) -> {
                 Thread thread = new Thread(runnable);
-                thread.setName("mqproxy-consumer-featcher-%d");
+                thread.setName("kaproxy-consumer-featcher-%d");
                 return thread;
             });
         this.okHttpConsumerTask = new OkHttpConsumerTask(this.getOkHttpClient(),
-            (kaproxyRequestMessage, mqproxyMessage) -> doConsumeMqproxyMessage(kaproxyRequestMessage, mqproxyMessage));
+            (kaproxyRequestMessage, mqproxyMessage) -> doConsumeKaproxyMessage(kaproxyRequestMessage, mqproxyMessage));
         if (this.consumptionRate > 0) {
             RateLimiter rateLimiter = RateLimiter.create(this.consumptionRate);
             this.okHttpConsumerTask.setRateLimiter(rateLimiter);
@@ -98,32 +98,32 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
         // 标记处于Running状态
         this.status = ConsumerStatus.RUNNING;
         if (LOG.isInfoEnabled()) {
-            LOG.info(Pair.of("clazz", "MqproxyOkHttpConsumer"), Pair.of("method", "start"),
+            LOG.info(Pair.of("clazz", "KaproxyOkHttpConsumer"), Pair.of("method", "start"),
                 Pair.of("status", this.status), Pair.of("cost", (System.currentTimeMillis() - start)),
                 Pair.of("message", "start the consumer successfully"));
         }
     }
 
     /**
-     * doConsumeMqproxyMessage
+     * doConsumeKaproxyMessage
      * <p>
      * 真实消费kafka队列中的消息，消费完后，提交给本地线程池处理线程池
      *
      * 不允许抛出异常
      *
      * @param kaproxyRequestMessage
-     * @param mqproxyMessage
+     * @param kaproxyMessage
      * @return void
      */
-    private void doConsumeMqproxyMessage(KaproxyRequestMessage kaproxyRequestMessage, String mqproxyMessage) {
+    private void doConsumeKaproxyMessage(KaproxyRequestMessage kaproxyRequestMessage, String kaproxyMessage) {
         try {
             // 反序列化序列化
             KaproxyResponseMessage kaproxyResponseMessage =
-                JacksonUtils.json2Obj(mqproxyMessage, KaproxyResponseMessage.class);
+                JacksonUtils.json2Obj(kaproxyMessage, KaproxyResponseMessage.class);
             // 一般情况下，不存在value为空的情况
             if (kaproxyResponseMessage == null || !kaproxyResponseMessage.isSuccessful()
                 || StringUtils.isBlank(kaproxyResponseMessage.getValue())) {
-                LOG.error(Pair.of("clazz", "MqproxyOkHttpConsumer"), Pair.of("method", "doConsumeMqproxyMessage"),
+                LOG.error(Pair.of("clazz", "KaproxyOkHttpConsumer"), Pair.of("method", "doConsumeKaproxyMessage"),
                     Pair.of("group", kaproxyRequestMessage.getGroup()),
                     Pair.of("topic", kaproxyRequestMessage.getTopic()),
                     Pair.of("content", kaproxyResponseMessage.getValue()),
@@ -133,7 +133,7 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
             if (!KaproxyConsumerMetaContainer.getInstance().isContainConsumer(kaproxyRequestMessage.getGroup(),
                 kaproxyResponseMessage.getTopic())) {
                 // 一般情况下，不会发生
-                LOG.error(Pair.of("clazz", "MqproxyOkHttpConsumer"), Pair.of("method", "doConsumeMqproxyMessage"),
+                LOG.error(Pair.of("clazz", "KaproxyOkHttpConsumer"), Pair.of("method", "doConsumeKaproxyMessage"),
                     Pair.of("group", kaproxyRequestMessage.getGroup()),
                     Pair.of("topic", kaproxyRequestMessage.getTopic()), Pair.of("key", kaproxyResponseMessage.getKey()),
                     Pair.of("msg", kaproxyResponseMessage.getValue()), Pair.of("message", "no cosumer"));
@@ -149,9 +149,9 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
             this.messageExecutorService.submit(message);
         } catch (Exception ex) {
             // for now just log some message
-            LOG.error(ex, Pair.of("clazz", "MqproxyOkHttpConsumer"), Pair.of("method", "doConsumeMqproxyMessage"),
+            LOG.error(ex, Pair.of("clazz", "KaproxyOkHttpConsumer"), Pair.of("method", "doConsumeKaproxyMessage"),
                 Pair.of("group", kaproxyRequestMessage.getGroup()), Pair.of("topic", kaproxyRequestMessage.getTopic()),
-                Pair.of("mqproxyMessage", mqproxyMessage), Pair.of("message", "some error happend!"),
+                Pair.of("kaproxyMessage", kaproxyMessage), Pair.of("message", "some error happend!"),
                 Pair.of("url", kaproxyRequestMessage.getUrl()));
         }
     }
@@ -173,7 +173,7 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
                 status = ConsumerStatus.STOPPED;
             }
             if (LOG.isInfoEnabled()) {
-                LOG.info(Pair.of("clazz", "MqproxyOkHttpConsumer"), Pair.of("method", "stop"),
+                LOG.info(Pair.of("clazz", "KaproxyOkHttpConsumer"), Pair.of("method", "stop"),
                     Pair.of("status", this.status), Pair.of("async", async),
                     Pair.of("message", "Stoping the topic consumer"));
             }
@@ -199,7 +199,7 @@ public class KaproxyOkHttpConsumer extends AbstractOkHttpConsumer {
         this.okHttpConsumerTask.stopRead();
         // 关闭线程池
         this.executors.shutdown();
-        LOG.warn(Pair.of("clazz", "MqproxyOkHttpConsumer"), Pair.of("method", "stopReadMqproxy"),
+        LOG.warn(Pair.of("clazz", "KaproxyOkHttpConsumer"), Pair.of("method", "stopReadMqproxy"),
             Pair.of("status", this.status), Pair.of("message", "stop read message queue proxy stream success"));
     }
 }
